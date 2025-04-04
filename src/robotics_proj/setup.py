@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'motor_ready = robotics_proj.motor_ready:main',
         ],
     },
 )

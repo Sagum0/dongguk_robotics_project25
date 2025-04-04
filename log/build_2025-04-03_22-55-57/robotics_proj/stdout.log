@@ -1,0 +1,17 @@
+running develop
+running egg_info
+writing robotics_proj.egg-info/PKG-INFO
+writing dependency_links to robotics_proj.egg-info/dependency_links.txt
+writing entry points to robotics_proj.egg-info/entry_points.txt
+writing requirements to robotics_proj.egg-info/requires.txt
+writing top-level names to robotics_proj.egg-info/top_level.txt
+reading manifest file 'robotics_proj.egg-info/SOURCES.txt'
+writing manifest file 'robotics_proj.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/pc/robot_ws/install/robotics_proj/lib/python3.10/site-packages/robotics-proj.egg-link (link to .)
+Installing motor_ready script to /home/pc/robot_ws/install/robotics_proj/lib/robotics_proj
+
+Installed /home/pc/robot_ws/build/robotics_proj
+running symlink_data
+symbolically linking /home/pc/robot_ws/build/robotics_proj/resource/robotics_proj -> /home/pc/robot_ws/install/robotics_proj/share/ament_index/resource_index/packages
+symbolically linking /home/pc/robot_ws/build/robotics_proj/package.xml -> /home/pc/robot_ws/install/robotics_proj/share/robotics_proj

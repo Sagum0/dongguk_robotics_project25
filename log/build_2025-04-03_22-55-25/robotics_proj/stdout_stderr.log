@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/robotics_proj/robotics_proj.egg-info
+writing ../../build/robotics_proj/robotics_proj.egg-info/PKG-INFO
+writing dependency_links to ../../build/robotics_proj/robotics_proj.egg-info/dependency_links.txt
+writing entry points to ../../build/robotics_proj/robotics_proj.egg-info/entry_points.txt
+writing requirements to ../../build/robotics_proj/robotics_proj.egg-info/requires.txt
+writing top-level names to ../../build/robotics_proj/robotics_proj.egg-info/top_level.txt
+writing manifest file '../../build/robotics_proj/robotics_proj.egg-info/SOURCES.txt'
+reading manifest file '../../build/robotics_proj/robotics_proj.egg-info/SOURCES.txt'
+writing manifest file '../../build/robotics_proj/robotics_proj.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/pc/robot_ws/build/robotics_proj/build
+creating /home/pc/robot_ws/build/robotics_proj/build/lib
+creating /home/pc/robot_ws/build/robotics_proj/build/lib/robotics_proj
+copying robotics_proj/__init__.py -> /home/pc/robot_ws/build/robotics_proj/build/lib/robotics_proj
+copying robotics_proj/motor_ready.py -> /home/pc/robot_ws/build/robotics_proj/build/lib/robotics_proj
+running install
+running install_lib
+creating /home/pc/robot_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+copying /home/pc/robot_ws/build/robotics_proj/build/lib/robotics_proj/__init__.py -> /home/pc/robot_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+copying /home/pc/robot_ws/build/robotics_proj/build/lib/robotics_proj/motor_ready.py -> /home/pc/robot_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+byte-compiling /home/pc/robot_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/pc/robot_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj/motor_ready.py to motor_ready.cpython-310.pyc
+running install_data
+creating /home/pc/robot_ws/install/robotics_proj/share/ament_index
+creating /home/pc/robot_ws/install/robotics_proj/share/ament_index/resource_index
+creating /home/pc/robot_ws/install/robotics_proj/share/ament_index/resource_index/packages
+copying resource/robotics_proj -> /home/pc/robot_ws/install/robotics_proj/share/ament_index/resource_index/packages
+copying package.xml -> /home/pc/robot_ws/install/robotics_proj/share/robotics_proj
+running install_egg_info
+Copying ../../build/robotics_proj/robotics_proj.egg-info to /home/pc/robot_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj-0.0.0-py3.10.egg-info
+running install_scripts
+Installing motor_ready script to /home/pc/robot_ws/install/robotics_proj/lib/robotics_proj
+writing list of installed files to '/home/pc/robot_ws/build/robotics_proj/install.log'
