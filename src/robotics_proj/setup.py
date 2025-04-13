@@ -21,6 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'motor_ready = robotics_proj.motor_ready:main',
+            'control_ready = robotics_proj.control_node:main',
+            'test_control = robotics_proj.test_control:main',
         ],
     },
 )
