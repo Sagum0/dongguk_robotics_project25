@@ -1,0 +1,13 @@
+package.xml
+setup.cfg
+setup.py
+resource/test_robotics_proj
+test_robotics_proj/__init__.py
+test_robotics_proj/motor_ready.py
+test_robotics_proj.egg-info/PKG-INFO
+test_robotics_proj.egg-info/SOURCES.txt
+test_robotics_proj.egg-info/dependency_links.txt
+test_robotics_proj.egg-info/entry_points.txt
+test_robotics_proj.egg-info/requires.txt
+test_robotics_proj.egg-info/top_level.txt
+test_robotics_proj.egg-info/zip-safe
