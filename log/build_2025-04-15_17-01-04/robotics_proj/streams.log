@@ -1,0 +1,45 @@
+[0.290s] Invoking command in '/home/pc/ros2_ws/src/robotics_proj': PYTHONPATH=/home/pc/ros2_ws/build/robotics_proj/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robotics_proj build --build-base /home/pc/ros2_ws/build/robotics_proj/build install --record /home/pc/ros2_ws/build/robotics_proj/install.log --single-version-externally-managed install_data
+[0.403s] running egg_info
+[0.403s] creating ../../build/robotics_proj/robotics_proj.egg-info
+[0.403s] writing ../../build/robotics_proj/robotics_proj.egg-info/PKG-INFO
+[0.403s] writing dependency_links to ../../build/robotics_proj/robotics_proj.egg-info/dependency_links.txt
+[0.403s] writing entry points to ../../build/robotics_proj/robotics_proj.egg-info/entry_points.txt
+[0.403s] writing requirements to ../../build/robotics_proj/robotics_proj.egg-info/requires.txt
+[0.403s] writing top-level names to ../../build/robotics_proj/robotics_proj.egg-info/top_level.txt
+[0.403s] writing manifest file '../../build/robotics_proj/robotics_proj.egg-info/SOURCES.txt'
+[0.404s] reading manifest file '../../build/robotics_proj/robotics_proj.egg-info/SOURCES.txt'
+[0.405s] writing manifest file '../../build/robotics_proj/robotics_proj.egg-info/SOURCES.txt'
+[0.405s] running build
+[0.405s] running build_py
+[0.405s] creating /home/pc/ros2_ws/build/robotics_proj/build
+[0.405s] creating /home/pc/ros2_ws/build/robotics_proj/build/lib
+[0.405s] creating /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj
+[0.405s] copying robotics_proj/test_control.py -> /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj
+[0.405s] copying robotics_proj/control_node.py -> /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj
+[0.405s] copying robotics_proj/__init__.py -> /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj
+[0.405s] copying robotics_proj/motor_ready.py -> /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj
+[0.405s] running install
+[0.405s] running install_lib
+[0.406s] creating /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+[0.406s] copying /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj/test_control.py -> /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+[0.406s] copying /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj/control_node.py -> /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+[0.406s] copying /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj/__init__.py -> /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+[0.406s] copying /home/pc/ros2_ws/build/robotics_proj/build/lib/robotics_proj/motor_ready.py -> /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj
+[0.406s] byte-compiling /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj/test_control.py to test_control.cpython-310.pyc
+[0.408s] byte-compiling /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj/control_node.py to control_node.cpython-310.pyc
+[0.408s] byte-compiling /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj/__init__.py to __init__.cpython-310.pyc
+[0.409s] byte-compiling /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj/motor_ready.py to motor_ready.cpython-310.pyc
+[0.409s] running install_data
+[0.409s] creating /home/pc/ros2_ws/install/robotics_proj/share/ament_index
+[0.409s] creating /home/pc/ros2_ws/install/robotics_proj/share/ament_index/resource_index
+[0.409s] creating /home/pc/ros2_ws/install/robotics_proj/share/ament_index/resource_index/packages
+[0.409s] copying resource/robotics_proj -> /home/pc/ros2_ws/install/robotics_proj/share/ament_index/resource_index/packages
+[0.409s] copying package.xml -> /home/pc/ros2_ws/install/robotics_proj/share/robotics_proj
+[0.409s] running install_egg_info
+[0.410s] Copying ../../build/robotics_proj/robotics_proj.egg-info to /home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages/robotics_proj-0.0.0-py3.10.egg-info
+[0.411s] running install_scripts
+[0.423s] Installing control_ready script to /home/pc/ros2_ws/install/robotics_proj/lib/robotics_proj
+[0.423s] Installing motor_ready script to /home/pc/ros2_ws/install/robotics_proj/lib/robotics_proj
+[0.423s] Installing test_control script to /home/pc/ros2_ws/install/robotics_proj/lib/robotics_proj
+[0.423s] writing list of installed files to '/home/pc/ros2_ws/build/robotics_proj/install.log'
+[0.435s] Invoked command in '/home/pc/ros2_ws/src/robotics_proj' returned '0': PYTHONPATH=/home/pc/ros2_ws/build/robotics_proj/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robotics_proj build --build-base /home/pc/ros2_ws/build/robotics_proj/build install --record /home/pc/ros2_ws/build/robotics_proj/install.log --single-version-externally-managed install_data
