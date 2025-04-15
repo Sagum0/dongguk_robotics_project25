@@ -3,6 +3,7 @@ setup.cfg
 setup.py
 resource/test_robotics_proj
 test_robotics_proj/__init__.py
+test_robotics_proj/data_hub.py
 test_robotics_proj/motor_ready.py
 test_robotics_proj.egg-info/PKG-INFO
 test_robotics_proj.egg-info/SOURCES.txt
