@@ -1,4 +1,5 @@
 [console_scripts]
 data_hub = test_robotics_proj.data_hub:main
 motor_ready = test_robotics_proj.motor_ready:main
+trajectory_planner = test_robotics_proj.trajectory_planner:main
 

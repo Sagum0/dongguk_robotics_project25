@@ -22,7 +22,7 @@ setup(
         'console_scripts': [
             'motor_ready = test_robotics_proj.motor_ready:main',
             'data_hub = test_robotics_proj.data_hub:main',
-            #'test_control = robotics_proj.test_control:main',
+            'trajectory_planner = test_robotics_proj.trajectory_planner:main',
         ],
     },
 )

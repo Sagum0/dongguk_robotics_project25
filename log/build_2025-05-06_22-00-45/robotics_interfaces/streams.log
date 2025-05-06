@@ -1,0 +1,61 @@
+[0.008s] Invoking command in '/home/pc/ros2_ws/build/robotics_interfaces': /usr/bin/cmake /home/pc/ros2_ws/src/robotics_interfaces -DCMAKE_INSTALL_PREFIX=/home/pc/ros2_ws/install/robotics_interfaces
+[0.080s] -- The C compiler identification is GNU 11.4.0
+[0.138s] -- The CXX compiler identification is GNU 11.4.0
+[0.146s] -- Detecting C compiler ABI info
+[0.197s] -- Detecting C compiler ABI info - done
+[0.204s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.205s] -- Detecting C compile features
+[0.205s] -- Detecting C compile features - done
+[0.209s] -- Detecting CXX compiler ABI info
+[0.267s] -- Detecting CXX compiler ABI info - done
+[0.275s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.275s] -- Detecting CXX compile features
+[0.275s] -- Detecting CXX compile features - done
+[0.279s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.397s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.486s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.490s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.497s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.537s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.682s] [31mCMake Error at /opt/ros/humble/share/rosidl_adapter/cmake/rosidl_adapt_interfaces.cmake:59 (message):
+[0.682s]   execute_process(/usr/bin/python3 -m rosidl_adapter --package-name
+[0.682s]   robotics_interfaces --arguments-file
+[0.682s]   /home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter__arguments__robotics_interfaces.json
+[0.682s]   --output-dir
+[0.682s]   /home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter/robotics_interfaces
+[0.682s]   --output-file
+[0.682s]   /home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter/robotics_interfaces.idls)
+[0.683s]   returned error code 1:
+[0.683s] 
+[0.683s]   Traceback (most recent call last):
+[0.683s] 
+[0.683s]     File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[0.683s]       return _run_code(code, main_globals, None,
+[0.683s]     File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+[0.683s]       exec(code, run_globals)
+[0.683s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__main__.py", line 19, in <module>
+[0.683s]       sys.exit(main())
+[0.683s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/main.py", line 53, in main
+[0.683s]       abs_idl_file = convert_to_idl(
+[0.683s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__init__.py", line 19, in convert_to_idl
+[0.683s]       return convert_msg_to_idl(
+[0.683s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/msg/__init__.py", line 28, in convert_msg_to_idl
+[0.683s]       msg = parse_message_string(package_name, input_file.stem, content)
+[0.683s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 544, in parse_message_string
+[0.683s]       msg = MessageSpecification(pkg_name, msg_name, fields, constants)
+[0.683s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 388, in __init__
+[0.683s]       self.base_type = BaseType(
+[0.683s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 205, in __init__
+[0.683s]       raise InvalidResourceName(
+[0.683s] 
+[0.683s]   rosidl_adapter.parser.InvalidResourceName: 'IK_msg' is an invalid message
+[0.684s]   name.  It should have the pattern '^[A-Z][A-Za-z0-9]*$'
+[0.684s] 
+[0.684s] Call Stack (most recent call first):
+[0.684s]   /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:130 (rosidl_adapt_interfaces)
+[0.684s]   CMakeLists.txt:7 (rosidl_generate_interfaces)
+[0.684s] 
+[0.684s] [0m
+[0.684s] -- Configuring incomplete, errors occurred!
+[0.684s] See also "/home/pc/ros2_ws/build/robotics_interfaces/CMakeFiles/CMakeOutput.log".
+[0.688s] Invoked command in '/home/pc/ros2_ws/build/robotics_interfaces' returned '1': /usr/bin/cmake /home/pc/ros2_ws/src/robotics_interfaces -DCMAKE_INSTALL_PREFIX=/home/pc/ros2_ws/install/robotics_interfaces

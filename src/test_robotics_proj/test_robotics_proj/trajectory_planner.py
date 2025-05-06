@@ -3,7 +3,8 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
-from std_msgs.msg import Float32MultiArray
+from geometry_msgs.msg import Point
+from robotics_interfaces.msg import TrajectoryPoints
 
 import os
 import threading
@@ -22,7 +23,7 @@ class TrajectoryPlanner:
         t = np.linspace(0.0, 1.0, self.num_points)
         blend = 10*t**3 - 15*t**4 + 6*t**5
         
-        path = self.start_point + np.outer(dp, blend)
+        path = self.start_point + np.outer(blend, dp)
         
         return path
     
@@ -48,7 +49,38 @@ class TrajectoryPlanner:
         
         return smoothed_path
     
-class DataHub(Node):
+class TrajectoryPlannerNode(Node):
     def __init__(self):
         super().__init__('trajectory_planner_node')
+        self.get_logger().info("Trajectory Planner Node Initialized")
         
+        self.publisher = self.create_publisher(TrajectoryPoints, 'trajectory_points', 10)
+        
+        self.timer = self.create_timer(1, self.timer_callback)
+        
+    def timer_callback(self):
+        start_point = [0, 0, 0]
+        end_point = [0.5, 0.8, 0.15]
+        num_points = 100
+        
+        planner = TrajectoryPlanner(start_point, end_point, num_points)
+        path = planner.plan()
+        
+        msg = TrajectoryPoints()
+        for x, y, z in path:
+            p = Point()
+            p.x = float(x)
+            p.y = float(y)
+            p.z = float(z)
+            msg.points.append(p)
+        self.publisher.publish(msg)
+        
+def main(args=None):
+    rclpy.init(args=args)
+    node = TrajectoryPlannerNode()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()

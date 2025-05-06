@@ -1,0 +1,6 @@
+setup.py
+robotics_interfaces/__init__.py
+robotics_interfaces.egg-info/PKG-INFO
+robotics_interfaces.egg-info/SOURCES.txt
+robotics_interfaces.egg-info/dependency_links.txt
+robotics_interfaces.egg-info/top_level.txt

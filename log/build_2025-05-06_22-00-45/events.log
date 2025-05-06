@@ -1,0 +1,75 @@
+[0.000000] (-) TimerEvent: {}
+[0.000278] (-) JobUnselected: {'identifier': 'robotics_proj'}
+[0.000397] (-) JobUnselected: {'identifier': 'test_robotics_proj'}
+[0.000419] (robotics_interfaces) JobQueued: {'identifier': 'robotics_interfaces', 'dependencies': OrderedDict()}
+[0.000435] (robotics_interfaces) JobStarted: {'identifier': 'robotics_interfaces'}
+[0.007084] (robotics_interfaces) JobProgress: {'identifier': 'robotics_interfaces', 'progress': 'cmake'}
+[0.007632] (robotics_interfaces) Command: {'cmd': ['/usr/bin/cmake', '/home/pc/ros2_ws/src/robotics_interfaces', '-DCMAKE_INSTALL_PREFIX=/home/pc/ros2_ws/install/robotics_interfaces'], 'cwd': '/home/pc/ros2_ws/build/robotics_interfaces', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'pc'), ('LC_TIME', 'ko_KR.UTF-8'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/pc/mobile_ws/install/more_interfaces/lib:/home/pc/mobile_ws/install/dynamixel_sdk_custom_interfaces/lib:/home/pc/mobile_ws/install/dynamixel_sdk/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/pc'), ('OLDPWD', '/home/pc'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'ko_KR.UTF-8'), ('MANAGERPID', '1615'), ('SYSTEMD_EXEC_PID', '2103'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3537'), ('COLCON_PREFIX_PATH', '/home/pc/ros2_ws/install:/home/pc/mobile_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'pc'), ('JOURNAL_STREAM', '8:23579'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'pc'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/pc:@/tmp/.ICE-unix/1844,unix/pc:/tmp/.ICE-unix/1844'), ('INVOCATION_ID', '280207baf6ab41fe80532b81ede953d2'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'ko_KR.UTF-8'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'ko_KR.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '15'), ('AMENT_PREFIX_PATH', '/home/pc/mobile_ws/install/sensing_pkg:/home/pc/mobile_ws/install/rplidar_ros:/home/pc/mobile_ws/install/my_turtle_proj:/home/pc/mobile_ws/install/more_interfaces:/home/pc/mobile_ws/install/lec_pkg_py:/home/pc/mobile_ws/install/lec_01_pkg:/home/pc/mobile_ws/install/dynamixel_sdk_examples:/home/pc/mobile_ws/install/dynamixel_sdk_custom_interfaces:/home/pc/mobile_ws/install/dxl_pwm_control:/home/pc/mobile_ws/install/dynamixel_sdk:/home/pc/ros2_ws/install/test_robotics_proj:/home/pc/ros2_ws/install/robotics_proj:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'ko_KR.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:cb630402-3d55-4e5a-bab1-fa66ea04331c'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'ko_KR.UTF-8'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('LC_IDENTIFICATION', 'ko_KR.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/pc/ros2_ws/build/robotics_interfaces'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/pc/mobile_ws/build/sensing_pkg:/home/pc/mobile_ws/install/sensing_pkg/lib/python3.10/site-packages:/home/pc/mobile_ws/build/my_turtle_proj:/home/pc/mobile_ws/install/my_turtle_proj/lib/python3.10/site-packages:/home/pc/mobile_ws/install/more_interfaces/local/lib/python3.10/dist-packages:/home/pc/mobile_ws/build/lec_pkg_py:/home/pc/mobile_ws/install/lec_pkg_py/lib/python3.10/site-packages:/home/pc/mobile_ws/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages:/home/pc/mobile_ws/build/dxl_pwm_control:/home/pc/mobile_ws/install/dxl_pwm_control/lib/python3.10/site-packages:/home/pc/mobile_ws/install/dynamixel_sdk/local/lib/python3.10/dist-packages:/home/pc/ros2_ws/build/test_robotics_proj:/home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages:/home/pc/ros2_ws/install/robotics_proj/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'ko_KR.UTF-8'), ('LC_PAPER', 'ko_KR.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/pc/mobile_ws/install/rplidar_ros:/home/pc/mobile_ws/install/more_interfaces:/home/pc/mobile_ws/install/lec_01_pkg:/home/pc/mobile_ws/install/dynamixel_sdk_examples:/home/pc/mobile_ws/install/dynamixel_sdk_custom_interfaces:/home/pc/mobile_ws/install/dynamixel_sdk')]), 'shell': False}
+[0.080128] (robotics_interfaces) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.099899] (-) TimerEvent: {}
+[0.138257] (robotics_interfaces) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.146053] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.197426] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.199969] (-) TimerEvent: {}
+[0.204535] (robotics_interfaces) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.204934] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.205534] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.208970] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.267691] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.274983] (robotics_interfaces) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.275298] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.275761] (robotics_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.279796] (robotics_interfaces) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.300037] (-) TimerEvent: {}
+[0.397194] (robotics_interfaces) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.400112] (-) TimerEvent: {}
+[0.486249] (robotics_interfaces) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[0.490445] (robotics_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.497639] (robotics_interfaces) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.500180] (-) TimerEvent: {}
+[0.537154] (robotics_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.600263] (-) TimerEvent: {}
+[0.682337] (robotics_interfaces) StderrLine: {'line': b'\x1b[31mCMake Error at /opt/ros/humble/share/rosidl_adapter/cmake/rosidl_adapt_interfaces.cmake:59 (message):\n'}
+[0.682503] (robotics_interfaces) StderrLine: {'line': b'  execute_process(/usr/bin/python3 -m rosidl_adapter --package-name\n'}
+[0.682568] (robotics_interfaces) StderrLine: {'line': b'  robotics_interfaces --arguments-file\n'}
+[0.682621] (robotics_interfaces) StderrLine: {'line': b'  /home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter__arguments__robotics_interfaces.json\n'}
+[0.682674] (robotics_interfaces) StderrLine: {'line': b'  --output-dir\n'}
+[0.682724] (robotics_interfaces) StderrLine: {'line': b'  /home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter/robotics_interfaces\n'}
+[0.682770] (robotics_interfaces) StderrLine: {'line': b'  --output-file\n'}
+[0.682873] (robotics_interfaces) StderrLine: {'line': b'  /home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter/robotics_interfaces.idls)\n'}
+[0.682924] (robotics_interfaces) StderrLine: {'line': b'  returned error code 1:\n'}
+[0.682967] (robotics_interfaces) StderrLine: {'line': b'\n'}
+[0.683010] (robotics_interfaces) StderrLine: {'line': b'  Traceback (most recent call last):\n'}
+[0.683052] (robotics_interfaces) StderrLine: {'line': b'\n'}
+[0.683101] (robotics_interfaces) StderrLine: {'line': b'    File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main\n'}
+[0.683152] (robotics_interfaces) StderrLine: {'line': b'      return _run_code(code, main_globals, None,\n'}
+[0.683193] (robotics_interfaces) StderrLine: {'line': b'    File "/usr/lib/python3.10/runpy.py", line 86, in _run_code\n'}
+[0.683233] (robotics_interfaces) StderrLine: {'line': b'      exec(code, run_globals)\n'}
+[0.683275] (robotics_interfaces) StderrLine: {'line': b'    File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__main__.py", line 19, in <module>\n'}
+[0.683317] (robotics_interfaces) StderrLine: {'line': b'      sys.exit(main())\n'}
+[0.683357] (robotics_interfaces) StderrLine: {'line': b'    File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/main.py", line 53, in main\n'}
+[0.683398] (robotics_interfaces) StderrLine: {'line': b'      abs_idl_file = convert_to_idl(\n'}
+[0.683439] (robotics_interfaces) StderrLine: {'line': b'    File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__init__.py", line 19, in convert_to_idl\n'}
+[0.683480] (robotics_interfaces) StderrLine: {'line': b'      return convert_msg_to_idl(\n'}
+[0.683525] (robotics_interfaces) StderrLine: {'line': b'    File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/msg/__init__.py", line 28, in convert_msg_to_idl\n'}
+[0.683568] (robotics_interfaces) StderrLine: {'line': b'      msg = parse_message_string(package_name, input_file.stem, content)\n'}
+[0.683607] (robotics_interfaces) StderrLine: {'line': b'    File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 544, in parse_message_string\n'}
+[0.683655] (robotics_interfaces) StderrLine: {'line': b'      msg = MessageSpecification(pkg_name, msg_name, fields, constants)\n'}
+[0.683695] (robotics_interfaces) StderrLine: {'line': b'    File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 388, in __init__\n'}
+[0.683734] (robotics_interfaces) StderrLine: {'line': b'      self.base_type = BaseType(\n'}
+[0.683772] (robotics_interfaces) StderrLine: {'line': b'    File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 205, in __init__\n'}
+[0.683811] (robotics_interfaces) StderrLine: {'line': b'      raise InvalidResourceName(\n'}
+[0.683848] (robotics_interfaces) StderrLine: {'line': b'\n'}
+[0.683887] (robotics_interfaces) StderrLine: {'line': b"  rosidl_adapter.parser.InvalidResourceName: 'IK_msg' is an invalid message\n"}
+[0.683925] (robotics_interfaces) StderrLine: {'line': b"  name.  It should have the pattern '^[A-Z][A-Za-z0-9]*$'\n"}
+[0.683963] (robotics_interfaces) StderrLine: {'line': b'\n'}
+[0.684002] (robotics_interfaces) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.684040] (robotics_interfaces) StderrLine: {'line': b'  /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:130 (rosidl_adapt_interfaces)\n'}
+[0.684079] (robotics_interfaces) StderrLine: {'line': b'  CMakeLists.txt:7 (rosidl_generate_interfaces)\n'}
+[0.684135] (robotics_interfaces) StderrLine: {'line': b'\n'}
+[0.684206] (robotics_interfaces) StderrLine: {'line': b'\x1b[0m\n'}
+[0.684269] (robotics_interfaces) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.684318] (robotics_interfaces) StdoutLine: {'line': b'See also "/home/pc/ros2_ws/build/robotics_interfaces/CMakeFiles/CMakeOutput.log".\n'}
+[0.688527] (robotics_interfaces) CommandEnded: {'returncode': 1}
+[0.689101] (robotics_interfaces) JobEnded: {'identifier': 'robotics_interfaces', 'rc': 1}
+[0.699437] (-) EventReactorShutdown: {}
