@@ -17,7 +17,8 @@ A2 = 98.5
 A3 = 98.5
 A4 = 84.5
 ALPHA_1 = np.pi / 2
-OFFSET = np.pi /2
+
+OFFSET = np.pi
 
 def dh_transform(theta, d, a, alpha):
     ct = np.cos(theta)
@@ -41,7 +42,7 @@ def forward_kinematics(theta1, theta2, theta3, theta4):
     points.append(p1)
     
     # 1 -> 2
-    T12 = dh_transform(theta2 + OFFSET, 0.0, A2, 0.0)
+    T12 = dh_transform(theta2 + np.pi/2, 0.0, A2, 0.0)
     T02 = T01 @ T12
     p2 = T02[:3, 3]
     points.append(p2)
@@ -61,7 +62,7 @@ def forward_kinematics(theta1, theta2, theta3, theta4):
     return T04, points
 
 def abs2theta_ax(abs_angle):
-    theta = ((abs_angle - 512) / 1024) * np.pi
+    theta = ((abs_angle - 512) / 1024) * 2 * np.pi
     
     if theta >= OFFSET:
         theta = OFFSET

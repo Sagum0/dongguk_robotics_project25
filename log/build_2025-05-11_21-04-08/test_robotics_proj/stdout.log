@@ -1,0 +1,19 @@
+running develop
+running egg_info
+writing test_robotics_proj.egg-info/PKG-INFO
+writing dependency_links to test_robotics_proj.egg-info/dependency_links.txt
+writing entry points to test_robotics_proj.egg-info/entry_points.txt
+writing requirements to test_robotics_proj.egg-info/requires.txt
+writing top-level names to test_robotics_proj.egg-info/top_level.txt
+reading manifest file 'test_robotics_proj.egg-info/SOURCES.txt'
+writing manifest file 'test_robotics_proj.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test-robotics-proj.egg-link (link to .)
+Installing data_hub script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing inverse_kinematics script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing motor_executor script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing motor_ready script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing trajectory_planner script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+
+Installed /home/pc/ros2_ws/build/test_robotics_proj
+running symlink_data
