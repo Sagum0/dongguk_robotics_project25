@@ -69,10 +69,10 @@ class MotorExecutor(Node):
                 tol = 2
                 
                 for q in q_list:
-                    qs = [round(theta2abs_ax(self.theta1),2),
-                                round(theta2abs_ax(self.theta2),2),
-                                round(theta2abs_ax(self.theta3),2),
-                                round(theta2abs_ax(self.theta4),2)]
+                    qs = [(theta2abs_ax(self.theta1)),
+                                (theta2abs_ax(self.theta2)),
+                                (theta2abs_ax(self.theta3)),
+                                (theta2abs_ax(self.theta4))]
                     qs_msg.data = qs
                     self.motor_pub.publish(qs_msg)
                     print(f"목표 값 publish : {qs_msg.data}")

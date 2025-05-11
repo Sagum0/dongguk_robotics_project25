@@ -20,8 +20,8 @@ arm_chain = Chain(name='4DOF_arm', links=[
 arm_chain.active_links_mask[0] = False
 
 # 3) 궤적 생성
-start = [0.10, -0.2, 0.10]
-end   = [-0.15,  0.15, 0.10]
+start = [0.15, 0.2, 0.10]
+end   = [0.15,  -0.15, 0.10]
 planner     = TrajectoryPlanner(start_point=start, end_point=end, num_points=50)
 path_points = planner.plan()  # (50, 3)
 
