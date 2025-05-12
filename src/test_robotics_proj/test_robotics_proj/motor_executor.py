@@ -1,20 +1,14 @@
 #!/usr/bin/env python3
 
 import rclpy
+import threading
+import numpy as np
 from rclpy.node import Node
 from std_msgs.msg import Float32MultiArray
-
-import numpy as np
-import threading
-
-OFFSET = np.pi
+from test_robotics_proj.Inverse_Kinematics import inverse_k
+from test_robotics_proj.Trajectory_Planner import TrajectoryPlanner
 
 def theta2abs_ax(theta):
-    if theta >= OFFSET:
-        theta = OFFSET
-    elif theta <= -OFFSET:
-        theta = -OFFSET
-
     abs_angle = (theta / (2 * np.pi)) * 1024 + 512
     return abs_angle
 
@@ -22,78 +16,106 @@ class MotorExecutor(Node):
     def __init__(self):
         super().__init__('motor_executor')
         
-        self.qs_sub = self.create_subscription(
-            Float32MultiArray,
-            '/robotics_cal_qs',
-            self.qs_callback,
-            10
-        )
-        
         self.motor_pub = self.create_publisher(
             Float32MultiArray,
             '/robotics_goal_position',
             10
         )
         
-        self.abs_motor_sub = self.create_subscription(
+        self.coordinate_sub = self.create_subscription(
             Float32MultiArray,
-            '/robotics_datahub_theta',
-            self.datahub_motor_callback,
+            '/robotics_goal_coordinate',
+            self.coordinate_callback,
             10
         )
-        self.theta1, self.theta2, self.theta3, self.theta4 = None, None, None, None
-    
+        
+        self.position_sub = self.create_subscription(
+            Float32MultiArray,
+            '/robotics_datahub_position',
+            self.position_callback,
+            10
+        )   
+        self.position_flag = False
+        self.present_x, self.present_y, self.present_z = None, None, None
+             
+        self.angle_sub = self.create_subscription(
+            Float32MultiArray,
+            '/robotics_datahub_theta',
+            self.angle_callback,
+            10
+        )
+        self.present_th1, self.present_th2, self.present_th3, self.present_th4 = None, None, None, None
+        self.angle_flag = False
+        
         self.lock = threading.Lock()
         
-    def datahub_motor_callback(self, msg):
+    def angle_callback(self, msg=Float32MultiArray):
         with self.lock:
-            if len(msg.data) == 0 or len(msg.data) != 4:
+            if len(msg.data) != 4:
+                self.angle_flag = False
                 return
             
-            self.theta1, self.theta2, self.theta3, self.theta4 = msg.data
-            self.flag = True
+            self.present_th1 = msg.data[0]
+            self.present_th2 = msg.data[1]
+            self.present_th3 = msg.data[2]
+            self.present_th4 = msg.data[3]
+            
+            self.angle_flag = True
         
-    def qs_callback(self, msg=Float32MultiArray):
+    def position_callback(self, msg=Float32MultiArray):
+        with self.lock:
+            if len(msg.data) != 3:
+                self.position_flag = False
+                return
+            
+            self.present_x = msg.data[0]
+            self.present_y = msg.data[1]
+            self.present_z = msg.data[2]
+            
+            self.position_flag = True
+            
+    def coordinate_callback(self, msg=Float32MultiArray):
         with self.lock:
             
-            while self.flag:
+            print(f"angle : {self.angle_flag}")
+            print(f"Position : {self.position_flag}")
             
-                rows = msg.layout.dim[0].size
-                cols = msg.layout.dim[1].size
+            if self.angle_flag or self.position_flag:
+                return
+            
+            if len(msg.data) == 3:
+                print(self.position_flag, self.angle_flag)
                 
-                q_list = np.array(msg.data, dtype=float).reshape(rows, cols)
+                start_point = [self.present_x, self.present_y, self.present_z]
+                print(start_point)
+                end_point = msg.data
                 
-                # print(q_list)
+                planner = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=100)
+                path    = planner.plan()
                 
-                qs_msg = Float32MultiArray()
-                tol = 2
+                qs = inverse_k(path)
+                q_msg = Float32MultiArray()
                 
-                for q in q_list:
-                    qs = [(theta2abs_ax(self.theta1)),
-                                (theta2abs_ax(self.theta2)),
-                                (theta2abs_ax(self.theta3)),
-                                (theta2abs_ax(self.theta4))]
-                    qs_msg.data = qs
-                    self.motor_pub.publish(qs_msg)
-                    print(f"목표 값 publish : {qs_msg.data}")
+                tol = 0.1
+                
+                for q in qs:
+                    q_list = [theta2abs_ax(q[0]), theta2abs_ax(q[1]), theta2abs_ax(q[2]), theta2abs_ax(q[3])]
+                    q_msg.data = q_list
+                    self.motor_pub.publish(q_msg)
+                    print(f" Target Angle Published : {q_msg.data}")
                     
                     while rclpy.ok():
                         rclpy.spin_once(self, timeout_sec=0.1)
-                        if None in (self.theta1, self.theta2, self.theta3, self.theta4):
-                            continue
+                        current = np.array([self.present_th1, self.present_th2, self.present_th3, self.present_th4])
+                        err = np.abs(current - q)
                         
-                        curr = np.array([self.theta1, self.theta2, self.theta3, self.theta4])
-                        err = np.abs(curr - q)
                         if np.all(err < tol):
-                            # print(f"도달 완료 : {curr}")
                             break
-                            
-                        qs_msg.data = qs
-                        self.motor_pub.publish(qs_msg)
                         
-                print('END!')
-                self.flag = False
-        
+                        self.motor_pub.publish(q_msg)
+                        
+                print(" All q list is Published! ")
+
 def main(args=None):
     rclpy.init(args=args)
     node = MotorExecutor()
