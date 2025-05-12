@@ -22,8 +22,8 @@ setup(
         'console_scripts': [
             'motor_ready = test_robotics_proj.motor_ready:main',
             'data_hub = test_robotics_proj.data_hub:main',
-            'trajectory_planner = test_robotics_proj.trajectory_planner:main',
-            'inverse_kinematics = test_robotics_proj.inverse_kinematics:main',
+            # 'trajectory_planner = test_robotics_proj.trajectory_planner:main',
+            # 'inverse_kinematics = test_robotics_proj.inverse_kinematics:main',
             'motor_executor = test_robotics_proj.motor_executor:main',
         ],
     },

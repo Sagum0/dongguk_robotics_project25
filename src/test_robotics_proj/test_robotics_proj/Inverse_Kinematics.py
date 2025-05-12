@@ -2,13 +2,33 @@ import numpy as np
 from ikpy.chain import Chain
 from ikpy.link  import OriginLink, DHLink
 
+def time_scaling_trap(num_points, T, accel_ratio=0.2):
+    t  = np.linspace(0, T, num_points)
+    Ta = accel_ratio * T
+    Tc = T - 2*Ta
+    s  = np.zeros_like(t)
+
+    for i, ti in enumerate(t):
+        if ti < Ta:
+            # 가속
+            s[i] = 0.5*(ti/Ta)**2 * (Ta/T)
+        elif ti < Ta + Tc:
+            # 등속
+            s[i] = (ti - 0.5*Ta) / T
+        else:
+            # 감속
+            dt   = T - ti
+            s[i] = 1 - 0.5*(dt/Ta)**2 * (Ta/T)
+
+    return s
+
 def inverse_k(path):
     arm_chain = Chain(name='4DOF_arm', links=[
         OriginLink(),
-        DHLink(d=0.1075, a=0.0,    alpha=np.pi/2, theta=0),
-        DHLink(d=0.0,    a=0.0985, alpha=0.0,     theta=np.pi/2),
-        DHLink(d=0.0,    a=0.0985, alpha=0.0,     theta=0),
-        DHLink(d=0.0,    a=0.0845, alpha=0.0,     theta=0),
+        DHLink(d=107.5,  a=0.0,   alpha=np.pi/2, theta=0),
+        DHLink(d=0.0,    a=98.5,  alpha=0.0,     theta=np.pi/2),
+        DHLink(d=0.0,    a=98.5,  alpha=0.0,     theta=0),
+        DHLink(d=0.0,    a=84.5,  alpha=0.0,     theta=0),
     ])
     
     path_points = path
