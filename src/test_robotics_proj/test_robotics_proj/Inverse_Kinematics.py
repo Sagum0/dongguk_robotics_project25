@@ -2,26 +2,6 @@ import numpy as np
 from ikpy.chain import Chain
 from ikpy.link  import OriginLink, DHLink
 
-def time_scaling_trap(num_points, T, accel_ratio=0.2):
-    t  = np.linspace(0, T, num_points)
-    Ta = accel_ratio * T
-    Tc = T - 2*Ta
-    s  = np.zeros_like(t)
-
-    for i, ti in enumerate(t):
-        if ti < Ta:
-            # 가속
-            s[i] = 0.5*(ti/Ta)**2 * (Ta/T)
-        elif ti < Ta + Tc:
-            # 등속
-            s[i] = (ti - 0.5*Ta) / T
-        else:
-            # 감속
-            dt   = T - ti
-            s[i] = 1 - 0.5*(dt/Ta)**2 * (Ta/T)
-
-    return s
-
 def inverse_k(path):
     arm_chain = Chain(name='4DOF_arm', links=[
         OriginLink(),
@@ -32,6 +12,12 @@ def inverse_k(path):
     ])
     
     path_points = path
+    dt = 0.001
+    T_seg = 0.01
+    steps = int(T_seg / dt) + 1
+    t = np.linspace(0, T_seg, steps)
+
+    s = 10*(t/T_seg)**3 - 15*(t/T_seg)**4 + 6*(t/T_seg)**5
     
     arm_chain.active_links_mask[0] = False
 
@@ -57,6 +43,24 @@ def inverse_k(path):
 
     q_matrix = np.array(q_list)
     print("q_matrix shape:", q_matrix.shape)
-    print(q_matrix)
+    #print(q_matrix)
     
-    return q_matrix
+    num_joint = q_matrix.shape[1]
+    profiles = []
+    
+    for j in range(num_joint):
+        traj_j = []
+        for k in range(len(q_matrix)-1):
+            q0 = q_matrix[k,   j]
+            q1 = q_matrix[k+1, j]
+            dq = q1 - q0
+            
+            traj_j.append(q0 + dq * s)
+            
+        profiles.append(np.concatenate(traj_j))
+
+        # **반드시** numpy array로 변환하고 전치
+    profiles = np.array(profiles).T  # shape: (total_steps, num_joints)
+    
+    print(profiles)
+    return profiles
