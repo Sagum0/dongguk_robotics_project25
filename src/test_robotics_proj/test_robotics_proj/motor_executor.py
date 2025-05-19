@@ -54,6 +54,13 @@ class MotorExecutor(Node):
         
         self.lock = threading.Lock()
         
+        # 초기 자세 1회성 전달
+        initial_msg = Float32MultiArray()
+        inital_point = [0.0, 0.0, 390.0]
+        initial_msg.data = inital_point
+        self.motor_pub.publish(initial_msg)
+        # =================
+        
     def angle_callback(self, msg=Float32MultiArray):
         with self.lock:
             if len(msg.data) != 4:
@@ -118,8 +125,7 @@ class MotorExecutor(Node):
             # 7) 다음 명령 대기를 위해 flag 클리어
             self.flag = False
             self.get_logger().info("All trajectory points published on schedule.")
-
-            
+ 
 def main(args=None):
     rclpy.init(args=args)
     node = MotorExecutor()

@@ -6,8 +6,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/TrajectoryPoints.msg"
-  DEPENDENCIES geometry_msgs
+  "srv/MotorExecutor.srv"
 )
 
 ament_export_dependencies(rosidl_default_runtime)
