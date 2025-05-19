@@ -6,9 +6,11 @@ import numpy as np
 from rclpy.node import Node
 from std_msgs.msg import Float32MultiArray
 from test_robotics_proj.Inverse_Kinematics import inverse_k
-from test_robotics_proj.Trajectory_Planner import TrajectoryPlanner
+from test_robotics_proj.Trajectory_Planner import *
 import time
 
+center = (0.0, -0.15, 0.07)
+radius = 0.06
 
 def theta2abs_ax(theta):
     abs_angle = (theta / (2 * np.pi)) * 1024 + 512
@@ -23,13 +25,7 @@ class MotorExecutor(Node):
             '/robotics_goal_position',
             10
         )
-        
-        self.coordinate_sub = self.create_subscription(
-            Float32MultiArray,
-            '/robotics_goal_coordinate',
-            self.coordinate_callback,
-            10
-        )
+    
         self.end_x, self.end_y, self.end_z = None, None, None
         self.flag = False
         
@@ -73,16 +69,6 @@ class MotorExecutor(Node):
             self.present_y = msg.data[1]
             self.present_z = msg.data[2]
             
-    def coordinate_callback(self, msg=Float32MultiArray):
-        with self.lock:
-            if len(msg.data) != 3:
-                self.flag = False
-                return
-            
-            self.end_x = msg.data[0]
-            self.end_y = msg.data[1]
-            self.end_z = msg.data[2]
-            
             self.flag = True
         
     def timer_callback(self):
@@ -92,10 +78,10 @@ class MotorExecutor(Node):
 
             # 1) 시작/끝 좌표 취득
             start_point = [self.present_x, self.present_y, self.present_z]
-            end_point   = [self.end_x,    self.end_y,    self.end_z   ]
 
             # 2) 공간 경로 생성 (폴리+BSpline)
-            planner = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=10)
+            planner = CircleTrajectoryPlanner(start_point, (center[0], center[1]), radius,
+                                              center[2], num_circle=30, num_trans=10)
             path     = planner.plan()                         # N×3
 
             q_matrix = inverse_k(path)

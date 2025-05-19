@@ -7,6 +7,45 @@ from Trajectory_Planner import TrajectoryPlanner
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+
+def generate_circle_with_transition(start, center, radius, z, 
+                                    num_circle=100, num_trans=20):
+    """
+    start: (xs, ys, zs) 현재 로봇의 시작 좌표
+    center: (x0, y0) 원의 중심
+    radius: 원의 반지름
+    z: 원 궤적 높이 (xy평면의 z)
+    num_circle: 원 위 포인트 개수
+    num_trans: 이동 구간(linear) 포인트 개수
+    """
+    xs, ys, zs = start
+    x0, y0 = center
+
+    # 1) 시작점에서 원 위로 이동: 
+    #    원 위 근접점(angle0), 그리고 보간
+    angle0 = np.arctan2(ys - y0, xs - x0)
+    x_on = x0 + radius * np.cos(angle0)
+    y_on = y0 + radius * np.sin(angle0)
+    z_on = z
+
+    # 선형 보간
+    trans_t = np.linspace(0, 1, num_trans)
+    x_trans = xs + (x_on - xs) * trans_t
+    y_trans = ys + (y_on - ys) * trans_t
+    z_trans = zs + (z_on - zs) * trans_t
+    trans_path = np.vstack((x_trans, y_trans, z_trans)).T
+
+    # 2) 원 궤적 생성 (angle0에서 시작)
+    theta = np.linspace(angle0, angle0 + 2*np.pi, num_circle, endpoint=False)
+    x_circle = x0 + radius * np.cos(theta)
+    y_circle = y0 + radius * np.sin(theta)
+    z_circle = np.full_like(theta, z)
+    circle_path = np.vstack((x_circle, y_circle, z_circle)).T
+
+    # 두 구간 연결
+    full_path = np.vstack((trans_path, circle_path))
+    return full_path
+
 # 1) IK 체인 정의 (2번 관절에 π/2 오프셋 적용)
 arm_chain = Chain(name='4DOF_arm', links=[
     OriginLink(),  # index 0: 베이스 (fixed)
@@ -19,11 +58,19 @@ arm_chain = Chain(name='4DOF_arm', links=[
 # 2) 베이스 링크 제외
 arm_chain.active_links_mask[0] = False
 
-# 3) 궤적 생성
-start = [0.15, 0.2, 0.10]
-end   = [0.15,  -0.15, 0.10]
-planner     = TrajectoryPlanner(start_point=start, end_point=end, num_points=100)
-path_points = planner.plan()  # (50, 3)
+# # 3) 궤적 생성
+# start = [0.15, 0.2, 0.10]
+# end   = [0.15,  -0.15, 0.10]
+# planner     = TrajectoryPlanner(start_point=start, end_point=end, num_points=100)
+# path_points = planner.plan()  # (50, 3)
+start   = (-0.2, 0.1, 0.05)   # 현재 로봇팔 위치
+center = (0.10, 0.10)     # 예: x=0.3, y=0.2
+radius = 0.07           # 반지름 0.1m
+z = 0.05               # 높이 0.15m
+path = generate_circle_with_transition(
+        start, center, radius, z,
+        num_circle=30, num_trans=10
+    )
 
 # 4) 초기 추정값: 체인 전체 링크 수만큼 0으로 세팅
 prev_q = np.zeros(len(arm_chain.links))  # 길이 5
@@ -31,7 +78,7 @@ prev_q = np.zeros(len(arm_chain.links))  # 길이 5
 q_list = []
 
 # 5) 첫 지점: 순수 위치 IK (orientation_mode 없이)
-first_point = path_points[0]
+first_point = path[0]
 q_full = arm_chain.inverse_kinematics(
     target_position  = first_point,   # 위치만
     initial_position = prev_q         # zero seed 사용
@@ -40,7 +87,7 @@ q_list.append(q_full[1:])             # 베이스 제외
 prev_q = q_full                        # 다음 단계 초기값
 
 # 6) 나머지 지점들: Z축 제약 IK
-for p in path_points[1:]:
+for p in path[1:]:
     q_full = arm_chain.inverse_kinematics(
         target_position   = p,
         # orientation_mode  = "Z",      # End Effector z축을 전역 z축과 정렬
@@ -118,5 +165,5 @@ def update(k):
     line.set_data(pts[:,0], pts[:,1])
     line.set_3d_properties(pts[:,2])
     return line,
-ani = FuncAnimation(fig, update, frames=profiles.shape[0], interval = dt * 1000, blit=True)
+ani = FuncAnimation(fig, update, frames=profiles.shape[0], interval = dt * 1000, blit=True, repeat = False)
 plt.show()

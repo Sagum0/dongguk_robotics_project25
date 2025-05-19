@@ -25,6 +25,7 @@ setup(
             # 'trajectory_planner = test_robotics_proj.trajectory_planner:main',
             # 'inverse_kinematics = test_robotics_proj.inverse_kinematics:main',
             'motor_executor = test_robotics_proj.motor_executor:main',
+            'Task_1 = test_robotics_proj.Task_1_motor_executor:main',
         ],
     },
 )
