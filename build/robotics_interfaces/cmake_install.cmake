@@ -97,7 +97,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/librobotics_interfaces__rosidl_typesupport_fastrtps_c.so")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/librobotics_interfaces__rosidl_typesupport_fastrtps_c.so"
-         OLD_RPATH "/home/pc/ros2_ws/build/robotics_interfaces:/opt/ros/humble/lib:"
+         OLD_RPATH "/opt/ros/humble/lib:/home/pc/ros2_ws/build/robotics_interfaces:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/librobotics_interfaces__rosidl_typesupport_fastrtps_c.so")
@@ -356,11 +356,19 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/msg" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter/robotics_interfaces/msg/TrajectoryPoints.idl")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/srv" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_adapter/robotics_interfaces/srv/MotorExecutor.idl")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/msg" TYPE FILE FILES "/home/pc/ros2_ws/src/robotics_interfaces/msg/TrajectoryPoints.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/srv" TYPE FILE FILES "/home/pc/ros2_ws/src/robotics_interfaces/srv/MotorExecutor.srv")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/srv" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_cmake/srv/MotorExecutor_Request.msg")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/srv" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_cmake/srv/MotorExecutor_Response.msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -584,10 +592,6 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/cmake" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/cmake" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/ament_cmake_export_include_directories/ament_cmake_export_include_directories-extras.cmake")
 endif()
 
@@ -601,6 +605,10 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/cmake" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_cmake/rosidl_cmake_export_typesupport_targets-extras.cmake")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robotics_interfaces/cmake" TYPE FILE FILES "/home/pc/ros2_ws/build/robotics_interfaces/ament_cmake_export_dependencies/ament_cmake_export_dependencies-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)

@@ -1,0 +1,20 @@
+[0.399s] Invoking command in '/home/pc/ros2_ws/build/test_robotics_proj': PYTHONPATH=/home/pc/ros2_ws/build/test_robotics_proj/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/pc/ros2_ws/build/test_robotics_proj/build --no-deps symlink_data
+[0.574s] running develop
+[0.676s] running egg_info
+[0.676s] writing test_robotics_proj.egg-info/PKG-INFO
+[0.677s] writing dependency_links to test_robotics_proj.egg-info/dependency_links.txt
+[0.677s] writing entry points to test_robotics_proj.egg-info/entry_points.txt
+[0.677s] writing requirements to test_robotics_proj.egg-info/requires.txt
+[0.677s] writing top-level names to test_robotics_proj.egg-info/top_level.txt
+[0.678s] reading manifest file 'test_robotics_proj.egg-info/SOURCES.txt'
+[0.678s] writing manifest file 'test_robotics_proj.egg-info/SOURCES.txt'
+[0.679s] running build_ext
+[0.680s] Creating /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test-robotics-proj.egg-link (link to .)
+[0.680s] Installing Task_1 script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.680s] Installing data_hub script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.680s] Installing motor_executor script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.681s] Installing motor_ready script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.681s] 
+[0.681s] Installed /home/pc/ros2_ws/build/test_robotics_proj
+[0.681s] running symlink_data
+[0.697s] Invoked command in '/home/pc/ros2_ws/build/test_robotics_proj' returned '0': PYTHONPATH=/home/pc/ros2_ws/build/test_robotics_proj/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/pc/ros2_ws/build/test_robotics_proj/build --no-deps symlink_data

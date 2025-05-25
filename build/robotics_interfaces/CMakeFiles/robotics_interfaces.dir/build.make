@@ -66,37 +66,9 @@ include CMakeFiles/robotics_interfaces.dir/compiler_depend.make
 # Include the progress variables for this target.
 include CMakeFiles/robotics_interfaces.dir/progress.make
 
-CMakeFiles/robotics_interfaces: /home/pc/ros2_ws/src/robotics_interfaces/msg/TrajectoryPoints.msg
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Accel.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/AccelStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/AccelWithCovariance.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/AccelWithCovarianceStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Inertia.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/InertiaStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Point.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Point32.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/PointStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Polygon.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/PolygonStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Pose.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Pose2D.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/PoseArray.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/PoseStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/PoseWithCovariance.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/PoseWithCovarianceStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Quaternion.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/QuaternionStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Transform.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/TransformStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Twist.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/TwistStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/TwistWithCovariance.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/TwistWithCovarianceStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Vector3.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Vector3Stamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/VelocityStamped.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/Wrench.idl
-CMakeFiles/robotics_interfaces: /opt/ros/humble/share/geometry_msgs/msg/WrenchStamped.idl
+CMakeFiles/robotics_interfaces: /home/pc/ros2_ws/src/robotics_interfaces/srv/MotorExecutor.srv
+CMakeFiles/robotics_interfaces: rosidl_cmake/srv/MotorExecutor_Request.msg
+CMakeFiles/robotics_interfaces: rosidl_cmake/srv/MotorExecutor_Response.msg
 
 robotics_interfaces: CMakeFiles/robotics_interfaces
 robotics_interfaces: CMakeFiles/robotics_interfaces.dir/build.make

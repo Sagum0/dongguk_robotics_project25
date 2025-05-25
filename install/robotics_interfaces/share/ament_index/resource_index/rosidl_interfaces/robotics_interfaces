@@ -1,2 +1,4 @@
-msg/TrajectoryPoints.idl
-msg/TrajectoryPoints.msg
+srv/MotorExecutor.idl
+srv/MotorExecutor.srv
+srv/MotorExecutor_Request.msg
+srv/MotorExecutor_Response.msg

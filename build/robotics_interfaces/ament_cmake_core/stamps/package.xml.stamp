@@ -7,16 +7,13 @@
   <license>TODO: License declaration</license>
   <maintainer email="you@example.com">Your Name</maintainer>
 
-  <!-- 빌드 도구 종속성 -->
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!-- 빌드 종속성 -->
   <build_depend>rosidl_default_generators</build_depend>
   
   <build_depend>geometry_msgs</build_depend>
   <exec_depend>geometry_msgs</exec_depend>
 
-  <!-- 빌드 내보내기 종속성 -->
   <build_export_depend>rosidl_default_runtime</build_export_depend>
   <exec_depend>rosidl_default_runtime</exec_depend>
   

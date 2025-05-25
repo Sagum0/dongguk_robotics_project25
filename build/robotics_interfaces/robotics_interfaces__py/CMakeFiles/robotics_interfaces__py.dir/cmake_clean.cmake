@@ -2,9 +2,9 @@ file(REMOVE_RECURSE
   "../rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_c.c"
   "../rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
   "../rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_introspection_c.c"
-  "../rosidl_generator_py/robotics_interfaces/msg/__init__.py"
-  "../rosidl_generator_py/robotics_interfaces/msg/_trajectory_points.py"
-  "../rosidl_generator_py/robotics_interfaces/msg/_trajectory_points_s.c"
+  "../rosidl_generator_py/robotics_interfaces/srv/__init__.py"
+  "../rosidl_generator_py/robotics_interfaces/srv/_motor_executor.py"
+  "../rosidl_generator_py/robotics_interfaces/srv/_motor_executor_s.c"
   "CMakeFiles/robotics_interfaces__py"
 )
 

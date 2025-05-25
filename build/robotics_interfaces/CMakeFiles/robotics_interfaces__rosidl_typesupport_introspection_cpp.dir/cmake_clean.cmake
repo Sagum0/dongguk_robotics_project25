@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/robotics_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/robotics_interfaces/msg/detail/trajectory_points__type_support.cpp.o"
-  "CMakeFiles/robotics_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/robotics_interfaces/msg/detail/trajectory_points__type_support.cpp.o.d"
+  "CMakeFiles/robotics_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/robotics_interfaces/srv/detail/motor_executor__type_support.cpp.o"
+  "CMakeFiles/robotics_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/robotics_interfaces/srv/detail/motor_executor__type_support.cpp.o.d"
   "librobotics_interfaces__rosidl_typesupport_introspection_cpp.pdb"
   "librobotics_interfaces__rosidl_typesupport_introspection_cpp.so"
-  "rosidl_typesupport_introspection_cpp/robotics_interfaces/msg/detail/trajectory_points__rosidl_typesupport_introspection_cpp.hpp"
-  "rosidl_typesupport_introspection_cpp/robotics_interfaces/msg/detail/trajectory_points__type_support.cpp"
+  "rosidl_typesupport_introspection_cpp/robotics_interfaces/srv/detail/motor_executor__rosidl_typesupport_introspection_cpp.hpp"
+  "rosidl_typesupport_introspection_cpp/robotics_interfaces/srv/detail/motor_executor__type_support.cpp"
 )
 
 # Per-language clean rules from dependency scanning.

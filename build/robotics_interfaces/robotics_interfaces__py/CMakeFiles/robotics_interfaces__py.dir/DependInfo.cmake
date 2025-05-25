@@ -14,9 +14,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
 set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_c.c" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
   "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_introspection_c.c" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
-  "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/msg/__init__.py" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
-  "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/msg/_trajectory_points.py" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
-  "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/msg/_trajectory_points_s.c" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/srv/__init__.py" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/srv/_motor_executor.py" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/srv/_motor_executor_s.c" "/home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c"
   )
 
 

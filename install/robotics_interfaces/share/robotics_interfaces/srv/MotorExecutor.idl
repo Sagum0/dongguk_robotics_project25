@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from robotics_interfaces/srv/MotorExecutor.srv
+// generated code does not contain a copyright notice
+
+
+module robotics_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "test_robotics_proj/srv/MotorExecutor.srv")
+    struct MotorExecutor_Request {
+      float x;
+
+      float y;
+
+      float z;
+
+      float r;
+
+      string task;
+    };
+    struct MotorExecutor_Response {
+      boolean success;
+    };
+  };
+};

@@ -26,6 +26,8 @@ setup(
             # 'inverse_kinematics = test_robotics_proj.inverse_kinematics:main',
             'motor_executor = test_robotics_proj.motor_executor:main',
             'Task_1 = test_robotics_proj.Task_1_motor_executor:main',
+            'motor_executor_client = test_robotics_proj.motor_executor_client:main',
+            'motor_executor_server = test_robotics_proj.motor_executor_server:main',
         ],
     },
 )
