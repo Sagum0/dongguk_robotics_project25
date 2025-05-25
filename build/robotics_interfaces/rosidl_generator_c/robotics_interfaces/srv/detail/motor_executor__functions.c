@@ -24,6 +24,7 @@ robotics_interfaces__srv__MotorExecutor_Request__init(robotics_interfaces__srv__
   // y
   // z
   // r
+  // grab
   // task
   if (!rosidl_runtime_c__String__init(&msg->task)) {
     robotics_interfaces__srv__MotorExecutor_Request__fini(msg);
@@ -42,6 +43,7 @@ robotics_interfaces__srv__MotorExecutor_Request__fini(robotics_interfaces__srv__
   // y
   // z
   // r
+  // grab
   // task
   rosidl_runtime_c__String__fini(&msg->task);
 }
@@ -66,6 +68,10 @@ robotics_interfaces__srv__MotorExecutor_Request__are_equal(const robotics_interf
   }
   // r
   if (lhs->r != rhs->r) {
+    return false;
+  }
+  // grab
+  if (lhs->grab != rhs->grab) {
     return false;
   }
   // task
@@ -93,6 +99,8 @@ robotics_interfaces__srv__MotorExecutor_Request__copy(
   output->z = input->z;
   // r
   output->r = input->r;
+  // grab
+  output->grab = input->grab;
   // task
   if (!rosidl_runtime_c__String__copy(
       &(input->task), &(output->task)))

@@ -5,8 +5,14 @@ from rclpy.node import Node
 from robotics_interfaces.srv import MotorExecutor
 
 coordinate_list = [
-    [50.0,  50.0, 200.0],
-    [100.0, 100.0, 100.0],
+    [50.0,  50.0, 200.0, False, 'move'],
+    [100.0, 100.0, 100.0, False, 'move'],
+    [120.0, 120.0, 50.0, False, 'move'],
+    [120.0, 120.0, 50.0, True, 'pick'],
+    [100.0, 100.0, 100.0, True, 'move'],
+    [100.0, -100.0, 100.0, True, 'move'],
+    [120.0, -120.0, 50.0, True, 'move'],
+    [120.0, -120.0, 50.0, False, 'pick'],
     # 다음 좌표를 여기에 추가...
 ]
 
@@ -25,11 +31,13 @@ class MotorExecutorClient(Node):
             self.get_logger().info('모든 좌표 전송 완료')
             return
 
-        x, y, z = coordinate_list[self.idx]
+        x, y, z, grab, task = coordinate_list[self.idx]
         req = MotorExecutor.Request()
         req.x = x
         req.y = y
         req.z = z
+        req.task = task
+        req.grab = grab
 
         self.get_logger().info(f'[{self.idx}] 목표 좌표 전송: x={x:.2f}, y={y:.2f}, z={z:.2f}')
         future = self.client.call_async(req)

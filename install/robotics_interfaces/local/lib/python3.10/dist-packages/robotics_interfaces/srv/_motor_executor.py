@@ -61,6 +61,7 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         '_y',
         '_z',
         '_r',
+        '_grab',
         '_task',
     ]
 
@@ -69,6 +70,7 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         'y': 'float',
         'z': 'float',
         'r': 'float',
+        'grab': 'boolean',
         'task': 'string',
     }
 
@@ -77,6 +79,7 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
+        rosidl_parser.definition.BasicType('boolean'),  # noqa: E501
         rosidl_parser.definition.UnboundedString(),  # noqa: E501
     )
 
@@ -88,6 +91,7 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         self.y = kwargs.get('y', float())
         self.z = kwargs.get('z', float())
         self.r = kwargs.get('r', float())
+        self.grab = kwargs.get('grab', bool())
         self.task = kwargs.get('task', str())
 
     def __repr__(self):
@@ -126,6 +130,8 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         if self.z != other.z:
             return False
         if self.r != other.r:
+            return False
+        if self.grab != other.grab:
             return False
         if self.task != other.task:
             return False
@@ -195,6 +201,19 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
             assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
                 "The 'r' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
         self._r = value
+
+    @builtins.property
+    def grab(self):
+        """Message field 'grab'."""
+        return self._grab
+
+    @grab.setter
+    def grab(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, bool), \
+                "The 'grab' field must be of type 'bool'"
+        self._grab = value
 
     @builtins.property
     def task(self):

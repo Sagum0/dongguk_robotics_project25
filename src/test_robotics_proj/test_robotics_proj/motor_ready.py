@@ -38,7 +38,7 @@ POSITION_MODE = 3
 ##############################################
 # 글로벌 상수 정의
 ##############################################
-TASK_NUMBER = 1  # 중간 과제: 1번 / 기말 과제: 2번
+TASK_NUMBER = 2  # 중간 과제: 1번 / 기말 과제: 2번
 
 
 ##############################################
@@ -65,13 +65,12 @@ class MotorReady(Node):
         if not self.ax_port.setBaudRate(AX_BAUDRATE):
             self.get_logger().error("AX 모터 baudrate 설정 실패")
         
-        if TASK_NUMBER == 2:
-            self.xc_port = PortHandler(XC_DEVICENAME)
-            self.xc_packet = PacketHandler(XC_PROTOCOL_VERSION)
-            if not self.xc_port.openPort():
-                self.get_logger().error("XC 모터 포트 열기 실패: {}".format(XC_DEVICENAME))
-            if not self.xc_port.setBaudRate(XC_BAUDRATE):
-                self.get_logger().error("XC 모터 baudrate 설정 실패")
+        self.xc_port = PortHandler(XC_DEVICENAME)
+        self.xc_packet = PacketHandler(XC_PROTOCOL_VERSION)
+        if not self.xc_port.openPort():
+            self.get_logger().error("XC 모터 포트 열기 실패: {}".format(XC_DEVICENAME))
+        if not self.xc_port.setBaudRate(XC_BAUDRATE):
+            self.get_logger().error("XC 모터 baudrate 설정 실패")
 
         # AX 모터 초기화 (동작 모드 변경은 없음)
         for motor_id in AX_ID_LIST:
@@ -79,7 +78,6 @@ class MotorReady(Node):
             if dxl_comm_result != COMM_SUCCESS:
                 self.get_logger().warn("AX Motor {}: Torque 활성화 실패({})".format(motor_id, self.ax_packet.getTxRxResult(dxl_comm_result)))
 
-        if TASK_NUMBER == 2:
             dxl_comm_result, dxl_error = self.xc_packet.write1ByteTxRx(self.xc_port, XC_ID, XC_OPERATING_MODE_ADDR, POSITION_MODE)
             if dxl_comm_result != COMM_SUCCESS:
                 self.get_logger().warn("XC Motor: 동작 모드 설정 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
@@ -111,7 +109,6 @@ class MotorReady(Node):
                 if dxl_comm_result != COMM_SUCCESS:
                     self.get_logger().warn("AX Motor {}: Goal Position 쓰기 실패({})".format(motor_id, self.ax_packet.getTxRxResult(dxl_comm_result)))
                     
-            if TASK_NUMBER == 2:
                 goal_pos = int(theta[4])  # float -> int 변환
                 dxl_comm_result, dxl_error = self.xc_packet.write4ByteTxRx(self.xc_port, XC_ID, XC_GOAL_POSITION_ADDR, goal_pos)
                 if dxl_comm_result != COMM_SUCCESS:
@@ -129,12 +126,6 @@ class MotorReady(Node):
                     pos = 0
                 positions.append(float(pos))
                 
-            if TASK_NUMBER == 2:
-                pos, dxl_comm_result, dxl_error = self.xc_packet.read4ByteTxRx(self.xc_port, XC_ID, XC_PRESENT_POSITION_ADDR)
-                if dxl_comm_result != COMM_SUCCESS:
-                    self.get_logger().warn("XC Motor: Present Position 읽기 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
-                    pos = 0
-                positions.append(float(pos))
         msg.data = positions
         self.present_pos_pub.publish(msg)
 

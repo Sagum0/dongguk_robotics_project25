@@ -40,6 +40,8 @@ cdr_serialize(
   cdr << ros_message.z;
   // Member: r
   cdr << ros_message.r;
+  // Member: grab
+  cdr << (ros_message.grab ? true : false);
   // Member: task
   cdr << ros_message.task;
   return true;
@@ -62,6 +64,13 @@ cdr_deserialize(
 
   // Member: r
   cdr >> ros_message.r;
+
+  // Member: grab
+  {
+    uint8_t tmp;
+    cdr >> tmp;
+    ros_message.grab = tmp ? true : false;
+  }
 
   // Member: task
   cdr >> ros_message.task;
@@ -103,6 +112,12 @@ get_serialized_size(
   // Member: r
   {
     size_t item_size = sizeof(ros_message.r);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // Member: grab
+  {
+    size_t item_size = sizeof(ros_message.grab);
     current_alignment += item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -168,6 +183,14 @@ max_serialized_size_MotorExecutor_Request(
     last_member_size = array_size * sizeof(uint32_t);
     current_alignment += array_size * sizeof(uint32_t) +
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+
+  // Member: grab
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
   }
 
   // Member: task

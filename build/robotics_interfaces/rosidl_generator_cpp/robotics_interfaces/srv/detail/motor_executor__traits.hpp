@@ -53,6 +53,13 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
+  // member: grab
+  {
+    out << "grab: ";
+    rosidl_generator_traits::value_to_yaml(msg.grab, out);
+    out << ", ";
+  }
+
   // member: task
   {
     out << "task: ";
@@ -102,6 +109,16 @@ inline void to_block_style_yaml(
     }
     out << "r: ";
     rosidl_generator_traits::value_to_yaml(msg.r, out);
+    out << "\n";
+  }
+
+  // member: grab
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "grab: ";
+    rosidl_generator_traits::value_to_yaml(msg.grab, out);
     out << "\n";
   }
 

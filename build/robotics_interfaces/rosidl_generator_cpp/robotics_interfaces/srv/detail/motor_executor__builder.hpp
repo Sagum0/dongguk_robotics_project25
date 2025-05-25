@@ -37,16 +37,32 @@ private:
   ::robotics_interfaces::srv::MotorExecutor_Request msg_;
 };
 
+class Init_MotorExecutor_Request_grab
+{
+public:
+  explicit Init_MotorExecutor_Request_grab(::robotics_interfaces::srv::MotorExecutor_Request & msg)
+  : msg_(msg)
+  {}
+  Init_MotorExecutor_Request_task grab(::robotics_interfaces::srv::MotorExecutor_Request::_grab_type arg)
+  {
+    msg_.grab = std::move(arg);
+    return Init_MotorExecutor_Request_task(msg_);
+  }
+
+private:
+  ::robotics_interfaces::srv::MotorExecutor_Request msg_;
+};
+
 class Init_MotorExecutor_Request_r
 {
 public:
   explicit Init_MotorExecutor_Request_r(::robotics_interfaces::srv::MotorExecutor_Request & msg)
   : msg_(msg)
   {}
-  Init_MotorExecutor_Request_task r(::robotics_interfaces::srv::MotorExecutor_Request::_r_type arg)
+  Init_MotorExecutor_Request_grab r(::robotics_interfaces::srv::MotorExecutor_Request::_r_type arg)
   {
     msg_.r = std::move(arg);
-    return Init_MotorExecutor_Request_task(msg_);
+    return Init_MotorExecutor_Request_grab(msg_);
   }
 
 private:

@@ -42,6 +42,7 @@ struct MotorExecutor_Request_
       this->y = 0.0f;
       this->z = 0.0f;
       this->r = 0.0f;
+      this->grab = false;
       this->task = "";
     }
   }
@@ -56,6 +57,7 @@ struct MotorExecutor_Request_
       this->y = 0.0f;
       this->z = 0.0f;
       this->r = 0.0f;
+      this->grab = false;
       this->task = "";
     }
   }
@@ -73,6 +75,9 @@ struct MotorExecutor_Request_
   using _r_type =
     float;
   _r_type r;
+  using _grab_type =
+    bool;
+  _grab_type grab;
   using _task_type =
     std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>;
   _task_type task;
@@ -100,6 +105,12 @@ struct MotorExecutor_Request_
     const float & _arg)
   {
     this->r = _arg;
+    return *this;
+  }
+  Type & set__grab(
+    const bool & _arg)
+  {
+    this->grab = _arg;
     return *this;
   }
   Type & set__task(
@@ -161,6 +172,9 @@ struct MotorExecutor_Request_
       return false;
     }
     if (this->r != other.r) {
+      return false;
+    }
+    if (this->grab != other.grab) {
       return false;
     }
     if (this->task != other.task) {

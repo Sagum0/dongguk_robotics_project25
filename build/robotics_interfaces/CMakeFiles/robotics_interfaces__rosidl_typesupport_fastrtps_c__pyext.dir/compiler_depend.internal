@@ -243,9 +243,10 @@ CMakeFiles/robotics_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_
  /opt/ros/humble/include/rosidl_typesupport_interface/rosidl_typesupport_interface/macros.h
  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/service_type_support_struct.h
  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/action_type_support_struct.h
- /home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_c/robotics_interfaces/msg/detail/trajectory_points__type_support.h
+ /home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_c/robotics_interfaces/srv/detail/motor_executor__type_support.h
  /home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_c/robotics_interfaces/msg/rosidl_generator_c__visibility_control.h
- /home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_c/robotics_interfaces/msg/detail/trajectory_points__struct.h
- /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/point__struct.h
- /home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_c/robotics_interfaces/msg/detail/trajectory_points__functions.h
+ /home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_c/robotics_interfaces/srv/detail/motor_executor__struct.h
+ /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/string.h
+ /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence.h
+ /home/pc/ros2_ws/build/robotics_interfaces/rosidl_generator_c/robotics_interfaces/srv/detail/motor_executor__functions.h
 

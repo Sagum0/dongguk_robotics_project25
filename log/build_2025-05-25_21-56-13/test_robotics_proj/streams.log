@@ -1,0 +1,24 @@
+[0.411s] Invoking command in '/home/pc/ros2_ws/build/test_robotics_proj': PYTHONPATH=/home/pc/ros2_ws/build/test_robotics_proj/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/pc/ros2_ws/build/test_robotics_proj/build --no-deps symlink_data --force
+[0.586s] running develop
+[0.690s] running egg_info
+[0.690s] writing test_robotics_proj.egg-info/PKG-INFO
+[0.690s] writing dependency_links to test_robotics_proj.egg-info/dependency_links.txt
+[0.690s] writing entry points to test_robotics_proj.egg-info/entry_points.txt
+[0.690s] writing requirements to test_robotics_proj.egg-info/requires.txt
+[0.690s] writing top-level names to test_robotics_proj.egg-info/top_level.txt
+[0.691s] reading manifest file 'test_robotics_proj.egg-info/SOURCES.txt'
+[0.692s] writing manifest file 'test_robotics_proj.egg-info/SOURCES.txt'
+[0.693s] running build_ext
+[0.693s] Creating /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test-robotics-proj.egg-link (link to .)
+[0.693s] Installing Task_1 script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.694s] Installing data_hub script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.694s] Installing motor_executor script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.694s] Installing motor_executor_client script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.694s] Installing motor_executor_server script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.694s] Installing motor_ready script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+[0.694s] 
+[0.694s] Installed /home/pc/ros2_ws/build/test_robotics_proj
+[0.694s] running symlink_data
+[0.694s] symbolically linking /home/pc/ros2_ws/build/test_robotics_proj/resource/test_robotics_proj -> /home/pc/ros2_ws/install/test_robotics_proj/share/ament_index/resource_index/packages
+[0.694s] symbolically linking /home/pc/ros2_ws/build/test_robotics_proj/package.xml -> /home/pc/ros2_ws/install/test_robotics_proj/share/test_robotics_proj
+[0.710s] Invoked command in '/home/pc/ros2_ws/build/test_robotics_proj' returned '0': PYTHONPATH=/home/pc/ros2_ws/build/test_robotics_proj/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/pc/ros2_ws/build/test_robotics_proj/build --no-deps symlink_data --force

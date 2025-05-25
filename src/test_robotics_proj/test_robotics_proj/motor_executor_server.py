@@ -14,9 +14,16 @@ def theta2abs_ax(theta):
     abs_angle = (theta / (2 * np.pi)) * 1024 + 512
     return abs_angle
 
+def get_it():
+    return int(1955)
+
+def let_it():
+    return int(2354)
+
 class MotorExecutorServer(Node):
     def __init__(self):
         super().__init__('motor_executor_server')
+        self.lock = threading.Lock()
         
         self.motor_pub = self.create_publisher(
             Float32MultiArray,
@@ -24,28 +31,26 @@ class MotorExecutorServer(Node):
             10
         )
         
+        self.present_x, self.present_y, self.present_z = None, None, None
         self.position_sub = self.create_subscription(
             Float32MultiArray,
             '/robotics_datahub_position',
             self.position_callback,
             10
         )   
-        self.present_x, self.present_y, self.present_z = None, None, None
         
+        self.present_th1, self.present_th2, self.present_th3, self.present_th4 = None, None, None, None
         self.angle_sub = self.create_subscription(
             Float32MultiArray,
             '/robotics_datahub_theta',
             self.angle_callback,
             10
         )
-        self.present_th1, self.present_th2, self.present_th3, self.present_th4 = None, None, None, None
         
-        self.lock = threading.Lock()
-        
-        self.srv = self.create_service(MotorExecutor, 'motor_executor', self.service_response_callback)
+        self.srv = self.create_service(MotorExecutor, 'motor_executor', 
+                                       self.service_response_callback)
         
         self.timer_period = 0.5
-        
         self.create_timer(self.timer_period, self.timer_callback)
 
     def angle_callback(self, msg=Float32MultiArray):
@@ -75,38 +80,63 @@ class MotorExecutorServer(Node):
             try:
                 start_point = [self.present_x, self.present_y, self.present_z]
                 end_point= [request.x, request.y, request.z]
+                grab = request.grab
                 radius = request.r
                 task = request.task
                 
-                os.system('clear')
+                # os.system('clear')
                 
                 print(f'요청된 목표 좌표: x={end_point[0]}, y={end_point[1]}, z={end_point[2]}')
                 print(f'요청된 작업: {task}, 반경: {radius}')
                 
                 time.sleep(1)
                 
-                planner = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=100)
-                path     = planner.plan()                         # N×3
+                if grab:
+                    theta_5 = 1955.0
+                else:
+                    theta_5 = 2354.0
+                
+                if task == 'move':
+                    print(' Gripper가 이동합니다. ')
+                    planner = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=100)
+                    path     = planner.plan()                         # N×3
 
-                q_matrix = inverse_k(path)
+                    q_matrix = inverse_k(path)
 
-                # 6) 시간 스케줄 기반 joint‐level 명령 발행
-                q_msg    = Float32MultiArray()
-                for idx, q in enumerate(q_matrix):
-
-                    # 6-2) 목표 각도 변환 및 퍼블리시
+                    # 6) 시간 스케줄 기반 joint‐level 명령 발행
+                    q_msg    = Float32MultiArray()
+                    for idx, q in enumerate(q_matrix):
+                        
+                        # 6-2) 목표 각도 변환 및 퍼블리시
+                        q_msg.data = [
+                            theta2abs_ax(q[0]),
+                            theta2abs_ax(q[1]),
+                            theta2abs_ax(q[2]),
+                            theta2abs_ax(q[3]),
+                            float(theta_5)
+                        ]
+                        self.motor_pub.publish(q_msg)
+                        
+                        time.sleep(0.005)
+                        
+                    response.success = True
+                    self.get_logger().info('플래닝 및 IK 성공')
+                    
+                elif task == 'pick':
+                    print(' Gripper를 열거나 닫습니다. ')
+                    
+                    q_msg    = Float32MultiArray()
                     q_msg.data = [
-                        theta2abs_ax(q[0]),
-                        theta2abs_ax(q[1]),
-                        theta2abs_ax(q[2]),
-                        theta2abs_ax(q[3]),
-                    ]
+                            theta2abs_ax(self.present_th1),
+                            theta2abs_ax(self.present_th2),
+                            theta2abs_ax(self.present_th3),
+                            theta2abs_ax(self.present_th4),
+                            theta_5
+                        ]
                     self.motor_pub.publish(q_msg)
                     
-                    time.sleep(0.005)
-                    
-                response.success = True
-                self.get_logger().info('플래닝 및 IK 성공')
+                    response.success = True
+                    self.get_logger().info('잡기 성공')
                 
             except Exception as e:
                 self.get_logger().error(f'플래닝/IK 실패: {e}')

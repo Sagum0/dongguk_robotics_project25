@@ -16,6 +16,8 @@ module robotics_interfaces {
 
       float r;
 
+      boolean grab;
+
       string task;
     };
     struct MotorExecutor_Response {

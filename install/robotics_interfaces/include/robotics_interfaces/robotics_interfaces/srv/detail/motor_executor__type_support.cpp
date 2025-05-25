@@ -37,7 +37,7 @@ void MotorExecutor_Request_fini_function(void * message_memory)
   typed_message->~MotorExecutor_Request();
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember MotorExecutor_Request_message_member_array[5] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember MotorExecutor_Request_message_member_array[6] = {
   {
     "x",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_FLOAT,  // type
@@ -107,6 +107,23 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember MotorExecutor
     nullptr  // resize(index) function pointer
   },
   {
+    "grab",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_BOOLEAN,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(robotics_interfaces::srv::MotorExecutor_Request, grab),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
     "task",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_STRING,  // type
     0,  // upper bound of string
@@ -128,7 +145,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember MotorExecutor
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers MotorExecutor_Request_message_members = {
   "robotics_interfaces::srv",  // message namespace
   "MotorExecutor_Request",  // message name
-  5,  // number of fields
+  6,  // number of fields
   sizeof(robotics_interfaces::srv::MotorExecutor_Request),
   MotorExecutor_Request_message_member_array,  // message members
   MotorExecutor_Request_init_function,  // function to initialize message memory (memory has to be allocated)

@@ -1,6 +1,13 @@
 package.xml
 setup.cfg
 setup.py
+../../build/test_robotics_proj/test_robotics_proj.egg-info/PKG-INFO
+../../build/test_robotics_proj/test_robotics_proj.egg-info/SOURCES.txt
+../../build/test_robotics_proj/test_robotics_proj.egg-info/dependency_links.txt
+../../build/test_robotics_proj/test_robotics_proj.egg-info/entry_points.txt
+../../build/test_robotics_proj/test_robotics_proj.egg-info/requires.txt
+../../build/test_robotics_proj/test_robotics_proj.egg-info/top_level.txt
+../../build/test_robotics_proj/test_robotics_proj.egg-info/zip-safe
 resource/test_robotics_proj
 test_robotics_proj/Inverse_Kinematics.py
 test_robotics_proj/Task_1_motor_executor.py

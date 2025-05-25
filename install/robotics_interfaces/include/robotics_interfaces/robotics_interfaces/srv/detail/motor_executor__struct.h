@@ -28,6 +28,7 @@ typedef struct robotics_interfaces__srv__MotorExecutor_Request
   float y;
   float z;
   float r;
+  bool grab;
   rosidl_runtime_c__String task;
 } robotics_interfaces__srv__MotorExecutor_Request;
 

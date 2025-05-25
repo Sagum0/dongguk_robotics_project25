@@ -71,6 +71,11 @@ static bool _MotorExecutor_Request__cdr_serialize(
     cdr << ros_message->r;
   }
 
+  // Field name: grab
+  {
+    cdr << (ros_message->grab ? true : false);
+  }
+
   // Field name: task
   {
     const rosidl_runtime_c__String * str = &ros_message->task;
@@ -115,6 +120,13 @@ static bool _MotorExecutor_Request__cdr_deserialize(
   // Field name: r
   {
     cdr >> ros_message->r;
+  }
+
+  // Field name: grab
+  {
+    uint8_t tmp;
+    cdr >> tmp;
+    ros_message->grab = tmp ? true : false;
   }
 
   // Field name: task
@@ -171,6 +183,12 @@ size_t get_serialized_size_robotics_interfaces__srv__MotorExecutor_Request(
   // field.name r
   {
     size_t item_size = sizeof(ros_message->r);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name grab
+  {
+    size_t item_size = sizeof(ros_message->grab);
     current_alignment += item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -238,6 +256,13 @@ size_t max_serialized_size_robotics_interfaces__srv__MotorExecutor_Request(
     last_member_size = array_size * sizeof(uint32_t);
     current_alignment += array_size * sizeof(uint32_t) +
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+  // member: grab
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint8_t);
+    current_alignment += array_size * sizeof(uint8_t);
   }
   // member: task
   {

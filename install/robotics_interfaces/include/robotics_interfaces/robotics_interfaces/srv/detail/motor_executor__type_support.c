@@ -35,7 +35,7 @@ void robotics_interfaces__srv__MotorExecutor_Request__rosidl_typesupport_introsp
   robotics_interfaces__srv__MotorExecutor_Request__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember robotics_interfaces__srv__MotorExecutor_Request__rosidl_typesupport_introspection_c__MotorExecutor_Request_message_member_array[5] = {
+static rosidl_typesupport_introspection_c__MessageMember robotics_interfaces__srv__MotorExecutor_Request__rosidl_typesupport_introspection_c__MotorExecutor_Request_message_member_array[6] = {
   {
     "x",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_FLOAT,  // type
@@ -105,6 +105,23 @@ static rosidl_typesupport_introspection_c__MessageMember robotics_interfaces__sr
     NULL  // resize(index) function pointer
   },
   {
+    "grab",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_BOOLEAN,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(robotics_interfaces__srv__MotorExecutor_Request, grab),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
     "task",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_STRING,  // type
     0,  // upper bound of string
@@ -126,7 +143,7 @@ static rosidl_typesupport_introspection_c__MessageMember robotics_interfaces__sr
 static const rosidl_typesupport_introspection_c__MessageMembers robotics_interfaces__srv__MotorExecutor_Request__rosidl_typesupport_introspection_c__MotorExecutor_Request_message_members = {
   "robotics_interfaces__srv",  // message namespace
   "MotorExecutor_Request",  // message name
-  5,  // number of fields
+  6,  // number of fields
   sizeof(robotics_interfaces__srv__MotorExecutor_Request),
   robotics_interfaces__srv__MotorExecutor_Request__rosidl_typesupport_introspection_c__MotorExecutor_Request_message_member_array,  // message members
   robotics_interfaces__srv__MotorExecutor_Request__rosidl_typesupport_introspection_c__MotorExecutor_Request_init_function,  // function to initialize message memory (memory has to be allocated)

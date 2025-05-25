@@ -1,0 +1,58 @@
+running develop
+Removing /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test-robotics-proj.egg-link (link to .)
+running egg_info
+writing ../../build/test_robotics_proj/test_robotics_proj.egg-info/PKG-INFO
+writing dependency_links to ../../build/test_robotics_proj/test_robotics_proj.egg-info/dependency_links.txt
+writing entry points to ../../build/test_robotics_proj/test_robotics_proj.egg-info/entry_points.txt
+writing requirements to ../../build/test_robotics_proj/test_robotics_proj.egg-info/requires.txt
+writing top-level names to ../../build/test_robotics_proj/test_robotics_proj.egg-info/top_level.txt
+reading manifest file '../../build/test_robotics_proj/test_robotics_proj.egg-info/SOURCES.txt'
+writing manifest file '../../build/test_robotics_proj/test_robotics_proj.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/pc/ros2_ws/build/test_robotics_proj/build
+creating /home/pc/ros2_ws/build/test_robotics_proj/build/lib
+creating /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/Inverse_Kinematics.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/motor_executor.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/__init__.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/data_hub.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/motor_ready.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/motor_executor_server.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/motor_executor_client.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/Trajectory_Planner.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+copying test_robotics_proj/Task_1_motor_executor.py -> /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj
+running install
+running install_lib
+creating /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/Inverse_Kinematics.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/motor_executor.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/__init__.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/data_hub.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/motor_ready.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/motor_executor_server.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/motor_executor_client.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/Trajectory_Planner.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+copying /home/pc/ros2_ws/build/test_robotics_proj/build/lib/test_robotics_proj/Task_1_motor_executor.py -> /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/Inverse_Kinematics.py to Inverse_Kinematics.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/motor_executor.py to motor_executor.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/data_hub.py to data_hub.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/motor_ready.py to motor_ready.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/motor_executor_server.py to motor_executor_server.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/motor_executor_client.py to motor_executor_client.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/Trajectory_Planner.py to Trajectory_Planner.cpython-310.pyc
+byte-compiling /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj/Task_1_motor_executor.py to Task_1_motor_executor.cpython-310.pyc
+running install_data
+copying resource/test_robotics_proj -> /home/pc/ros2_ws/install/test_robotics_proj/share/ament_index/resource_index/packages
+copying package.xml -> /home/pc/ros2_ws/install/test_robotics_proj/share/test_robotics_proj
+running install_egg_info
+Copying ../../build/test_robotics_proj/test_robotics_proj.egg-info to /home/pc/ros2_ws/install/test_robotics_proj/lib/python3.10/site-packages/test_robotics_proj-0.0.0-py3.10.egg-info
+running install_scripts
+Installing Task_1 script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing data_hub script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing motor_executor script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing motor_executor_client script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing motor_executor_server script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+Installing motor_ready script to /home/pc/ros2_ws/install/test_robotics_proj/lib/test_robotics_proj
+writing list of installed files to '/home/pc/ros2_ws/build/test_robotics_proj/install.log'
