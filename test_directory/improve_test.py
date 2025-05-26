@@ -7,6 +7,21 @@ from Trajectory_Planner import TrajectoryPlanner
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+# # 관절 각도 제한 (라디안)
+# min_limits = np.array([
+#     0.0,
+#     np.deg2rad(-100),  # 1번 관절
+#     np.deg2rad(-125),  # 2번 관절
+#     np.deg2rad(-125),  # 3번 관절
+#     np.deg2rad(-125),  # 4번 관절
+# ])
+# max_limits = np.array([
+#     0.0,
+#     np.deg2rad( 100),
+#     np.deg2rad( 45),
+#     np.deg2rad( 30),
+#     np.deg2rad( 30),
+# ])
 
 def generate_circle_with_transition(start, center, radius, z, 
                                     num_circle=100, num_trans=20):
@@ -50,8 +65,8 @@ def generate_circle_with_transition(start, center, radius, z,
 arm_chain = Chain(name='4DOF_arm', links=[
     OriginLink(),  # index 0: 베이스 (fixed)
     DHLink(d=0.1075, a=0.0,    alpha=np.pi/2, theta=0),
-    DHLink(d=0.0,    a=0.0985, alpha=0.0,     theta=np.pi/2),  # θ₂ offset
-    DHLink(d=0.0,    a=0.0985, alpha=0.0,     theta=0),
+    DHLink(d=0.0,    a=0.1135, alpha=0.0,     theta=np.pi/2),  # θ₂ offset
+    DHLink(d=0.0,    a=0.1085, alpha=0.0,     theta=0),
     DHLink(d=0.0,    a=0.0845, alpha=0.0,     theta=0),
 ])
 
@@ -63,10 +78,10 @@ arm_chain.active_links_mask[0] = False
 # end   = [0.15,  -0.15, 0.10]
 # planner     = TrajectoryPlanner(start_point=start, end_point=end, num_points=100)
 # path_points = planner.plan()  # (50, 3)
-start   = (-0.2, 0.1, 0.05)   # 현재 로봇팔 위치
-center = (0.10, 0.10)     # 예: x=0.3, y=0.2
+start   = (-0.2, 0.1, 0.1)   # 현재 로봇팔 위치
+center = (0.15, 0.15)     # 예: x=0.3, y=0.2
 radius = 0.07           # 반지름 0.1m
-z = 0.05               # 높이 0.15m
+z = 0.0               # 높이 0.15m
 path = generate_circle_with_transition(
         start, center, radius, z,
         num_circle=30, num_trans=10
@@ -93,6 +108,7 @@ for p in path[1:]:
         # orientation_mode  = "Z",      # End Effector z축을 전역 z축과 정렬
         initial_position  = prev_q
     )
+    # q_full = np.clip(q_full, min_limits, max_limits)
     q_list.append(q_full[1:])       # [q1, q2, q3, q4]
     prev_q = q_full                  # 연속성 보장
 

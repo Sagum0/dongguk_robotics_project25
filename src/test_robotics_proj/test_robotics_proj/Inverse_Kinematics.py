@@ -14,8 +14,8 @@ max_limits = np.array([
     0.0,
     np.deg2rad( 100),
     np.deg2rad( 45),
-    np.deg2rad( 50),
-    np.deg2rad( 50),
+    np.deg2rad( 30),
+    np.deg2rad( 30),
 ])
 
 def inverse_k(path):
