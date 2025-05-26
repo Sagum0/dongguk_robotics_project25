@@ -50,9 +50,9 @@ class MotorReady(Node):
         self.get_logger().info("MotorReady 노드 시작")
 
         # Publisher: 100ms마다 present position publish
-        self.present_pos_pub = self.create_publisher(Float32MultiArray, '/robotics_present_position', 10)
+        self.present_pos_pub = self.create_publisher(Float32MultiArray, '/robotics/abs/pulse', 10)
         # Subscriber: goal position 명령 수신
-        self.goal_pos_sub = self.create_subscription(Float32MultiArray, '/robotics_goal_position', self.goal_pos_callback, 10)
+        self.goal_pos_sub = self.create_subscription(Float32MultiArray, '/robotics/abs/target_pulse', self.goal_pos_callback, 10)
 
         # 멀티스레드 환경에서 포트 접근을 위한 Lock 생성
         self.lock = threading.Lock()

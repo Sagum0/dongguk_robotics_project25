@@ -17,12 +17,13 @@ class TrajectoryPlanner:
         
         return path
     
-    def bspline_path(self, path, degree=3, num_points=100):
+    def bspline_path(self, path, degree=3):
+        num_points = self.num_points
         N = len(path)
         k = degree
         if N <= k:
             raise ValueError("Number of control points must be greater than the degree.")
-
+        
         interior = N - (k+1)
         
         inner_knots = np.linspace(0, 1, interior+2)[1:-1] if interior > 0 else []

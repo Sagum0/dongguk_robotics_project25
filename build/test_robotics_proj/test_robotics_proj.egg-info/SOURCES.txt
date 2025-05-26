@@ -10,14 +10,13 @@ setup.py
 ../../build/test_robotics_proj/test_robotics_proj.egg-info/zip-safe
 resource/test_robotics_proj
 test_robotics_proj/Inverse_Kinematics.py
-test_robotics_proj/Task_1_motor_executor.py
 test_robotics_proj/Trajectory_Planner.py
 test_robotics_proj/__init__.py
 test_robotics_proj/data_hub.py
-test_robotics_proj/motor_executor.py
 test_robotics_proj/motor_executor_client.py
 test_robotics_proj/motor_executor_server.py
 test_robotics_proj/motor_ready.py
+test_robotics_proj/motor_ready_copy.py
 test_robotics_proj.egg-info/PKG-INFO
 test_robotics_proj.egg-info/SOURCES.txt
 test_robotics_proj.egg-info/dependency_links.txt

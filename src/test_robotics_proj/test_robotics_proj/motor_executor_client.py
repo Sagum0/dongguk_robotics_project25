@@ -5,15 +5,28 @@ from rclpy.node import Node
 from robotics_interfaces.srv import MotorExecutor
 
 coordinate_list = [
-    [50.0,  50.0, 200.0, False, 'move'],
-    [100.0, 100.0, 100.0, False, 'move'],
-    [120.0, 120.0, 50.0, False, 'move'],
-    [120.0, 120.0, 50.0, True, 'pick'],
-    [100.0, 100.0, 100.0, True, 'move'],
-    [100.0, -100.0, 100.0, True, 'move'],
-    [120.0, -120.0, 50.0, True, 'move'],
-    [120.0, -120.0, 50.0, False, 'pick'],
-    # 다음 좌표를 여기에 추가...
+    # [100.0, 100.0, 100.0, False, 'move'],
+    # [120.0, 120.0, 50.0, False, 'move'],
+    # [120.0, 120.0, 50.0, True, 'pick'],
+    # [100.0, 100.0, 100.0, True, 'move'],
+    # [100.0, -100.0, 100.0, True, 'move'],
+    # [120.0, -120.0, 50.0, True, 'move'],
+    # [120.0, -120.0, 50.0, False, 'pick'],
+    
+    # [120.0, 120.0, 50.0, False, 'move'],
+    # [60.0, 65.0, 20.0, False, 'move'],
+    # [60.0, 65.0, 20.0, True, 'pick'],
+    # [80.0, 80.0, 80.0, True, 'pick'],
+    # [80.0, -80.0, 50.0, True, 'move'],
+    
+    
+    [100.0, 0.0, 200.0, False, 'move'],
+    [100.0, 0.0, 100.0, False, 'move'],
+    [180.0, 0.0, 30.0, False, 'move'],
+    [180.0, 0.0, 30.0, True, 'pick'],
+    [140.0, 0.0, 30.0, True, 'move'],
+    [140.0, 0.0, 30.0, False, 'pick'],
+    [140.0, 0.0, 100.0, False, 'move'],
 ]
 
 class MotorExecutorClient(Node):

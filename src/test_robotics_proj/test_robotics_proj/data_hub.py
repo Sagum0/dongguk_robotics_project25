@@ -18,8 +18,6 @@ A3 = 98.5
 A4 = 84.5
 ALPHA_1 = np.pi / 2
 
-OFFSET = np.pi
-
 def dh_transform(theta, d, a, alpha):
     ct = np.cos(theta)
     st = np.sin(theta)
@@ -61,16 +59,29 @@ def forward_kinematics(theta1, theta2, theta3, theta4):
     
     return T04, points
 
-def abs2theta_ax(abs_angle):
-    theta = ((abs_angle - 512) / 1024) * 2 * np.pi
-    
-    if theta >= OFFSET:
-        theta = OFFSET
-    elif theta <= -OFFSET:
-        theta = -OFFSET
-        
-    return theta
-    
+def theta_to_pulse(theta, deg_min=-150.0, deg_max=150.0, resolution=1024):
+    """
+    라디안 단위 각(theta_rad)을 pulse 값으로 변환 (0 ~ resolution-1)
+    - deg_min → 0
+    - deg_max → resolution-1
+    """                                # 라디안 → 도
+    theta_clamped = np.clip(theta, deg_min, deg_max)                # 최소/최대 클램핑
+    pulse = (theta_clamped - deg_min) / (deg_max - deg_min) * (resolution - 1)
+    return pulse.astype(float) 
+
+def pulse_to_theta(pulse, deg_min=-150.0, deg_max=150.0, resolution=1024):
+    """
+    pulse 값(0 ~ resolution-1)을 라디안 단위 각도로 변환
+    - 0          → deg_min 도
+    - resolution-1 → deg_max 도
+    """
+    pulse_arr = np.asarray(pulse)
+    # pulse 범위 클램핑
+    pulse_clamped = np.clip(pulse_arr, 0, resolution - 1)
+    # 도 단위로 매핑
+    theta_deg = pulse_clamped / (resolution - 1) * (deg_max - deg_min) + deg_min
+    # 라디안 변환
+    return np.deg2rad(theta_deg)
 
 class DataHub(Node):
     def __init__(self):
@@ -79,24 +90,37 @@ class DataHub(Node):
         
         self.abs_motor_sub = self.create_subscription(
             Float32MultiArray,
-            '/robotics_present_position',
+            '/robotics/abs/pulse',
             self.abs_motor_callback,
             10
         )
         
-        self.abs_motor_sub
-        
         self.theta_angle_pub = self.create_publisher(
             Float32MultiArray,
-            '/robotics_datahub_theta',
+            '/robotics/radian/theta',
             10
         )
         
         self.position_pub = self.create_publisher(
             Float32MultiArray,
-            '/robotics_datahub_position',
+            '/robotics/coordinate/position',
             10
         )
+        
+        self.target_pulse_pub = self.create_publisher(
+            Float32MultiArray,
+            '/robotics/abs/target_pulse',
+            10
+        )
+        
+        self.target_pulse_sub = self.create_subscription(
+            Float32MultiArray,
+            '/robotics/degree/target_theta',
+            self.target_degree2pulse_callback,
+            10
+        )
+        
+        self.abs_motor_sub
         
         self.lock = threading.Lock()
         
@@ -124,10 +148,10 @@ class DataHub(Node):
         with self.lock:
             self.abs_angle_1, self.abs_angle_2, self.abs_angle_3, self.abs_angle_4 = data
             
-            self.theta1 = abs2theta_ax(self.abs_angle_1)
-            self.theta2 = abs2theta_ax(self.abs_angle_2)
-            self.theta3 = abs2theta_ax(self.abs_angle_3)
-            self.theta4 = abs2theta_ax(self.abs_angle_4)
+            self.theta1 = pulse_to_theta(self.abs_angle_1)
+            self.theta2 = pulse_to_theta(self.abs_angle_2)
+            self.theta3 = pulse_to_theta(self.abs_angle_3)
+            self.theta4 = pulse_to_theta(self.abs_angle_4)
             
             T, _ = forward_kinematics(self.theta1, self.theta2, self.theta3, self.theta4)
             self.x, self.y, self.z = T[:3, 3]
@@ -160,10 +184,24 @@ class DataHub(Node):
             
         position_msg.data = [x,y,z]
         
-        angle_msg.data = [ theta1,theta2,theta3, theta4]
+        angle_msg.data = [theta1,theta2,theta3,theta4]
         
         self.position_pub.publish(position_msg)
         self.theta_angle_pub.publish(angle_msg)
+        
+    def target_degree2pulse_callback(self, msg):
+        data = msg.data
+        
+        if len(data) < 5:
+            self.get_logger().error(" Target degree array length is less than 5.")
+            return
+        with self.lock:
+            th = theta_to_pulse(data)
+            
+            target_pulse = Float32MultiArray()
+            target_pulse.data = [th[0], th[1], th[2], th[3], data[4]]
+            
+            self.target_pulse_pub.publish(target_pulse)
         
 def main(args=None):
     rclpy.init(args=args)

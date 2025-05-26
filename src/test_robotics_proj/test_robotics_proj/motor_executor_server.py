@@ -7,7 +7,7 @@ import rclpy
 from rclpy.node import Node
 from robotics_interfaces.srv import MotorExecutor
 from std_msgs.msg import Float32MultiArray
-from test_robotics_proj.Inverse_Kinematics import inverse_k
+from test_robotics_proj.Inverse_Kinematics import inverse_kinematics
 from test_robotics_proj.Trajectory_Planner import TrajectoryPlanner
 
 def theta2abs_ax(theta):
@@ -27,14 +27,14 @@ class MotorExecutorServer(Node):
         
         self.motor_pub = self.create_publisher(
             Float32MultiArray,
-            '/robotics_goal_position',
+            '/robotics/degree/target_theta',
             10
         )
         
         self.present_x, self.present_y, self.present_z = None, None, None
         self.position_sub = self.create_subscription(
             Float32MultiArray,
-            '/robotics_datahub_position',
+            '/robotics/coordinate/position',
             self.position_callback,
             10
         )   
@@ -42,7 +42,7 @@ class MotorExecutorServer(Node):
         self.present_th1, self.present_th2, self.present_th3, self.present_th4 = None, None, None, None
         self.angle_sub = self.create_subscription(
             Float32MultiArray,
-            '/robotics_datahub_theta',
+            '/robotics/radian/theta',
             self.angle_callback,
             10
         )
@@ -98,26 +98,25 @@ class MotorExecutorServer(Node):
                 
                 if task == 'move':
                     print(' Gripper가 이동합니다. ')
-                    planner = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=100)
+                    planner = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=200)
                     path     = planner.plan()                         # N×3
 
-                    q_matrix = inverse_k(path)
+                    q_matrix = inverse_kinematics(path, initial_q_full=
+                        [0, self.present_th1, self.present_th2, self.present_th3, self.present_th4]
+                    )
+                    
+                    q_matrix = np.array(q_matrix)
+                    q_matrix = np.rad2deg(q_matrix)
 
                     # 6) 시간 스케줄 기반 joint‐level 명령 발행
                     q_msg    = Float32MultiArray()
                     for idx, q in enumerate(q_matrix):
                         
                         # 6-2) 목표 각도 변환 및 퍼블리시
-                        q_msg.data = [
-                            theta2abs_ax(q[0]),
-                            theta2abs_ax(q[1]),
-                            theta2abs_ax(q[2]),
-                            theta2abs_ax(q[3]),
-                            float(theta_5)
-                        ]
+                        q_msg.data = [q[0], q[1], q[2], q[3], float(theta_5)]
                         self.motor_pub.publish(q_msg)
                         
-                        time.sleep(0.005)
+                        time.sleep(0.05)
                         
                     response.success = True
                     self.get_logger().info('플래닝 및 IK 성공')
@@ -127,10 +126,10 @@ class MotorExecutorServer(Node):
                     
                     q_msg    = Float32MultiArray()
                     q_msg.data = [
-                            theta2abs_ax(self.present_th1),
-                            theta2abs_ax(self.present_th2),
-                            theta2abs_ax(self.present_th3),
-                            theta2abs_ax(self.present_th4),
+                            np.rad2deg(self.present_th1), 
+                            np.rad2deg(self.present_th2), 
+                            np.rad2deg(self.present_th3), 
+                            np.rad2deg(self.present_th4), 
                             theta_5
                         ]
                     self.motor_pub.publish(q_msg)

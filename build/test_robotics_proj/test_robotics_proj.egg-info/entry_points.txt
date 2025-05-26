@@ -1,5 +1,6 @@
 [console_scripts]
 Task_1 = test_robotics_proj.Task_1_motor_executor:main
+copy_motor_ready = test_robotics_proj.motor_ready_copy:main
 data_hub = test_robotics_proj.data_hub:main
 motor_executor = test_robotics_proj.motor_executor:main
 motor_executor_client = test_robotics_proj.motor_executor_client:main
