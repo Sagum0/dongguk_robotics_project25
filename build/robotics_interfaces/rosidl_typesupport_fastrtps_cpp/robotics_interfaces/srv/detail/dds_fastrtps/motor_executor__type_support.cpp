@@ -44,6 +44,8 @@ cdr_serialize(
   cdr << (ros_message.grab ? true : false);
   // Member: task
   cdr << ros_message.task;
+  // Member: time
+  cdr << ros_message.time;
   return true;
 }
 
@@ -74,6 +76,9 @@ cdr_deserialize(
 
   // Member: task
   cdr >> ros_message.task;
+
+  // Member: time
+  cdr >> ros_message.time;
 
   return true;
 }
@@ -125,6 +130,12 @@ get_serialized_size(
   current_alignment += padding +
     eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
     (ros_message.task.size() + 1);
+  // Member: time
+  {
+    size_t item_size = sizeof(ros_message.time);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
 
   return current_alignment - initial_alignment;
 }
@@ -206,6 +217,15 @@ max_serialized_size_MotorExecutor_Request(
     }
   }
 
+  // Member: time
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+
   size_t ret_val = current_alignment - initial_alignment;
   if (is_plain) {
     // All members are plain, and type is not empty.
@@ -214,7 +234,7 @@ max_serialized_size_MotorExecutor_Request(
     using DataType = robotics_interfaces::srv::MotorExecutor_Request;
     is_plain =
       (
-      offsetof(DataType, task) +
+      offsetof(DataType, time) +
       last_member_size
       ) == ret_val;
   }

@@ -20,13 +20,13 @@ coordinate_list = [
     # [80.0, -80.0, 50.0, True, 'move'],
     
     
-    [100.0, 0.0, 200.0, False, 'move'],
-    [100.0, 0.0, 100.0, False, 'move'],
-    [180.0, 0.0, 30.0, False, 'move'],
-    [180.0, 0.0, 30.0, True, 'pick'],
-    [140.0, 0.0, 30.0, True, 'move'],
-    [140.0, 0.0, 30.0, False, 'pick'],
-    [140.0, 0.0, 100.0, False, 'move'],
+    [100.0, 0.0, 200.0, False, 'move', 5.0],
+    [100.0, 0.0, 100.0, False, 'move', 5.0],
+    [180.0, 0.0, 30.0, False, 'move', 5.0],
+    [180.0, 0.0, 30.0, True, 'pick', 0.5],
+    [140.0, 0.0, 30.0, True, 'move', 5.0],
+    [140.0, 0.0, 30.0, False, 'pick', 0.5],
+    [140.0, 0.0, 100.0, False, 'move', 5.0],
 ]
 
 class MotorExecutorClient(Node):
@@ -44,13 +44,14 @@ class MotorExecutorClient(Node):
             self.get_logger().info('모든 좌표 전송 완료')
             return
 
-        x, y, z, grab, task = coordinate_list[self.idx]
+        x, y, z, grab, task, time = coordinate_list[self.idx]
         req = MotorExecutor.Request()
         req.x = x
         req.y = y
         req.z = z
         req.task = task
         req.grab = grab
+        req.time = time
 
         self.get_logger().info(f'[{self.idx}] 목표 좌표 전송: x={x:.2f}, y={y:.2f}, z={z:.2f}')
         future = self.client.call_async(req)

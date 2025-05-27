@@ -13,8 +13,8 @@ import numpy as np
 timer_period = 0.1 # 1 : 1초
 
 D1 = 107.5
-A2 = 98.5
-A3 = 98.5
+A2 = 113.5
+A3 = 108.5
 A4 = 84.5
 ALPHA_1 = np.pi / 2
 

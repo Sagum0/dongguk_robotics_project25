@@ -30,6 +30,7 @@ robotics_interfaces__srv__MotorExecutor_Request__init(robotics_interfaces__srv__
     robotics_interfaces__srv__MotorExecutor_Request__fini(msg);
     return false;
   }
+  // time
   return true;
 }
 
@@ -46,6 +47,7 @@ robotics_interfaces__srv__MotorExecutor_Request__fini(robotics_interfaces__srv__
   // grab
   // task
   rosidl_runtime_c__String__fini(&msg->task);
+  // time
 }
 
 bool
@@ -80,6 +82,10 @@ robotics_interfaces__srv__MotorExecutor_Request__are_equal(const robotics_interf
   {
     return false;
   }
+  // time
+  if (lhs->time != rhs->time) {
+    return false;
+  }
   return true;
 }
 
@@ -107,6 +113,8 @@ robotics_interfaces__srv__MotorExecutor_Request__copy(
   {
     return false;
   }
+  // time
+  output->time = input->time;
   return true;
 }
 

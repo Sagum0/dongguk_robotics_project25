@@ -85,7 +85,7 @@ class MotorReady(Node):
             if dxl_comm_result != COMM_SUCCESS:
                 self.get_logger().warn("XC Motor: Torque 활성화 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
 
-        # 100ms 주기 타이머: present position publish
+        # 10ms 주기 타이머: present position publish
         self.timer = self.create_timer(0.1, self.publish_present_position)
 
     def goal_pos_callback(self, msg):

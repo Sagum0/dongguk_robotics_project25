@@ -113,6 +113,15 @@ bool robotics_interfaces__srv__motor_executor__request__convert_from_py(PyObject
     Py_DECREF(encoded_field);
     Py_DECREF(field);
   }
+  {  // time
+    PyObject * field = PyObject_GetAttrString(_pymsg, "time");
+    if (!field) {
+      return false;
+    }
+    assert(PyFloat_Check(field));
+    ros_message->time = (float)PyFloat_AS_DOUBLE(field);
+    Py_DECREF(field);
+  }
 
   return true;
 }
@@ -201,6 +210,17 @@ PyObject * robotics_interfaces__srv__motor_executor__request__convert_to_py(void
     }
     {
       int rc = PyObject_SetAttrString(_pymessage, "task", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // time
+    PyObject * field = NULL;
+    field = PyFloat_FromDouble(ros_message->time);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "time", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

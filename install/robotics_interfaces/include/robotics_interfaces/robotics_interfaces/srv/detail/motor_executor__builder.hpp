@@ -21,16 +21,32 @@ namespace srv
 namespace builder
 {
 
+class Init_MotorExecutor_Request_time
+{
+public:
+  explicit Init_MotorExecutor_Request_time(::robotics_interfaces::srv::MotorExecutor_Request & msg)
+  : msg_(msg)
+  {}
+  ::robotics_interfaces::srv::MotorExecutor_Request time(::robotics_interfaces::srv::MotorExecutor_Request::_time_type arg)
+  {
+    msg_.time = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::robotics_interfaces::srv::MotorExecutor_Request msg_;
+};
+
 class Init_MotorExecutor_Request_task
 {
 public:
   explicit Init_MotorExecutor_Request_task(::robotics_interfaces::srv::MotorExecutor_Request & msg)
   : msg_(msg)
   {}
-  ::robotics_interfaces::srv::MotorExecutor_Request task(::robotics_interfaces::srv::MotorExecutor_Request::_task_type arg)
+  Init_MotorExecutor_Request_time task(::robotics_interfaces::srv::MotorExecutor_Request::_task_type arg)
   {
     msg_.task = std::move(arg);
-    return std::move(msg_);
+    return Init_MotorExecutor_Request_time(msg_);
   }
 
 private:

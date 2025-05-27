@@ -5,3 +5,4 @@ float32 z
 float32 r
 bool grab
 string task
+float32 time

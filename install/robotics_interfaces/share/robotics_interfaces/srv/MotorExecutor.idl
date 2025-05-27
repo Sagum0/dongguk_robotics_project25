@@ -19,6 +19,8 @@ module robotics_interfaces {
       boolean grab;
 
       string task;
+
+      float time;
     };
     struct MotorExecutor_Response {
       boolean success;

@@ -30,6 +30,7 @@ typedef struct robotics_interfaces__srv__MotorExecutor_Request
   float r;
   bool grab;
   rosidl_runtime_c__String task;
+  float time;
 } robotics_interfaces__srv__MotorExecutor_Request;
 
 // Struct for a sequence of robotics_interfaces__srv__MotorExecutor_Request.

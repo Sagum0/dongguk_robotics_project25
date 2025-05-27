@@ -89,6 +89,15 @@ bool robotics_interfaces__srv__motor_executor__request__convert_from_py(PyObject
     ros_message->r = (float)PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
+  {  // grab
+    PyObject * field = PyObject_GetAttrString(_pymsg, "grab");
+    if (!field) {
+      return false;
+    }
+    assert(PyBool_Check(field));
+    ros_message->grab = (Py_True == field);
+    Py_DECREF(field);
+  }
   {  // task
     PyObject * field = PyObject_GetAttrString(_pymsg, "task");
     if (!field) {
@@ -164,6 +173,17 @@ PyObject * robotics_interfaces__srv__motor_executor__request__convert_to_py(void
     field = PyFloat_FromDouble(ros_message->r);
     {
       int rc = PyObject_SetAttrString(_pymessage, "r", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
+  {  // grab
+    PyObject * field = NULL;
+    field = PyBool_FromLong(ros_message->grab ? 1 : 0);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "grab", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

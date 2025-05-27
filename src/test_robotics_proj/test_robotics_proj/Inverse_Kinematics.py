@@ -209,8 +209,8 @@ MAX_LIMITS = np.array([0.0,
 CHAIN = Chain(name='4DOF_arm', links=[
     OriginLink(),
     DHLink(d=107.5, a=0.0,   alpha=np.pi/2, theta=0),
-    DHLink(d=0.0,   a=98.5,  alpha=0.0,     theta=np.pi/2),
-    DHLink(d=0.0,   a=98.5,  alpha=0.0,     theta=0),
+    DHLink(d=0.0,   a=113.5,  alpha=0.0,     theta=np.pi/2),
+    DHLink(d=0.0,   a=108.5,  alpha=0.0,     theta=0),
     DHLink(d=0.0,   a=84.5,  alpha=0.0,     theta=0),
 ], active_links_mask=[False, True, True, True, True])
 
@@ -222,7 +222,7 @@ def _error(q_active, target):
     ori_err = T[:3, 0] - np.array([0, 0, -1.0])
     return np.hstack((pos_err, ori_err * 0.5))
 
-def inverse_kinematics(path, initial_q_full=None):
+def inverse_kinematics(path, initial_q_full=None, total_time=5.0 ):
     """
     path: array_like of shape (N,3), 목표 (x,y,z) 좌표들
     initial_q_full: optional, array_like of shape (5,), 
@@ -267,7 +267,9 @@ def inverse_kinematics(path, initial_q_full=None):
 
     # 1~4번 관절만 추출 후 스플라인 보간
     raw = all_q_full[:, 1:]  # shape (N,4)
-    t   = np.linspace(0, 1, N)
+    t   = np.linspace(0, total_time, N)
+    dt = t[1] - t[0]  # 시간 간격
+    
     q_smooth = np.zeros_like(raw)
     for j in range(4):
         spline = make_interp_spline(
@@ -280,4 +282,4 @@ def inverse_kinematics(path, initial_q_full=None):
     q_smooth[0, :]  = raw[0, :]
     q_smooth[-1, :] = raw[-1, :]
 
-    return q_smooth
+    return q_smooth, dt

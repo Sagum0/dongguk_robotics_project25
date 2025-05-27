@@ -44,6 +44,7 @@ struct MotorExecutor_Request_
       this->r = 0.0f;
       this->grab = false;
       this->task = "";
+      this->time = 0.0f;
     }
   }
 
@@ -59,6 +60,7 @@ struct MotorExecutor_Request_
       this->r = 0.0f;
       this->grab = false;
       this->task = "";
+      this->time = 0.0f;
     }
   }
 
@@ -81,6 +83,9 @@ struct MotorExecutor_Request_
   using _task_type =
     std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>;
   _task_type task;
+  using _time_type =
+    float;
+  _time_type time;
 
   // setters for named parameter idiom
   Type & set__x(
@@ -117,6 +122,12 @@ struct MotorExecutor_Request_
     const std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> & _arg)
   {
     this->task = _arg;
+    return *this;
+  }
+  Type & set__time(
+    const float & _arg)
+  {
+    this->time = _arg;
     return *this;
   }
 
@@ -178,6 +189,9 @@ struct MotorExecutor_Request_
       return false;
     }
     if (this->task != other.task) {
+      return false;
+    }
+    if (this->time != other.time) {
       return false;
     }
     return true;
