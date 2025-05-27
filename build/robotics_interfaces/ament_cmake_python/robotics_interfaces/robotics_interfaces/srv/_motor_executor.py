@@ -63,6 +63,8 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         '_r',
         '_grab',
         '_task',
+        '_time',
+        '_mode',
     ]
 
     _fields_and_field_types = {
@@ -72,6 +74,8 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         'r': 'float',
         'grab': 'boolean',
         'task': 'string',
+        'time': 'float',
+        'mode': 'string',
     }
 
     SLOT_TYPES = (
@@ -80,6 +84,8 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('boolean'),  # noqa: E501
+        rosidl_parser.definition.UnboundedString(),  # noqa: E501
+        rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.UnboundedString(),  # noqa: E501
     )
 
@@ -93,6 +99,8 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         self.r = kwargs.get('r', float())
         self.grab = kwargs.get('grab', bool())
         self.task = kwargs.get('task', str())
+        self.time = kwargs.get('time', float())
+        self.mode = kwargs.get('mode', str())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -134,6 +142,10 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
         if self.grab != other.grab:
             return False
         if self.task != other.task:
+            return False
+        if self.time != other.time:
+            return False
+        if self.mode != other.mode:
             return False
         return True
 
@@ -227,6 +239,34 @@ class MotorExecutor_Request(metaclass=Metaclass_MotorExecutor_Request):
                 isinstance(value, str), \
                 "The 'task' field must be of type 'str'"
         self._task = value
+
+    @builtins.property
+    def time(self):
+        """Message field 'time'."""
+        return self._time
+
+    @time.setter
+    def time(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, float), \
+                "The 'time' field must be of type 'float'"
+            assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
+                "The 'time' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
+        self._time = value
+
+    @builtins.property
+    def mode(self):
+        """Message field 'mode'."""
+        return self._mode
+
+    @mode.setter
+    def mode(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, str), \
+                "The 'mode' field must be of type 'str'"
+        self._mode = value
 
 
 # Import statements for member types

@@ -72,18 +72,33 @@ class MotorReady(Node):
         if not self.xc_port.setBaudRate(XC_BAUDRATE):
             self.get_logger().error("XC 모터 baudrate 설정 실패")
 
-        # AX 모터 초기화 (동작 모드 변경은 없음)
+        # AX 모터 초기화: Torque 활성화 및 속도 제한 설정
+        speed_limits = {1: 100, 2: 50, 3: 50, 4: 50}
         for motor_id in AX_ID_LIST:
-            dxl_comm_result, dxl_error = self.ax_packet.write1ByteTxRx(self.ax_port, motor_id, AX_TORQUE_ENABLE_ADDR, 1)
+            # Torque 활성화
+            dxl_comm_result, dxl_error = self.ax_packet.write1ByteTxRx(
+                self.ax_port, motor_id, AX_TORQUE_ENABLE_ADDR, 1
+            )
             if dxl_comm_result != COMM_SUCCESS:
-                self.get_logger().warn("AX Motor {}: Torque 활성화 실패({})".format(motor_id, self.ax_packet.getTxRxResult(dxl_comm_result)))
+                self.get_logger().warn(
+                    f"AX Motor {motor_id}: Torque 활성화 실패({self.ax_packet.getTxRxResult(dxl_comm_result)})"
+                )
+            # 초기 속도 제한 설정
+            limit_speed = speed_limits.get(motor_id, 150)
+            dxl_comm_result, dxl_error = self.ax_packet.write2ByteTxRx(
+                self.ax_port, motor_id, AX_MOVING_SPEED_ADDR, limit_speed
+            )
+            if dxl_comm_result != COMM_SUCCESS:
+                self.get_logger().warn(
+                    f"AX Motor {motor_id}: 초기 Moving Speed 설정 실패({self.ax_packet.getTxRxResult(dxl_comm_result)})"
+                )
 
-            dxl_comm_result, dxl_error = self.xc_packet.write1ByteTxRx(self.xc_port, XC_ID, XC_OPERATING_MODE_ADDR, POSITION_MODE)
-            if dxl_comm_result != COMM_SUCCESS:
-                self.get_logger().warn("XC Motor: 동작 모드 설정 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
-            dxl_comm_result, dxl_error = self.xc_packet.write1ByteTxRx(self.xc_port, XC_ID, XC_TORQUE_ENABLE_ADDR, 1)
-            if dxl_comm_result != COMM_SUCCESS:
-                self.get_logger().warn("XC Motor: Torque 활성화 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
+        dxl_comm_result, dxl_error = self.xc_packet.write1ByteTxRx(self.xc_port, XC_ID, XC_OPERATING_MODE_ADDR, POSITION_MODE)
+        if dxl_comm_result != COMM_SUCCESS:
+            self.get_logger().warn("XC Motor: 동작 모드 설정 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
+        dxl_comm_result, dxl_error = self.xc_packet.write1ByteTxRx(self.xc_port, XC_ID, XC_TORQUE_ENABLE_ADDR, 1)
+        if dxl_comm_result != COMM_SUCCESS:
+            self.get_logger().warn("XC Motor: Torque 활성화 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
 
         # 10ms 주기 타이머: present position publish
         self.timer = self.create_timer(0.1, self.publish_present_position)

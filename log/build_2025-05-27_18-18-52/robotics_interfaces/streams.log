@@ -1,0 +1,254 @@
+[0.009s] Invoking command in '/home/pc/ros2_ws/build/robotics_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/pc/MG_motor_ws/install/MG_Motor_test:/home/pc/mobile_ws/install/sensing_pkg:/home/pc/mobile_ws/install/my_turtle_proj:/home/pc/mobile_ws/install/lec_pkg_py:/home/pc/mobile_ws/install/dxl_pwm_control:/home/pc/ros2_ws/install/test_robotics_proj:/home/pc/ros2_ws/install/robotics_proj:/opt/ros/humble /usr/bin/cmake --build /home/pc/ros2_ws/build/robotics_interfaces -- -j16 -l16
+[0.039s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.143s] -- Found geometry_msgs: 4.8.0 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.167s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.169s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.175s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.183s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.194s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.222s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.417s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.653s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.741s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.759s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[0.777s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.777s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[0.777s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[0.794s] -- Configuring done
+[0.824s] -- Generating done
+[0.832s] -- Build files have been written to: /home/pc/ros2_ws/build/robotics_interfaces
+[0.851s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[0.858s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[0.867s] [  6%] Built target ament_cmake_python_copy_robotics_interfaces
+[1.036s] running egg_info
+[1.037s] writing robotics_interfaces.egg-info/PKG-INFO
+[1.037s] writing dependency_links to robotics_interfaces.egg-info/dependency_links.txt
+[1.037s] writing top-level names to robotics_interfaces.egg-info/top_level.txt
+[1.039s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_generator_c[0m
+[1.039s] reading manifest file 'robotics_interfaces.egg-info/SOURCES.txt'
+[1.040s] writing manifest file 'robotics_interfaces.egg-info/SOURCES.txt'
+[1.049s] [  9%] [32mBuilding C object CMakeFiles/robotics_interfaces__rosidl_generator_c.dir/rosidl_generator_c/robotics_interfaces/srv/detail/motor_executor__functions.c.o[0m
+[1.050s] [  9%] Built target robotics_interfaces__cpp
+[1.058s] [ 19%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.058s] [ 19%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.058s] [ 19%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.063s] [ 19%] Built target ament_cmake_python_build_robotics_interfaces_egg
+[1.119s] [ 22%] [32m[1mLinking C shared library librobotics_interfaces__rosidl_generator_c.so[0m
+[1.150s] [ 22%] Built target robotics_interfaces__rosidl_generator_c
+[1.158s] [ 32%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.158s] [ 32%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[1.158s] [ 32%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[1.217s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_cpp[0m
+[1.231s] [ 35%] [32mBuilding CXX object CMakeFiles/robotics_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/robotics_interfaces/srv/motor_executor__type_support.cpp.o[0m
+[1.232s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_introspection_cpp[0m
+[1.242s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_fastrtps_cpp[0m
+[1.243s] [ 38%] [32mBuilding CXX object CMakeFiles/robotics_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/robotics_interfaces/srv/detail/motor_executor__type_support.cpp.o[0m
+[1.254s] [ 41%] [32mBuilding CXX object CMakeFiles/robotics_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/robotics_interfaces/srv/detail/dds_fastrtps/motor_executor__type_support.cpp.o[0m
+[1.323s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_c[0m
+[1.334s] [ 45%] [32mBuilding CXX object CMakeFiles/robotics_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/robotics_interfaces/srv/motor_executor__type_support.cpp.o[0m
+[1.344s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_introspection_c[0m
+[1.352s] [ 48%] [32mBuilding C object CMakeFiles/robotics_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/robotics_interfaces/srv/detail/motor_executor__type_support.c.o[0m
+[1.353s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_fastrtps_c[0m
+[1.360s] [ 51%] [32m[1mLinking CXX shared library librobotics_interfaces__rosidl_typesupport_c.so[0m
+[1.363s] [ 54%] [32mBuilding CXX object CMakeFiles/robotics_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/robotics_interfaces/srv/detail/motor_executor__type_support_c.cpp.o[0m
+[1.379s] [ 58%] [32m[1mLinking C shared library librobotics_interfaces__rosidl_typesupport_introspection_c.so[0m
+[1.392s] [ 58%] Built target robotics_interfaces__rosidl_typesupport_c
+[1.402s] [ 58%] Built target robotics_interfaces__rosidl_typesupport_introspection_c
+[1.440s] [ 61%] [32m[1mLinking CXX shared library librobotics_interfaces__rosidl_typesupport_cpp.so[0m
+[1.471s] [ 61%] Built target robotics_interfaces__rosidl_typesupport_cpp
+[1.509s] [ 64%] [32m[1mLinking CXX shared library librobotics_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[1.528s] [ 67%] [32m[1mLinking CXX shared library librobotics_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[1.553s] [ 67%] Built target robotics_interfaces__rosidl_typesupport_introspection_cpp
+[1.582s] [ 67%] Built target robotics_interfaces__rosidl_typesupport_fastrtps_cpp
+[1.590s] [ 70%] [32m[1mLinking CXX shared library librobotics_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[1.638s] [ 70%] Built target robotics_interfaces__rosidl_typesupport_fastrtps_c
+[1.652s] [ 70%] Built target robotics_interfaces
+[1.666s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[1.921s] [ 74%] Built target robotics_interfaces__py
+[1.929s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_generator_py[0m
+[1.939s] [ 77%] [32mBuilding C object CMakeFiles/robotics_interfaces__rosidl_generator_py.dir/rosidl_generator_py/robotics_interfaces/srv/_motor_executor_s.c.o[0m
+[2.024s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/robotics_interfaces/librobotics_interfaces__rosidl_generator_py.so[0m
+[2.052s] [ 80%] Built target robotics_interfaces__rosidl_generator_py
+[2.060s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_c__pyext[0m
+[2.060s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_introspection_c__pyext[0m
+[2.060s] [35m[1mConsolidate compiler generated dependencies of target robotics_interfaces__rosidl_typesupport_fastrtps_c__pyext[0m
+[2.070s] [ 87%] [32mBuilding C object CMakeFiles/robotics_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[2.070s] [ 87%] [32mBuilding C object CMakeFiles/robotics_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[2.070s] [ 90%] [32mBuilding C object CMakeFiles/robotics_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[2.131s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.131s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.134s] [100%] [32m[1mLinking C shared library rosidl_generator_py/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.154s] [100%] Built target robotics_interfaces__rosidl_typesupport_introspection_c__pyext
+[2.155s] [100%] Built target robotics_interfaces__rosidl_typesupport_c__pyext
+[2.159s] [100%] Built target robotics_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[2.167s] Invoked command in '/home/pc/ros2_ws/build/robotics_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/pc/MG_motor_ws/install/MG_Motor_test:/home/pc/mobile_ws/install/sensing_pkg:/home/pc/mobile_ws/install/my_turtle_proj:/home/pc/mobile_ws/install/lec_pkg_py:/home/pc/mobile_ws/install/dxl_pwm_control:/home/pc/ros2_ws/install/test_robotics_proj:/home/pc/ros2_ws/install/robotics_proj:/opt/ros/humble /usr/bin/cmake --build /home/pc/ros2_ws/build/robotics_interfaces -- -j16 -l16
+[2.174s] Invoking command in '/home/pc/ros2_ws/build/robotics_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/pc/MG_motor_ws/install/MG_Motor_test:/home/pc/mobile_ws/install/sensing_pkg:/home/pc/mobile_ws/install/my_turtle_proj:/home/pc/mobile_ws/install/lec_pkg_py:/home/pc/mobile_ws/install/dxl_pwm_control:/home/pc/ros2_ws/install/test_robotics_proj:/home/pc/ros2_ws/install/robotics_proj:/opt/ros/humble /usr/bin/cmake --install /home/pc/ros2_ws/build/robotics_interfaces
+[2.180s] -- Install configuration: ""
+[2.180s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/ament_index/resource_index/rosidl_interfaces/robotics_interfaces
+[2.180s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces
+[2.180s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv
+[2.180s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail
+[2.180s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__struct.h
+[2.180s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__functions.h
+[2.180s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__functions.c
+[2.180s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__type_support.h
+[2.180s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/motor_executor.h
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__type_support.h
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__functions.c
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__functions.h
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__struct.h
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/trajectory_points.h
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/rosidl_generator_c__visibility_control.h
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/library_path.sh
+[2.181s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/library_path.dsv
+[2.181s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_generator_c.so
+[2.181s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_generator_c.so" to ""
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces
+[2.181s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail
+[2.182s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__rosidl_typesupport_fastrtps_c.h
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__rosidl_typesupport_fastrtps_c.h
+[2.182s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_fastrtps_c.so
+[2.182s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv
+[2.182s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail
+[2.182s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__traits.hpp
+[2.182s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__type_support.hpp
+[2.183s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__builder.hpp
+[2.183s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__struct.hpp
+[2.183s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/motor_executor.hpp
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__builder.hpp
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__traits.hpp
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__struct.hpp
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__type_support.hpp
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/trajectory_points.hpp
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces
+[2.183s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/dds_fastrtps
+[2.184s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__rosidl_typesupport_fastrtps_cpp.hpp
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/dds_fastrtps
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__rosidl_typesupport_fastrtps_cpp.hpp
+[2.184s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[2.184s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces
+[2.184s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv
+[2.185s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail
+[2.185s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__rosidl_typesupport_introspection_c.h
+[2.185s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__type_support.c
+[2.185s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg
+[2.185s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail
+[2.185s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__type_support.c
+[2.185s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__rosidl_typesupport_introspection_c.h
+[2.185s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[2.185s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_introspection_c.so
+[2.185s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[2.186s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_c.so
+[2.186s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_c.so" to ""
+[2.186s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces
+[2.186s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv
+[2.186s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail
+[2.186s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__type_support.cpp
+[2.186s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/srv/detail/motor_executor__rosidl_typesupport_introspection_cpp.hpp
+[2.186s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg
+[2.186s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail
+[2.186s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__type_support.cpp
+[2.186s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/include/robotics_interfaces/robotics_interfaces/msg/detail/trajectory_points__rosidl_typesupport_introspection_cpp.hpp
+[2.187s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_introspection_cpp.so
+[2.187s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[2.187s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_cpp.so
+[2.188s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_typesupport_cpp.so" to ""
+[2.188s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/pythonpath.sh
+[2.188s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/pythonpath.dsv
+[2.188s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces-0.0.0-py3.10.egg-info
+[2.188s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces-0.0.0-py3.10.egg-info/PKG-INFO
+[2.188s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt
+[2.188s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces-0.0.0-py3.10.egg-info/top_level.txt
+[2.188s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt
+[2.188s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/__init__.py
+[2.189s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/srv
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/srv/__init__.py
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/srv/_motor_executor.py
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/srv/_motor_executor_s.c
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/librobotics_interfaces__rosidl_generator_py.so
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[2.189s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/_robotics_interfaces_s.ep.rosidl_typesupport_c.c
+[2.190s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/msg
+[2.190s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/msg/__init__.py
+[2.190s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/msg/_trajectory_points.py
+[2.190s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/msg/_trajectory_points_s.c
+[2.190s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.190s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.190s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.220s] Listing '/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces'...
+[2.220s] Compiling '/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/__init__.py'...
+[2.220s] Listing '/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/msg'...
+[2.220s] Listing '/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/srv'...
+[2.220s] Compiling '/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/srv/__init__.py'...
+[2.220s] Compiling '/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/srv/_motor_executor.py'...
+[2.222s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.223s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""
+[2.223s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.223s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""
+[2.224s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.224s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/local/lib/python3.10/dist-packages/robotics_interfaces/robotics_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""
+[2.224s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_generator_py.so
+[2.224s] -- Set runtime path of "/home/pc/ros2_ws/install/robotics_interfaces/lib/librobotics_interfaces__rosidl_generator_py.so" to ""
+[2.224s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/srv/MotorExecutor.idl
+[2.224s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/srv/MotorExecutor.srv
+[2.225s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/srv/MotorExecutor_Request.msg
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/srv/MotorExecutor_Response.msg
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/ament_index/resource_index/package_run_dependencies/robotics_interfaces
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/ament_index/resource_index/parent_prefix_path/robotics_interfaces
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/ament_prefix_path.sh
+[2.225s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/ament_prefix_path.dsv
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/path.sh
+[2.225s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/environment/path.dsv
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/local_setup.bash
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/local_setup.sh
+[2.225s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/local_setup.zsh
+[2.225s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/local_setup.dsv
+[2.225s] -- Installing: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/package.dsv
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/ament_index/resource_index/packages/robotics_interfaces
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_generator_cExport.cmake
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_generator_cExport-noconfig.cmake
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_generator_cppExport.cmake
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[2.226s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_cExport.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_cppExport.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_generator_pyExport.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/export_robotics_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[2.227s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/rosidl_cmake-extras.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfacesConfig.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/cmake/robotics_interfacesConfig-version.cmake
+[2.228s] -- Up-to-date: /home/pc/ros2_ws/install/robotics_interfaces/share/robotics_interfaces/package.xml
+[2.229s] Invoked command in '/home/pc/ros2_ws/build/robotics_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/pc/MG_motor_ws/install/MG_Motor_test:/home/pc/mobile_ws/install/sensing_pkg:/home/pc/mobile_ws/install/my_turtle_proj:/home/pc/mobile_ws/install/lec_pkg_py:/home/pc/mobile_ws/install/dxl_pwm_control:/home/pc/ros2_ws/install/test_robotics_proj:/home/pc/ros2_ws/install/robotics_proj:/opt/ros/humble /usr/bin/cmake --install /home/pc/ros2_ws/build/robotics_interfaces
