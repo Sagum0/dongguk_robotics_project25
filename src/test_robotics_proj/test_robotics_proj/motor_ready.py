@@ -1,158 +1,180 @@
 #!/usr/bin/env python3
-
 import rclpy
 from rclpy.node import Node
-from rclpy.executors import MultiThreadedExecutor
-from std_msgs.msg import Float32MultiArray
-from dynamixel_sdk import *  # PortHandler, PacketHandler 등 제공
+from std_msgs.msg import Float32MultiArray, Float32
+from threading import Lock
 
-import threading
-import numpy as np
+from dynamixel_sdk import (
+    PortHandler,
+    PacketHandler,
+)
 
-##############################################
-# 글로벌 상수 정의
-##############################################
-AX_BAUDRATE = 115200
-AX_ID_LIST = [1, 2, 3, 4]
-AX_PROTOCOL_VERSION = 1.0
-AX_DEVICENAME = '/dev/ttyUSB0'
-
-AX_GOAL_POSITION_ADDR    = 30
-AX_PRESENT_POSITION_ADDR = 36
-AX_MOVING_SPEED_ADDR     = 32
-AX_TORQUE_ENABLE_ADDR    = 24
-
-XC_BAUDRATE = 115200
-XC_ID = 5
-XC_PROTOCOL_VERSION = 2.0
-XC_DEVICENAME = '/dev/ttyUSB0'
-
-XC_OPERATING_MODE_ADDR   = 11
-XC_GOAL_POSITION_ADDR    = 116
-XC_PRESENT_POSITION_ADDR = 132
-XC_PRESENT_SPEED_ADDR    = 128
-XC_TORQUE_ENABLE_ADDR    = 64
-
-POSITION_MODE = 3
-
-##############################################
-# 글로벌 상수 정의
-##############################################
-TASK_NUMBER = 2  # 중간 과제: 1번 / 기말 과제: 2번
-
-
-##############################################
-# MotorReady Node 클래스 정의
-##############################################
-class MotorReady(Node):
+class MotorReadyNode(Node):
     def __init__(self):
         super().__init__('motor_ready')
-        self.get_logger().info("MotorReady 노드 시작")
+        self.lock = Lock()
 
-        # Publisher: 100ms마다 present position publish
-        self.present_pos_pub = self.create_publisher(Float32MultiArray, '/robotics/abs/pulse', 10)
-        # Subscriber: goal position 명령 수신
-        self.goal_pos_sub = self.create_subscription(Float32MultiArray, '/robotics/abs/target_pulse', self.goal_pos_callback, 10)
+        # Dynamixel 설정
+        self.DEVICENAME            = '/dev/ttyUSB0'
+        self.BAUDRATE              = 57600
+        self.PROTOCOL_VERSION      = 2.0
 
-        # 멀티스레드 환경에서 포트 접근을 위한 Lock 생성
-        self.lock = threading.Lock()
-        
-        # AX 모터 (Protocol 1.0)
-        self.ax_port = PortHandler(AX_DEVICENAME)
-        self.ax_packet = PacketHandler(AX_PROTOCOL_VERSION)
-        if not self.ax_port.openPort():
-            self.get_logger().error("AX 모터 포트 열기 실패: {}".format(AX_DEVICENAME))
-        if not self.ax_port.setBaudRate(AX_BAUDRATE):
-            self.get_logger().error("AX 모터 baudrate 설정 실패")
-        
-        self.xc_port = PortHandler(XC_DEVICENAME)
-        self.xc_packet = PacketHandler(XC_PROTOCOL_VERSION)
-        if not self.xc_port.openPort():
-            self.get_logger().error("XC 모터 포트 열기 실패: {}".format(XC_DEVICENAME))
-        if not self.xc_port.setBaudRate(XC_BAUDRATE):
-            self.get_logger().error("XC 모터 baudrate 설정 실패")
+        # 모터 ID
+        self.JOINT_IDS             = [1, 2, 3, 4]
+        self.GRIPPER_ID            = 5
 
-        # AX 모터 초기화: Torque 활성화 및 속도 제한 설정
-        speed_limits = {1: 100, 2: 50, 3: 50, 4: 50}
-        for motor_id in AX_ID_LIST:
-            # Torque 활성화
-            dxl_comm_result, dxl_error = self.ax_packet.write1ByteTxRx(
-                self.ax_port, motor_id, AX_TORQUE_ENABLE_ADDR, 1
+        # Control table 주소
+        self.ADDR_TORQUE_ENABLE    = 64
+        self.ADDR_OPERATING_MODE   = 11
+        self.ADDR_PROFILE_VELOCITY = 112
+        self.ADDR_GOAL_POSITION    = 116
+        self.ADDR_PRESENT_POSITION = 132
+
+        # 핸들러 생성
+        self.portHandler   = PortHandler(self.DEVICENAME)
+        self.packetHandler = PacketHandler(self.PROTOCOL_VERSION)
+
+        if not self.portHandler.openPort():
+            self.get_logger().error(f"포트를 열 수 없습니다: {self.DEVICENAME}")
+            return
+        if not self.portHandler.setBaudRate(self.BAUDRATE):
+            self.get_logger().error(f"보드레이트 설정 실패: {self.BAUDRATE}")
+            return
+
+        # 초기 설정: torque 끄고 → operating mode 설정 → torque 켜기 → profile velocity 0
+        for motor_id in (*self.JOINT_IDS, self.GRIPPER_ID):
+            # 1) 토크 비활성화 (0)
+            _, dxl_error = self.packetHandler.write1ByteTxRx(
+                self.portHandler, motor_id,
+                self.ADDR_TORQUE_ENABLE, 0
             )
-            if dxl_comm_result != COMM_SUCCESS:
-                self.get_logger().warn(
-                    f"AX Motor {motor_id}: Torque 활성화 실패({self.ax_packet.getTxRxResult(dxl_comm_result)})"
-                )
-            # 초기 속도 제한 설정
-            limit_speed = speed_limits.get(motor_id, 150)
-            dxl_comm_result, dxl_error = self.ax_packet.write2ByteTxRx(
-                self.ax_port, motor_id, AX_MOVING_SPEED_ADDR, limit_speed
+            if dxl_error != 0:
+                self.get_logger().warn(f"ID {motor_id}: 토크 비활성화 오류 ({dxl_error})")
+
+            # 2) Position Control 모드(3) 설정
+            _, dxl_error = self.packetHandler.write1ByteTxRx(
+                self.portHandler, motor_id,
+                self.ADDR_OPERATING_MODE, 3
             )
-            if dxl_comm_result != COMM_SUCCESS:
-                self.get_logger().warn(
-                    f"AX Motor {motor_id}: 초기 Moving Speed 설정 실패({self.ax_packet.getTxRxResult(dxl_comm_result)})"
-                )
+            if dxl_error != 0:
+                self.get_logger().warn(f"ID {motor_id}: 운영 모드 설정 오류 ({dxl_error})")
 
-        dxl_comm_result, dxl_error = self.xc_packet.write1ByteTxRx(self.xc_port, XC_ID, XC_OPERATING_MODE_ADDR, POSITION_MODE)
-        if dxl_comm_result != COMM_SUCCESS:
-            self.get_logger().warn("XC Motor: 동작 모드 설정 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
-        dxl_comm_result, dxl_error = self.xc_packet.write1ByteTxRx(self.xc_port, XC_ID, XC_TORQUE_ENABLE_ADDR, 1)
-        if dxl_comm_result != COMM_SUCCESS:
-            self.get_logger().warn("XC Motor: Torque 활성화 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
+            # 3) 토크 활성화 (1)
+            _, dxl_error = self.packetHandler.write1ByteTxRx(
+                self.portHandler, motor_id,
+                self.ADDR_TORQUE_ENABLE, 1
+            )
+            if dxl_error != 0:
+                self.get_logger().warn(f"ID {motor_id}: 토크 활성화 오류 ({dxl_error})")
 
-        # 10ms 주기 타이머: present position publish
-        self.timer = self.create_timer(0.1, self.publish_present_position)
-
-    def goal_pos_callback(self, msg):
-        data = msg.data
-        if TASK_NUMBER == 1:
-            if len(data) < 4:
-                self.get_logger().error("goal position 배열 길이가 4 미만입니다.")
-                return
-            theta = data
-        else:
-            if len(data) < 5:
-                self.get_logger().error("goal position 배열 길이가 5 미만입니다.")
-                return
-            theta = data
-
-        with self.lock:
-            # AX 모터 (Protocol 1.0) 처리: write2ByteTxRx 사용
-            for i, motor_id in enumerate(AX_ID_LIST):
-                goal_pos = int(theta[i])  # float -> int 변환
-                dxl_comm_result, dxl_error = self.ax_packet.write2ByteTxRx(self.ax_port, motor_id, AX_GOAL_POSITION_ADDR, goal_pos)
-                if dxl_comm_result != COMM_SUCCESS:
-                    self.get_logger().warn("AX Motor {}: Goal Position 쓰기 실패({})".format(motor_id, self.ax_packet.getTxRxResult(dxl_comm_result)))
-                    
-                goal_pos = int(theta[4])  # float -> int 변환
-                dxl_comm_result, dxl_error = self.xc_packet.write4ByteTxRx(self.xc_port, XC_ID, XC_GOAL_POSITION_ADDR, goal_pos)
-                if dxl_comm_result != COMM_SUCCESS:
-                    self.get_logger().warn("XC Motor: Goal Position 쓰기 실패({})".format(self.xc_packet.getTxRxResult(dxl_comm_result)))
-
-                    
-    def publish_present_position(self):
-        msg = Float32MultiArray()
-        positions = []
-        with self.lock:
-            for motor_id in AX_ID_LIST:
-                pos, dxl_comm_result, dxl_error = self.ax_packet.read2ByteTxRx(self.ax_port, motor_id, AX_PRESENT_POSITION_ADDR)
-                if dxl_comm_result != COMM_SUCCESS:
-                    self.get_logger().warn("AX Motor {}: Present Position 읽기 실패({})".format(motor_id, self.ax_packet.getTxRxResult(dxl_comm_result)))
-                    pos = 0
-                positions.append(float(pos))
+            # 4) 초기 프로파일 속도 0
+            _, dxl_error = self.packetHandler.write4ByteTxRx(
+                self.portHandler, motor_id,
+                self.ADDR_PROFILE_VELOCITY, 0
+            )
+            if dxl_error != 0:
+                self.get_logger().warn(f"ID {motor_id}: 초기 속도 설정 오류 ({dxl_error})")
                 
-        msg.data = positions
-        self.present_pos_pub.publish(msg)
+        self.get_logger().info(' Motor Connected! ')
+
+        # 구독자
+        self.sub_target_pulse = self.create_subscription(
+            Float32MultiArray,
+            '/robotics/abs/target_pulse',
+            self.callback_target_pulse,
+            10
+        )
+        self.sub_speed = self.create_subscription(
+            Float32MultiArray,
+            '/robotics/abs/speed',
+            self.callback_speed,
+            10
+        )
+        self.sub_gripper_cmd = self.create_subscription(
+            Float32,
+            '/robotics/gripper/command',
+            self.callback_gripper_cmd,
+            10
+        )
+
+        # 발행자 (60Hz)
+        self.pub_present_pulse = self.create_publisher(
+            Float32MultiArray,
+            '/robotics/abs/pulse',
+            10
+        )
+        timer_period = 1.0 / 60.0
+        self.timer = self.create_timer(timer_period, self.timer_read_and_publish)
+
+    def callback_target_pulse(self, msg: Float32MultiArray):
+        with self.lock:
+            data = msg.data
+            if len(data) < len(self.JOINT_IDS):
+                self.get_logger().warn("target_pulse 데이터 길이 부족")
+                return
+            for idx, motor_id in enumerate(self.JOINT_IDS):
+                goal_pulse = int(data[idx])
+                _, dxl_error = self.packetHandler.write4ByteTxRx(
+                    self.portHandler, motor_id,
+                    self.ADDR_GOAL_POSITION, goal_pulse
+                )
+                if dxl_error != 0:
+                    self.get_logger().warn(f"ID {motor_id}: 목표 위치 쓰기 오류 ({dxl_error})")
+
+    def callback_speed(self, msg: Float32MultiArray):
+        with self.lock:
+            data = msg.data
+            if len(data) < len(self.JOINT_IDS):
+                self.get_logger().warn("speed 데이터 길이 부족")
+                return
+            for idx, motor_id in enumerate(self.JOINT_IDS):
+                vel = int(data[idx])
+                _, dxl_error = self.packetHandler.write4ByteTxRx(
+                    self.portHandler, motor_id,
+                    self.ADDR_PROFILE_VELOCITY, vel
+                )
+                if dxl_error != 0:
+                    self.get_logger().warn(f"ID {motor_id}: 프로파일 속도 쓰기 오류 ({dxl_error})")
+
+    def callback_gripper_cmd(self, msg: Float32):
+        with self.lock:
+            goal_pulse = int(msg.data)
+            _, dxl_error = self.packetHandler.write4ByteTxRx(
+                self.portHandler, self.GRIPPER_ID,
+                self.ADDR_GOAL_POSITION, goal_pulse
+            )
+            if dxl_error != 0:
+                self.get_logger().warn(f"ID {self.GRIPPER_ID}: 그리퍼 목표 위치 쓰기 오류 ({dxl_error})")
+
+    def timer_read_and_publish(self):
+        with self.lock:
+            positions = []
+            for motor_id in self.JOINT_IDS:
+                present_pos, _, dxl_error = self.packetHandler.read4ByteTxRx(
+                    self.portHandler, motor_id,
+                    self.ADDR_PRESENT_POSITION
+                )
+                if dxl_error != 0:
+                    self.get_logger().warn(f"ID {motor_id}: 현재 위치 읽기 오류 ({dxl_error})")
+                    positions.append(0.0)
+                else:
+                    positions.append(float(present_pos))
+
+            msg = Float32MultiArray()
+            msg.data = positions
+            self.pub_present_pulse.publish(msg)
+
+    def destroy_node(self):
+        self.portHandler.closePort()
+        super().destroy_node()
 
 def main(args=None):
     rclpy.init(args=args)
-    node = MotorReady()
-    executor = MultiThreadedExecutor()
-    executor.add_node(node)
+    node = MotorReadyNode()
     try:
-        executor.spin()
+        rclpy.spin(node)
     except KeyboardInterrupt:
-        node.get_logger().info("KeyboardInterrupt 감지, 노드 종료")
+        pass
     finally:
         node.destroy_node()
         rclpy.shutdown()

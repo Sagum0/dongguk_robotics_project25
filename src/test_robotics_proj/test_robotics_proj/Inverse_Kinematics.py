@@ -16,8 +16,8 @@ MAX_LIMITS = np.array([0.0,
 # 2) 로봇 체인 정의
 CHAIN = Chain(name='4DOF_arm', links=[
     OriginLink(),
-    DHLink(d=107.5, a=0.0,   alpha=np.pi/2, theta=0),
-    DHLink(d=0.0,   a=113.5, alpha=0.0,     theta=np.pi/2),
+    DHLink(d=120.75, a=0.0,   alpha=np.pi/2, theta=0),
+    DHLink(d=0.0,   a=125.25, alpha=0.0,     theta=np.pi/2),
     DHLink(d=0.0,   a=108.5, alpha=0.0,     theta=0),
     DHLink(d=0.0,   a=84.5,  alpha=0.0,     theta=0),
 ], active_links_mask=[False, True, True, True, True])
