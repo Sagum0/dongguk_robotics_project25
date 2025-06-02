@@ -41,7 +41,7 @@ coordinate_list = [
     [85.0, 0.0, 270.0, False, 'move'],  # 초기 위치로 이동
     
     # 박스 집으러 이동
-    []
+    # []
 ]
 
 class MotorExecutorClient(Node):
