@@ -3,45 +3,30 @@
 import rclpy
 from rclpy.node import Node
 from robotics_interfaces.srv import MotorExecutor
-import numpy as np
-
-# 입력 받을 변수 mm 단위
-
-L1 = 200
-BOX_TH = 45
-
-L2 = 150
-TOP_TH = 30
-
-# ================
-
-BOX_OPEN_DISTANCE = 50.0  # 서랍 열기 거리
-L1_OPEN = L1 - BOX_OPEN_DISTANCE  # 서랍 열기 후 L1 길이
-
-BOX_RAD = np.deg2rad(BOX_TH)
-TOP_RAD = np.deg2rad(TOP_TH)
-
-BOX_SIN = np.sin(BOX_RAD)
-BOX_COS = np.cos(BOX_RAD)
-
-TOP_SIN = np.sin(TOP_RAD)
-TOP_COS = np.cos(TOP_RAD)
-
-# ================
 
 coordinate_list = [
-    # 서랍 열기
-    [L1 * BOX_SIN, L1 * BOX_COS, 150.0, False, 'move'],
-    [L1 * BOX_SIN, L1 * BOX_COS, 30.0, False, 'move'], # 서랍 위치까지 하강
-    [L1 * BOX_SIN, L1 * BOX_COS, 30.0, True, 'pick'], # 서랍 집기
-    [L1_OPEN * BOX_SIN, L1_OPEN * BOX_COS, 30.0, True, 'move'], # 서랍 위치에서 서랍 열기 위치로 이동
-    [L1_OPEN * BOX_SIN, L1_OPEN * BOX_COS, 30.0, False, 'pick'], # 서랍 놓기
+    # [100.0, 100.0, 100.0, False, 'move'],
+    # [120.0, 120.0, 50.0, False, 'move'],
+    # [120.0, 120.0, 50.0, True, 'pick'],
+    # [100.0, 100.0, 100.0, True, 'move'],
+    # [100.0, -100.0, 100.0, True, 'move'],
+    # [120.0, -120.0, 50.0, True, 'move'],
+    # [120.0, -120.0, 50.0, False, 'pick'],
     
-    # 초기 자세로 이동
-    [85.0, 0.0, 270.0, False, 'move'],  # 초기 위치로 이동
+    [120.0, 120.0, 50.0, False, 'move'],
+    [60.0, 65.0, 20.0, False, 'move'],
+    [60.0, 65.0, 20.0, True, 'pick'],
+    [80.0, 80.0, 80.0, True, 'pick'],
+    [80.0, -80.0, 50.0, True, 'move'],
     
-    # 박스 집으러 이동
-    []
+    
+    # [100.0, 0.0, 200.0, False, 'move', 2.0],
+    # [100.0, 0.0, 100.0, False, 'move', 2.0],
+    # [180.0, 0.0, 35.0, False, 'move', 5.0],
+    # [180.0, 0.0, 35.0, True, 'pick', 0.5],
+    # [140.0, 0.0, 35.0, True, 'move', 3.0],
+    # [140.0, 0.0, 35.0, False, 'pick', 0.5],
+    # [140.0, 0.0, 100.0, False, 'move', 3.0],
 ]
 
 class MotorExecutorClient(Node):
@@ -98,6 +83,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
-
-

@@ -12,8 +12,8 @@ import numpy as np
 
 timer_period = 0.1 # 1 : 1초
 
-D1 = 120.75
-A2 = 125.25
+D1 = 107.5
+A2 = 113.5
 A3 = 108.5
 A4 = 84.5
 ALPHA_1 = np.pi / 2
@@ -59,7 +59,7 @@ def forward_kinematics(theta1, theta2, theta3, theta4):
     
     return T04, points
 
-def theta_to_pulse(theta, deg_min=-150.0, deg_max=150.0, resolution=4096):
+def theta_to_pulse(theta, deg_min=-150.0, deg_max=150.0, resolution=1024):
     """
     라디안 단위 각(theta_rad)을 pulse 값으로 변환 (0 ~ resolution-1)
     - deg_min → 0
@@ -69,7 +69,7 @@ def theta_to_pulse(theta, deg_min=-150.0, deg_max=150.0, resolution=4096):
     pulse = (theta_clamped - deg_min) / (deg_max - deg_min) * (resolution - 1)
     return pulse.astype(float) 
 
-def pulse_to_theta(pulse, deg_min=-150.0, deg_max=150.0, resolution=4096):
+def pulse_to_theta(pulse, deg_min=-150.0, deg_max=150.0, resolution=1024):
     """
     pulse 값(0 ~ resolution-1)을 라디안 단위 각도로 변환
     - 0          → deg_min 도
