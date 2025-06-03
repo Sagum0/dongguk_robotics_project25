@@ -8,13 +8,16 @@ import numpy as np
 # 입력 받을 변수 mm 단위
 
 L1 = 200
-BOX_TH = 45
+BOX_TH = 30
 
 L2 = 150
-TOP_TH = 30
+TOP_TH = -45
+
+height_offset = -10.0
 
 # ================
 
+PICK_OFFSET = 30.0
 BOX_OPEN_DISTANCE = 50.0  # 서랍 열기 거리
 L1_OPEN = L1 - BOX_OPEN_DISTANCE  # 서랍 열기 후 L1 길이
 
@@ -27,21 +30,65 @@ BOX_COS = np.cos(BOX_RAD)
 TOP_SIN = np.sin(TOP_RAD)
 TOP_COS = np.cos(TOP_RAD)
 
+TOP_1_DIS = L2 + 62.5
+TOP_1 = [TOP_1_DIS * TOP_COS, TOP_1_DIS * TOP_SIN, 157.5 + height_offset]
+
+###
+
+TOP_2_DIS = L2 + 52.5
+TOP_2 = [TOP_2_DIS * TOP_COS, TOP_2_DIS * TOP_SIN, 132.5 + height_offset]
+
+TOP_3_DIS = L2 + 82.5
+TOP_3 = [TOP_3_DIS * TOP_COS, TOP_3_DIS * TOP_SIN, 132.5 + height_offset]
+
+###
+
+TOP_4_DIS = L2 + 37.5
+TOP_4 = [TOP_4_DIS * TOP_COS, TOP_4_DIS * TOP_SIN, 107.5 + height_offset]
+
+TOP_5_DIS = L2 + 62.5
+TOP_5 = [TOP_5_DIS * TOP_COS, TOP_5_DIS * TOP_SIN, 107.5 + height_offset]
+
+TOP_6_DIS = L2 + 97.5
+TOP_6 = [TOP_6_DIS * TOP_COS, TOP_6_DIS * TOP_SIN, 107.5 + height_offset]
+
+###
+
+TOP_7_DIS = L2 + 22.5
+TOP_7 = [TOP_7_DIS * TOP_COS, TOP_7_DIS * TOP_SIN, 82.5 + height_offset]
+
+TOP_8_DIS = L2 + 52.5
+TOP_8 = [TOP_8_DIS * TOP_COS, TOP_8_DIS * TOP_SIN, 82.5 + height_offset]
+
+TOP_9_DIS = L2 + 82.5
+TOP_9 = [TOP_9_DIS * TOP_COS, TOP_9_DIS * TOP_SIN, 82.5 + height_offset]
+
+TOP_10_DIS = L2 + 37.5
+TOP_10 = [TOP_10_DIS * TOP_COS, TOP_10_DIS * TOP_SIN, 57.5 + height_offset]
+
+STEADY_DIS = L2 - 30.0
+STEADY = [STEADY_DIS * TOP_COS, STEADY_DIS * TOP_SIN, 180.0 + height_offset]
+
 # ================
 
 coordinate_list = [
     # 서랍 열기
-    [L1 * BOX_SIN, L1 * BOX_COS, 150.0, False, 'move'],
-    [L1 * BOX_SIN, L1 * BOX_COS, 30.0, False, 'move'], # 서랍 위치까지 하강
-    [L1 * BOX_SIN, L1 * BOX_COS, 30.0, True, 'pick'], # 서랍 집기
-    [L1_OPEN * BOX_SIN, L1_OPEN * BOX_COS, 30.0, True, 'move'], # 서랍 위치에서 서랍 열기 위치로 이동
-    [L1_OPEN * BOX_SIN, L1_OPEN * BOX_COS, 30.0, False, 'pick'], # 서랍 놓기
+    [L1 * BOX_COS, L1 * BOX_SIN, 150.0, False, 'move'],
+    [L1 * BOX_COS, L1 * BOX_SIN, 30.0, False, 'move'], # 서랍 위치까지 하강
+    [L1 * BOX_COS, L1 * BOX_SIN, 30.0, True, 'pick'], # 서랍 집기
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, True, 'move'], # 서랍 위치에서 서랍 열기 위치로 이동
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, False, 'pick'], # 서랍 놓기
     
     # 초기 자세로 이동
-    [85.0, 0.0, 270.0, False, 'move'],  # 초기 위치로 이동
+    [150.0, 0.0, 250.0, False, 'move'],  # 초기 위치로 이동
     
     # 박스 집으러 이동
-    # []
+    [STEADY[0], STEADY[1], STEADY[2], False, 'move'],  # 안정 위치로 이동
+    [TOP_1[0], TOP_1[1], TOP_1[2], False, 'move'],  # 박스 위치로 이동
+    [TOP_1[0], TOP_1[1], TOP_1[2], True, 'pick'],  # 박스 집기
+    [TOP_1[0], TOP_1[1], TOP_1[2] + PICK_OFFSET, True, 'move'],  # 박스 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], True, 'move'],  # 안정 위치로 이동
+    
 ]
 
 class MotorExecutorClient(Node):

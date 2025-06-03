@@ -5,8 +5,8 @@ from scipy.optimize import least_squares
 
 # 1) 관절 한계 (라디안)
 MIN_LIMITS = np.array([0.0,
-    np.deg2rad(-100), np.deg2rad(-120),
-    np.deg2rad(-120), np.deg2rad(-120),
+    np.deg2rad(-100), np.deg2rad(-105),
+    np.deg2rad(-105), np.deg2rad(-105),
 ])
 MAX_LIMITS = np.array([0.0,
     np.deg2rad( 100), np.deg2rad(  45),
@@ -18,8 +18,8 @@ CHAIN = Chain(name='4DOF_arm', links=[
     OriginLink(),
     DHLink(d=120.75, a=0.0,   alpha=np.pi/2, theta=0),
     DHLink(d=0.0,   a=125.25, alpha=0.0,     theta=np.pi/2),
-    DHLink(d=0.0,   a=108.5, alpha=0.0,     theta=0),
-    DHLink(d=0.0,   a=84.5,  alpha=0.0,     theta=0),
+    DHLink(d=0.0,   a=110.25, alpha=0.0,     theta=0),
+    DHLink(d=0.0,   a=98.5,  alpha=0.0,     theta=0),
 ], active_links_mask=[False, True, True, True, True])
 
 # 3) 오차 함수: x_H 축이 항상 -Z 방향을 보도록 orientation 제약 추가

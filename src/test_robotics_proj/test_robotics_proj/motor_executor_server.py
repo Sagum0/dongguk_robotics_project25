@@ -100,7 +100,7 @@ class MotorExecutorServer(Node):
                 if task == 'move':
                     print(' Gripper가 이동합니다. ')
 
-                    path  = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=1000).plan()
+                    path  = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=2000).plan()
                     # path  = np.vstack((start_point, end_point))
                     
                     q_matrix = inverse_kinematics(path, 
@@ -117,7 +117,7 @@ class MotorExecutorServer(Node):
                         q_msg.data = [q[0], q[1], q[2], q[3], float(theta_5)]
                         self.motor_pub.publish(q_msg)
                         
-                        time.sleep(0.01)
+                        time.sleep(0.005)
                         
                     response.success = True
                     self.get_logger().info('플래닝 및 IK 성공')
