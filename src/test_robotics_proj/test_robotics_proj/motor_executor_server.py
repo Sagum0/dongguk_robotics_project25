@@ -48,7 +48,11 @@ class MotorExecutorServer(Node):
             '/robotics/gripper/command',
             10
         )
-        
+        self.motor_speed_pub = self.create_publisher(
+            Float32MultiArray,
+            '/robotics/abs/speed',
+            10
+        )
         self.srv = self.create_service(MotorExecutor, 'motor_executor', 
                                        self.service_response_callback)
         
@@ -97,10 +101,11 @@ class MotorExecutorServer(Node):
                 else:
                     theta_5 = 2354.0
                 
-                if task == 'move':
+                if task == 'detailed_move':
                     print(' Gripper가 이동합니다. ')
+                    self.motor_speed_pub.publish(Float32MultiArray(data=[0.0, 0.0, 0.0, 0.0]))
 
-                    path  = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=2000).plan()
+                    path  = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=1000).plan()
                     # path  = np.vstack((start_point, end_point))
                     
                     q_matrix = inverse_kinematics(path, 
@@ -122,13 +127,37 @@ class MotorExecutorServer(Node):
                     response.success = True
                     self.get_logger().info('플래닝 및 IK 성공')
                     
-                elif task == 'pick':
+                elif task == 'fast_move':
+                    print(' Gripper가 이동합니다. ')
+                    self.motor_speed_pub.publish(Float32MultiArray(data=[70.0, 70.0, 70.0, 70.0]))
+                    
+                    path = np.vstack((start_point, end_point))
+                    
+                    q_matrix = inverse_kinematics(path, 
+                                                  initial_q_full=[0, self.present_th1, self.present_th2, self.present_th3, self.present_th4])
+                    
+                    q_matrix = np.array(q_matrix)
+                    q_matrix = np.rad2deg(q_matrix)
+
+                    # 6) 시간 스케줄 기반 joint‐level 명령 발행
+                    q_msg    = Float32MultiArray()
+                    for idx, q in enumerate(q_matrix):
+                        
+                        # 6-2) 목표 각도 변환 및 퍼블리시
+                        q_msg.data = [q[0], q[1], q[2], q[3], float(theta_5)]
+                        self.motor_pub.publish(q_msg)
+                        
+                    time.sleep(2.0)
+                    
+                    response.success = True
+                    self.get_logger().info('플래닝 및 IK 성공')
+                    
+                elif task == 'pick' or task == 'place':
                     print(' Gripper를 열거나 닫습니다. ')
                     
                     gripper_msg = Float32()
                     gripper_msg.data = theta_5
                     self.gripper_pub.publish(gripper_msg)
-                    time.sleep(1)
                     
                     response.success = True
                     self.get_logger().info('잡기 성공')

@@ -5,21 +5,24 @@ from rclpy.node import Node
 from robotics_interfaces.srv import MotorExecutor
 import numpy as np
 
+# ================
 # 입력 받을 변수 mm 단위
 
 L1 = 200
-BOX_TH = 30
+BOX_TH = 45
 
-L2 = 150
-TOP_TH = -45
-
-height_offset = -10.0
+L2_INPUT = 100
+TOP_TH = -30
 
 # ================
 
+L2 = L2_INPUT - 9.5
+
+height_offset = -10.0
+HANDLE = L1 - 20.0
 PICK_OFFSET = 30.0
-BOX_OPEN_DISTANCE = 50.0  # 서랍 열기 거리
-L1_OPEN = L1 - BOX_OPEN_DISTANCE  # 서랍 열기 후 L1 길이
+BOX_OPEN_DISTANCE = 60.0  # 서랍 열기 거리
+L1_OPEN = L1 - BOX_OPEN_DISTANCE - 15.0  # 서랍 열기 후 L1 길이
 
 BOX_RAD = np.deg2rad(BOX_TH)
 TOP_RAD = np.deg2rad(TOP_TH)
@@ -30,7 +33,7 @@ BOX_COS = np.cos(BOX_RAD)
 TOP_SIN = np.sin(TOP_RAD)
 TOP_COS = np.cos(TOP_RAD)
 
-TOP_1_DIS = L2 + 62.5
+TOP_1_DIS = L2 + 67.5
 TOP_1 = [TOP_1_DIS * TOP_COS, TOP_1_DIS * TOP_SIN, 157.5 + height_offset]
 
 ###
@@ -46,7 +49,7 @@ TOP_3 = [TOP_3_DIS * TOP_COS, TOP_3_DIS * TOP_SIN, 132.5 + height_offset]
 TOP_4_DIS = L2 + 37.5
 TOP_4 = [TOP_4_DIS * TOP_COS, TOP_4_DIS * TOP_SIN, 107.5 + height_offset]
 
-TOP_5_DIS = L2 + 62.5
+TOP_5_DIS = L2 + 67.5
 TOP_5 = [TOP_5_DIS * TOP_COS, TOP_5_DIS * TOP_SIN, 107.5 + height_offset]
 
 TOP_6_DIS = L2 + 97.5
@@ -69,26 +72,72 @@ TOP_10 = [TOP_10_DIS * TOP_COS, TOP_10_DIS * TOP_SIN, 57.5 + height_offset]
 STEADY_DIS = L2 - 30.0
 STEADY = [STEADY_DIS * TOP_COS, STEADY_DIS * TOP_SIN, 180.0 + height_offset]
 
+### ================
+
+# DROP POSITION
+DROP_DIS = L1 - 25.0
+N1_DROP = [DROP_DIS * BOX_COS - 40.0 * BOX_COS, DROP_DIS * BOX_SIN + 40.0 * BOX_SIN, 70.0]
+N2_DROP = [DROP_DIS * BOX_COS, DROP_DIS * BOX_SIN, 70.0]
+N3_DROP = [DROP_DIS * BOX_COS + 40.0 * BOX_COS, DROP_DIS * BOX_SIN - 40.0 * BOX_SIN, 70.0]
+
 # ================
 
 coordinate_list = [
     # 서랍 열기
-    [L1 * BOX_COS, L1 * BOX_SIN, 150.0, False, 'move'],
-    [L1 * BOX_COS, L1 * BOX_SIN, 30.0, False, 'move'], # 서랍 위치까지 하강
-    [L1 * BOX_COS, L1 * BOX_SIN, 30.0, True, 'pick'], # 서랍 집기
-    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, True, 'move'], # 서랍 위치에서 서랍 열기 위치로 이동
-    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, False, 'pick'], # 서랍 놓기
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 150.0, False, 'fast_move'],
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0, False, 'detailed_move'], # 서랍 위치까지 하강
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0, True, 'pick'], # 서랍 집기
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, True, 'detailed_move'], # 서랍 위치에서 서랍 열기 위치로 이동
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, False, 'place'], # 서랍 놓기
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 70.0, False, 'detailed_move'],
+    # 초기 자세로 이동
+    [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
+    
+    # 1번 큐브 PICK =======================
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_1[0], TOP_1[1], TOP_1[2], False, 'detailed_move'],  # 박스 위치로 이동
+    [TOP_1[0], TOP_1[1], TOP_1[2], True, 'pick'],  # 박스 집기
+    [TOP_1[0], TOP_1[1], TOP_1[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
+    
+    # 1번 큐브 PLACE
+    [N1_DROP[0], N1_DROP[1], N1_DROP[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
+    [N1_DROP[0], N1_DROP[1], N1_DROP[2], False, 'place'],  # 1번 큐브 위치로 이동
     
     # 초기 자세로 이동
-    [150.0, 0.0, 250.0, False, 'move'],  # 초기 위치로 이동
+    [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
     
-    # 박스 집으러 이동
-    [STEADY[0], STEADY[1], STEADY[2], False, 'move'],  # 안정 위치로 이동
-    [TOP_1[0], TOP_1[1], TOP_1[2], False, 'move'],  # 박스 위치로 이동
-    [TOP_1[0], TOP_1[1], TOP_1[2], True, 'pick'],  # 박스 집기
-    [TOP_1[0], TOP_1[1], TOP_1[2] + PICK_OFFSET, True, 'move'],  # 박스 위치로 이동
-    [STEADY[0], STEADY[1], STEADY[2], True, 'move'],  # 안정 위치로 이동
+    # 2번 큐브 PICK =======================
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_2[0], TOP_2[1], TOP_2[2], False, 'detailed_move'],  # 박스 위치로 이동
+    [TOP_2[0], TOP_2[1], TOP_2[2], True, 'pick'],  # 박스 집기
+    [TOP_2[0], TOP_2[1], TOP_2[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
+    # 2번 큐브 PLACE
+    [N2_DROP[0], N2_DROP[1], N2_DROP[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
+    [N2_DROP[0], N2_DROP[1], N2_DROP[2], False, 'place'],  # 1번 큐브 위치로 이동
+    
+    # 3번 큐브 PICK =======================
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_3[0], TOP_3[1], TOP_3[2], False, 'detailed_move'],  # 박스 위치로 이동
+    [TOP_3[0], TOP_3[1], TOP_3[2], True, 'pick'],  # 박스 집기
+    [TOP_3[0], TOP_3[1], TOP_3[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
+    
+    # 3번 큐브 PLACE
+    [N3_DROP[0], N3_DROP[1], N3_DROP[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
+    [N3_DROP[0], N3_DROP[1], N3_DROP[2], False, 'place'],  # 1번 큐브 위치로 이동
+    
+    # 상자를 닫기 위한 위치로 이동
+    [N3_DROP[0], N3_DROP[1], N3_DROP[2] + PICK_OFFSET, False, 'fast_move'],
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, N3_DROP[2] + PICK_OFFSET, False, 'fast_move'],
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, False, 'detailed_move'], # 서랍 놓기
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0, False, 'detailed_move'],
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 70.0, False, 'detailed_move'],
+    
+    # 초기 자세로 이동
+    [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
 ]
 
 class MotorExecutorClient(Node):
