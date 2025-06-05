@@ -9,10 +9,10 @@ import numpy as np
 # 입력 받을 변수 mm 단위
 
 L1 = 175
-BOX_TH = 45
+BOX_TH = 60
 
 L2_INPUT = 125
-TOP_TH = -20
+TOP_TH = -45
 
 # ================
 
@@ -20,7 +20,7 @@ L2 = L2_INPUT - 9.5
 
 height_offset = -10.0
 HANDLE = L1 - 20.0
-PICK_OFFSET = 35.0
+PICK_OFFSET = 40.0
 BOX_OPEN_DISTANCE = 60.0  # 서랍 열기 거리
 L1_OPEN = L1 - BOX_OPEN_DISTANCE - 15.0  # 서랍 열기 후 L1 길이
 
@@ -67,7 +67,7 @@ TOP_9_DIS = L2 + 82.5 -3
 TOP_9 = [TOP_9_DIS * TOP_COS, TOP_9_DIS * TOP_SIN, 82.5 + height_offset]
 
 TOP_10_DIS = L2 + 112.5 -3
-TOP_10 = [TOP_10_DIS * TOP_COS, TOP_10_DIS * TOP_SIN, 57.5 + height_offset]
+TOP_10 = [TOP_10_DIS * TOP_COS, TOP_10_DIS * TOP_SIN, 82.5 + height_offset]
 
 STEADY_DIS = L2 - 30.0
 STEADY = [STEADY_DIS * TOP_COS, STEADY_DIS * TOP_SIN, 180.0 + height_offset]
@@ -176,13 +176,15 @@ coordinate_list = [
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
     
     # 4번 큐브 PICK =======================
-    [STEADY[0], STEADY[1], STEADY[2] + PICK_OFFSET, False, 'fast_move'],  # 안정 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_4[0], TOP_4[1], TOP_4[2] + PICK_OFFSET, False, 'fast_move'],  # 박스 위치로 이동
     [TOP_4[0], TOP_4[1], TOP_4[2], False, 'detailed_move'],  # 박스 위치로 이동
     [TOP_4[0], TOP_4[1], TOP_4[2], True, 'pick'],  # 박스 집기
     [TOP_4[0], TOP_4[1], TOP_4[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
     [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
     # 4번 큐브 PLACE
+    [GIFT_4[0], GIFT_4[1], STEADY[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_4[0], GIFT_4[1], GIFT_4[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_4[0], GIFT_4[1], GIFT_4[2], True, 'detailed_move'],  # 1번 큐브 위치로 이동
     [GIFT_4[0], GIFT_4[1], GIFT_4[2], False, 'place'],  # 1번 큐브 위치로 이동
@@ -192,13 +194,15 @@ coordinate_list = [
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
     
     # 5번 큐브 PICK =======================
-    [STEADY[0], STEADY[1], STEADY[2] + PICK_OFFSET, False, 'fast_move'],  # 안정 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_5[0], TOP_5[1], TOP_5[2] + PICK_OFFSET, False, 'fast_move'],  # 박스 위치로 이동
     [TOP_5[0], TOP_5[1], TOP_5[2], False, 'detailed_move'],  # 박스 위치로 이동
     [TOP_5[0], TOP_5[1], TOP_5[2], True, 'pick'],  # 박스 집기
     [TOP_5[0], TOP_5[1], TOP_5[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
     [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
     # 5번 큐브 PLACE
+    [GIFT_5[0], GIFT_5[1], STEADY[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_5[0], GIFT_5[1], GIFT_5[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_5[0], GIFT_5[1], GIFT_5[2], True, 'detailed_move'],  # 1번 큐브 위치로 이동
     [GIFT_5[0], GIFT_5[1], GIFT_5[2], False, 'place'],  # 1번 큐브 위치로 이동
@@ -208,13 +212,15 @@ coordinate_list = [
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
     
     # 6번 큐브 PICK =======================
-    [STEADY[0], STEADY[1], STEADY[2] + PICK_OFFSET, False, 'fast_move'],  # 안정 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_6[0], TOP_6[1], TOP_6[2] + PICK_OFFSET, False, 'fast_move'],  # 박스 위치로 이동
     [TOP_6[0], TOP_6[1], TOP_6[2], False, 'detailed_move'],  # 박스 위치로 이동
     [TOP_6[0], TOP_6[1], TOP_6[2], True, 'pick'],  # 박스 집기
     [TOP_6[0], TOP_6[1], TOP_6[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
     [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
     # 6번 큐브 PLACE
+    [GIFT_6[0], GIFT_6[1], STEADY[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_6[0], GIFT_6[1], GIFT_6[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_6[0], GIFT_6[1], GIFT_6[2], True, 'detailed_move'],  # 1번 큐브 위치로 이동
     [GIFT_6[0], GIFT_6[1], GIFT_6[2], False, 'place'],  # 1번 큐브 위치로 이동
@@ -224,13 +230,15 @@ coordinate_list = [
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
     
     # 7번 큐브 PICK =======================
-    [STEADY[0], STEADY[1], STEADY[2] + PICK_OFFSET, False, 'fast_move'],  # 안정 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_7[0], TOP_7[1], TOP_7[2] + PICK_OFFSET, False, 'fast_move'],  # 박스 위치로 이동
     [TOP_7[0], TOP_7[1], TOP_7[2], False, 'detailed_move'],  # 박스 위치로 이동
     [TOP_7[0], TOP_7[1], TOP_7[2], True, 'pick'],  # 박스 집기
     [TOP_7[0], TOP_7[1], TOP_7[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
     [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
     # 7번 큐브 PLACE
+    [GIFT_7[0], GIFT_7[1], STEADY[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_7[0], GIFT_7[1], GIFT_7[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_7[0], GIFT_7[1], GIFT_7[2], True, 'detailed_move'],  # 1번 큐브 위치로 이동
     [GIFT_7[0], GIFT_7[1], GIFT_7[2], False, 'place'],  # 1번 큐브 위치로 이동
@@ -240,13 +248,15 @@ coordinate_list = [
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
     
     # 8번 큐브 PICK =======================
-    [STEADY[0], STEADY[1], STEADY[2] + PICK_OFFSET, False, 'fast_move'],  # 안정 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_8[0], TOP_8[1], TOP_8[2] + PICK_OFFSET, False, 'fast_move'],  # 박스 위치로 이동
     [TOP_8[0], TOP_8[1], TOP_8[2], False, 'detailed_move'],  # 박스 위치로 이동
     [TOP_8[0], TOP_8[1], TOP_8[2], True, 'pick'],  # 박스 집기
     [TOP_8[0], TOP_8[1], TOP_8[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
     [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
     # 8번 큐브 PLACE
+    [GIFT_8[0], GIFT_8[1], STEADY[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_8[0], GIFT_8[1], GIFT_8[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_8[0], GIFT_8[1], GIFT_8[2], True, 'detailed_move'],  # 1번 큐브 위치로 이동
     [GIFT_8[0], GIFT_8[1], GIFT_8[2], False, 'place'],  # 1번 큐브 위치로 이동
@@ -256,20 +266,30 @@ coordinate_list = [
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
     
     # 9번 큐브 PICK =======================
-    [STEADY[0], STEADY[1], STEADY[2] + PICK_OFFSET, False, 'fast_move'],  # 안정 위치로 이동
+    [STEADY[0], STEADY[1], STEADY[2], False, 'fast_move'],  # 안정 위치로 이동
+    [TOP_9[0], TOP_9[1], TOP_9[2] + PICK_OFFSET, False, 'fast_move'],  # 박스 위치로 이동
     [TOP_9[0], TOP_9[1], TOP_9[2], False, 'detailed_move'],  # 박스 위치로 이동
     [TOP_9[0], TOP_9[1], TOP_9[2], True, 'pick'],  # 박스 집기
     [TOP_9[0], TOP_9[1], TOP_9[2] + PICK_OFFSET, True, 'detailed_move'],  # 박스 위치로 이동
     [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
     # 9번 큐브 PLACE
-    [GIFT_9[0], GIFT_9[1], GIFT_9[2] + FAST_MOVE_Z_OFFSET + 20.0, True, 'fast_move'],  # 1번 큐브 위치로 이동
+    [GIFT_9[0], GIFT_9[1], STEADY[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
+    [GIFT_9[0], GIFT_9[1], GIFT_9[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],  # 1번 큐브 위치로 이동
     [GIFT_9[0], GIFT_9[1], GIFT_9[2], True, 'detailed_move'],  # 1번 큐브 위치로 이동
     [GIFT_9[0], GIFT_9[1], GIFT_9[2], False, 'place'],  # 1번 큐브 위치로 이동
     [GIFT_9[0], GIFT_9[1], GIFT_9[2] + FAST_MOVE_Z_OFFSET, True, 'detailed_move'],  # 1번 큐브 위치로 이동
     
     # 초기 자세로 이동
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
+    
+    # 초기 자세로 이동
+    [150.0, -100.0, 200.0, False, 'fast_move'],
+    [150.0, 100.0, 150.0, False, 'fast_move'],
+    [150.0, -100.0, 200.0, False, 'fast_move'],
+    [150.0, 100.0, 150.0, False, 'fast_move'],
+    [150.0, -100.0, 200.0, False, 'fast_move'],
+    [150.0, 100.0, 150.0, False, 'fast_move'],
 ]
 
 class MotorExecutorClient(Node):

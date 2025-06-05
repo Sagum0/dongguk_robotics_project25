@@ -94,7 +94,7 @@ class MotorExecutorServer(Node):
                 print(f'요청된 목표 좌표: x={end_point[0]}, y={end_point[1]}, z={end_point[2]}')
                 print(f'요청된 작업: {task}, 반경: {radius}')
                 
-                time.sleep(0.5)
+                time.sleep(0.2)
                 
                 if grab:
                     theta_5 = 1955.0
@@ -105,8 +105,8 @@ class MotorExecutorServer(Node):
                     print(' Gripper가 이동합니다. ')
                     self.motor_speed_pub.publish(Float32MultiArray(data=[0.0, 0.0, 0.0, 0.0]))
 
-                    path  = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=1000).plan()
-                    # path  = np.vstack((start_point, end_point))
+                    path  = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=900).plan()
+                    # path  = np.linspace(start_point, end_point, num=1000)
                     
                     q_matrix = inverse_kinematics(path, 
                                                   initial_q_full=[0, self.present_th1, self.present_th2, self.present_th3, self.present_th4])
@@ -122,7 +122,7 @@ class MotorExecutorServer(Node):
                         q_msg.data = [q[0], q[1], q[2], q[3], float(theta_5)]
                         self.motor_pub.publish(q_msg)
                         
-                        time.sleep(0.005)
+                        time.sleep(0.0031)
                         
                     response.success = True
                     self.get_logger().info('플래닝 및 IK 성공')
