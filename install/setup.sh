@@ -39,7 +39,7 @@ COLCON_CURRENT_PREFIX="/home/pc/mobile_ws/install"
 _colcon_prefix_chain_sh_source_script "$COLCON_CURRENT_PREFIX/local_setup.sh"
 
 # setting COLCON_CURRENT_PREFIX avoids relying on the build time prefix of the sourced script
-COLCON_CURRENT_PREFIX="/home/pc/MG_motor_ws/install"
+COLCON_CURRENT_PREFIX="/home/pc/mg_motor_ws/install"
 _colcon_prefix_chain_sh_source_script "$COLCON_CURRENT_PREFIX/local_setup.sh"
 
 

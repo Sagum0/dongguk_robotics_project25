@@ -6,7 +6,7 @@ from scipy.optimize import least_squares
 # 1) 관절 한계 (라디안)
 MIN_LIMITS = np.array([0.0,
     np.deg2rad(-100), np.deg2rad(-105),
-    np.deg2rad(-120), np.deg2rad(-115),
+    np.deg2rad(-135), np.deg2rad(-115),
 ])
 MAX_LIMITS = np.array([0.0,
     np.deg2rad( 100), np.deg2rad(  45),
