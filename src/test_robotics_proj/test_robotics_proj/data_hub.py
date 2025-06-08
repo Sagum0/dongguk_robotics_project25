@@ -16,7 +16,9 @@ D1 = 120.75
 A2 = 125.25
 A3 = 110.25
 A4 = 98.5
+A5 = 45.0
 ALPHA_1 = np.pi / 2
+ALPHA_5 = np.pi / 2
 
 def dh_transform(theta, d, a, alpha):
     ct = np.cos(theta)
@@ -30,7 +32,7 @@ def dh_transform(theta, d, a, alpha):
                   [  0,       0,      0,    1]])
     return T
 
-def forward_kinematics(theta1, theta2, theta3, theta4):
+def forward_kinematics(theta1, theta2, theta3, theta4, theta5):
     base_point = np.array([0, 0, 0])
     points = [base_point]
     
@@ -51,36 +53,30 @@ def forward_kinematics(theta1, theta2, theta3, theta4):
     p3 = T03[:3, 3]
     points.append(p3)
     
-    # 3 -> 4 (끝 단)
+    # 3 -> 4
     T34 = dh_transform(theta4, 0.0, A4, 0.0)
     T04 = T03 @ T34
     p4 = T04[:3, 3]
     points.append(p4)
     
-    return T04, points
+    # 4 -> 5 (펜/엔드이펙터)
+    T45 = dh_transform(theta5, 0.0, A5, ALPHA_5)
+    T05 = T04 @ T45
+    p5 = T05[:3, 3]
+    points.append(p5)
+    
+    return T05, points
 
 def theta_to_pulse(theta, deg_min=-180.0, deg_max=180.0, resolution=4096):
-    """
-    라디안 단위 각(theta_rad)을 pulse 값으로 변환 (0 ~ resolution-1)
-    - deg_min → 0
-    - deg_max → resolution-1
-    """                                # 라디안 → 도
-    theta_clamped = np.clip(theta, deg_min, deg_max)                # 최소/최대 클램핑
+    theta = np.asarray(theta)
+    theta_clamped = np.clip(theta, deg_min, deg_max)
     pulse = (theta_clamped - deg_min) / (deg_max - deg_min) * (resolution - 1)
     return pulse.astype(float) 
 
 def pulse_to_theta(pulse, deg_min=-180.0, deg_max=180.0, resolution=4096):
-    """
-    pulse 값(0 ~ resolution-1)을 라디안 단위 각도로 변환
-    - 0          → deg_min 도
-    - resolution-1 → deg_max 도
-    """
     pulse_arr = np.asarray(pulse)
-    # pulse 범위 클램핑
     pulse_clamped = np.clip(pulse_arr, 0, resolution - 1)
-    # 도 단위로 매핑
     theta_deg = pulse_clamped / (resolution - 1) * (deg_max - deg_min) + deg_min
-    # 라디안 변환
     return np.deg2rad(theta_deg)
 
 class DataHub(Node):
@@ -120,50 +116,39 @@ class DataHub(Node):
             10
         )
         
-        self.abs_motor_sub
-        
         self.lock = threading.Lock()
-        
         self.timer = self.create_timer(timer_period, self.timer_callback)
-        
         self.data_received = False
-        
-        self.abs_angle_1, self.abs_angle_2, self.abs_angle_3, self.abs_angle_4 = 0, 0, 0, 0
-        self.theta1, self.theta2, self.theta3, self.theta4 = 0, 0, 0, 0
+
+        # 5자유도 각도/펄스 변수
+        self.abs_angles = np.zeros(5)    # abs_angle_1~5
+        self.thetas     = np.zeros(5)    # theta1~5
         self.x, self.y, self.z = 0, 0, 0
-        
     
     def abs_motor_callback(self, msg):
         data = msg.data
         
         os.system('clear')
         
-        if len(data) < 4:
+        if len(data) < 5:
             print(' ')
             self.get_logger().error(" Motor 절대 각도가 수신되지 않습니다. ")
             print(' ')
-            
             return 
         
         with self.lock:
-            self.abs_angle_1, self.abs_angle_2, self.abs_angle_3, self.abs_angle_4 = data
+            self.abs_angles = np.array(data[:5])
+            self.thetas = pulse_to_theta(self.abs_angles)
             
-            self.theta1 = pulse_to_theta(self.abs_angle_1)
-            self.theta2 = pulse_to_theta(self.abs_angle_2)
-            self.theta3 = pulse_to_theta(self.abs_angle_3)
-            self.theta4 = pulse_to_theta(self.abs_angle_4)
-            
-            T, _ = forward_kinematics(self.theta1, self.theta2, self.theta3, self.theta4)
+            T, _ = forward_kinematics(*self.thetas)
             self.x, self.y, self.z = T[:3, 3]
             
             self.data_received = True
             
             print(" ==================== DATA HUB ==================== ")
             print(" ")
-            print(f" Joint #1 : Abs : {self.abs_angle_1:.1f} RAD : {self.theta1:.3f} // theta #1 : {np.rad2deg(self.theta1):.3f}")
-            print(f" Joint #2 : Abs : {self.abs_angle_2:.1f} RAD : {self.theta2:.3f} // theta #2 : {np.rad2deg(self.theta2):.3f}")
-            print(f" Joint #3 : Abs : {self.abs_angle_3:.1f} RAD : {self.theta3:.3f} // theta #3 : {np.rad2deg(self.theta3):.3f}")
-            print(f" Joint #4 : Abs : {self.abs_angle_4:.1f} RAD : {self.theta4:.3f} // theta #4 : {np.rad2deg(self.theta4):.3f}")
+            for i in range(5):
+                print(f" Joint #{i+1} : Abs : {self.abs_angles[i]:.1f} RAD : {self.thetas[i]:.3f} // theta #{i+1} : {np.rad2deg(self.thetas[i]):.3f}")
             print(" ")
             print(f" Position X Y Z : {self.x:.3f} | {self.y:.3f} | {self.z:.3f}")
             print(" ")
@@ -173,19 +158,16 @@ class DataHub(Node):
         with self.lock:
             if self.data_received != True:
                 self.get_logger().warn(' No INFO to Publish !! ')
-                
                 return 
             
             position_msg = Float32MultiArray()
             angle_msg = Float32MultiArray()
             
             x, y, z = self.x, self.y, self.z
-            theta1, theta2, theta3, theta4 = self.theta1, self.theta2, self.theta3, self.theta4
-            
-        position_msg.data = [x,y,z]
+            thetas = self.thetas.tolist()
         
-        angle_msg.data = [theta1,theta2,theta3,theta4]
-        
+        position_msg.data = [x, y, z]
+        angle_msg.data = thetas
         self.position_pub.publish(position_msg)
         self.theta_angle_pub.publish(angle_msg)
         
@@ -197,10 +179,8 @@ class DataHub(Node):
             return
         with self.lock:
             th = theta_to_pulse(data)
-            
             target_pulse = Float32MultiArray()
-            target_pulse.data = [th[0], th[1], th[2], th[3], data[4]]
-            
+            target_pulse.data = th.tolist()  # 모든 joint pulse를 변환
             self.target_pulse_pub.publish(target_pulse)
         
 def main(args=None):

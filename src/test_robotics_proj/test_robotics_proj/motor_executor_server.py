@@ -8,13 +8,7 @@ from rclpy.node import Node
 from robotics_interfaces.srv import MotorExecutor
 from std_msgs.msg import Float32MultiArray, Float32
 from test_robotics_proj.Inverse_Kinematics import inverse_kinematics
-from test_robotics_proj.Trajectory_Planner import TrajectoryPlanner
-
-def get_it():
-    return int(1955)
-
-def let_it():
-    return int(2354)
+from test_robotics_proj.Trajectory_Planner import *
 
 class MotorExecutorServer(Node):
     def __init__(self):
@@ -35,7 +29,8 @@ class MotorExecutorServer(Node):
             10
         )   
         
-        self.present_th1, self.present_th2, self.present_th3, self.present_th4 = None, None, None, None
+        # --- joint 5까지 모두 받도록 수정
+        self.present_thetas = [None] * 5
         self.angle_sub = self.create_subscription(
             Float32MultiArray,
             '/robotics/radian/theta',
@@ -43,11 +38,6 @@ class MotorExecutorServer(Node):
             10
         )
         
-        self.gripper_pub = self.create_publisher(
-            Float32,
-            '/robotics/gripper/command',
-            10
-        )
         self.motor_speed_pub = self.create_publisher(
             Float32MultiArray,
             '/robotics/abs/speed',
@@ -61,19 +51,14 @@ class MotorExecutorServer(Node):
 
     def angle_callback(self, msg=Float32MultiArray):
         with self.lock:
-            if len(msg.data) != 4:
+            if len(msg.data) != 5:
                 return
-            
-            self.present_th1 = msg.data[0]
-            self.present_th2 = msg.data[1]
-            self.present_th3 = msg.data[2]
-            self.present_th4 = msg.data[3]
+            self.present_thetas = list(msg.data)
             
     def position_callback(self, msg=Float32MultiArray):
         with self.lock:
             if len(msg.data) != 3:
                 return
-            
             self.present_x = msg.data[0]
             self.present_y = msg.data[1]
             self.present_z = msg.data[2]
@@ -89,86 +74,51 @@ class MotorExecutorServer(Node):
                 grab = request.grab
                 radius = request.r
                 task = request.task
-                # worktime = request.time
                 
-                print(f'요청된 목표 좌표: x={end_point[0]}, y={end_point[1]}, z={end_point[2]}')
+                print(f'요청된 Center 목표 좌표: x={end_point[0]}, y={end_point[1]}, z={end_point[2]}')
                 print(f'요청된 작업: {task}, 반경: {radius}')
                 
                 time.sleep(0.2)
                 
-                if grab:
-                    theta_5 = 1955.0
-                else:
-                    theta_5 = 2354.0
-                
-                if task == 'detailed_move':
-                    print(' Gripper가 이동합니다. ')
-                    self.motor_speed_pub.publish(Float32MultiArray(data=[0.0, 0.0, 0.0, 0.0]))
-
-                    path  = TrajectoryPlanner(start_point=start_point, end_point=end_point, num_points=900).plan()
-                    # path  = np.linspace(start_point, end_point, num=1000)
+                if task == 'circle':
+                    print(' Start to Draw Circle ')
+                    self.motor_speed_pub.publish(Float32MultiArray(data=[0.0, 0.0, 0.0, 0.0, 0.0]))
                     
-                    q_matrix = inverse_kinematics(path, 
-                                                  initial_q_full=[0, self.present_th1, self.present_th2, self.present_th3, self.present_th4])
+                    present_radian = np.deg2rad(self.present_thetas)
+                    # --- joint5까지 모두 포함한 initial_q_full
+                    q_now = present_radian if None not in present_radian else [0,0,0,0,0]
+                    path  = CircleFullPathPlanner(
+                        start_point=start_point, 
+                        center_point=end_point, 
+                        radius=radius, 
+                        z_circle=30, 
+                        num_move=500, 
+                        num_circle=1000
+                    ).plan()
                     
+                    q_matrix = inverse_kinematics(path, initial_q_full=[0] + list(q_now)) # [0]은 base(joint0)
                     q_matrix = np.array(q_matrix)
                     q_matrix = np.rad2deg(q_matrix)
 
-                    # 6) 시간 스케줄 기반 joint‐level 명령 발행
-                    q_msg    = Float32MultiArray()
+                    # 5) joint-level 명령 발행 (joint5까지 모두)
+                    q_msg = Float32MultiArray()
                     for idx, q in enumerate(q_matrix):
-                        
-                        # 6-2) 목표 각도 변환 및 퍼블리시
-                        q_msg.data = [q[0], q[1], q[2], q[3], float(theta_5)]
+                        # 각도+펄스 프로토콜 일치 필요시 변환 적용
+                        # q[4]가 펜/그리퍼라면 theta_5 적용(아니면 q[4] 그대로)
+                        q_list = q.tolist()
+                        q_msg.data = q_list
                         self.motor_pub.publish(q_msg)
-                        
-                        time.sleep(0.0031)
+                        time.sleep(0.01)
                         
                     response.success = True
                     self.get_logger().info('플래닝 및 IK 성공')
-                    
-                elif task == 'fast_move':
-                    print(' Gripper가 이동합니다. ')
-                    self.motor_speed_pub.publish(Float32MultiArray(data=[70.0, 70.0, 70.0, 70.0]))
-                    
-                    path = np.vstack((start_point, end_point))
-                    
-                    q_matrix = inverse_kinematics(path, 
-                                                  initial_q_full=[0, self.present_th1, self.present_th2, self.present_th3, self.present_th4])
-                    
-                    q_matrix = np.array(q_matrix)
-                    q_matrix = np.rad2deg(q_matrix)
-
-                    # 6) 시간 스케줄 기반 joint‐level 명령 발행
-                    q_msg    = Float32MultiArray()
-                    for idx, q in enumerate(q_matrix):
-                        
-                        # 6-2) 목표 각도 변환 및 퍼블리시
-                        q_msg.data = [q[0], q[1], q[2], q[3], float(theta_5)]
-                        self.motor_pub.publish(q_msg)
-                        
-                    time.sleep(2.0)
-                    
-                    response.success = True
-                    self.get_logger().info('플래닝 및 IK 성공')
-                    
-                elif task == 'pick' or task == 'place':
-                    print(' Gripper를 열거나 닫습니다. ')
-                    
-                    gripper_msg = Float32()
-                    gripper_msg.data = theta_5
-                    self.gripper_pub.publish(gripper_msg)
-                    
-                    response.success = True
-                    self.get_logger().info('잡기 성공')
                 
             except Exception as e:
                 self.get_logger().error(f'플래닝/IK 실패: {e}')
                 response.success = False
 
         return response
-    
-    
+
 def main(args=None):
     rclpy.init(args=args)
     node = MotorExecutorServer()
