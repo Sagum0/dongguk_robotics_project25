@@ -166,7 +166,7 @@ class MotorExecutorServer(Node):
                 self.get_logger().error(f'플래닝/IK 실패: {e}')
                 response.success = False
 
-        return response 
+        return response
     
     
 def main(args=None):
