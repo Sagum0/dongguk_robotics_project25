@@ -92,8 +92,8 @@ class MotorExecutorServer(Node):
                         center_point=end_point, 
                         radius=radius, 
                         z_circle=30, 
-                        num_move=500, 
-                        num_circle=1000
+                        num_move=100, 
+                        num_circle=400
                     ).plan()
                     
                     q_matrix = inverse_kinematics(path, initial_q_full=[0] + list(q_now)) # [0]은 base(joint0)
@@ -108,7 +108,7 @@ class MotorExecutorServer(Node):
                         q_list = q.tolist()
                         q_msg.data = q_list
                         self.motor_pub.publish(q_msg)
-                        time.sleep(0.01)
+                        time.sleep(0.1)
                         
                     response.success = True
                     self.get_logger().info('플래닝 및 IK 성공')
