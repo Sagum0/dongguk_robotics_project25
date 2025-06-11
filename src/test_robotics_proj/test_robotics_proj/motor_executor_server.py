@@ -91,7 +91,7 @@ class MotorExecutorServer(Node):
                         start_point=start_point, 
                         center_point=end_point, 
                         radius=radius, 
-                        z_circle=30, 
+                        z_circle=19, 
                         num_move=100, 
                         num_circle=400
                     ).plan()

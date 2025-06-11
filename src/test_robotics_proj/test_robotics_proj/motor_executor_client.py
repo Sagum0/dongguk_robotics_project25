@@ -7,13 +7,13 @@ import numpy as np
 
 # ================
 
-FIRST_CIRCLE = [190.0, 190.0, 30.0]
+FIRST_CIRCLE = [205.0, 30.0, 30.0]
 
 # ================
 
 coordinate_list = [
     # 서랍 열기
-    [FIRST_CIRCLE[0], FIRST_CIRCLE[0], FIRST_CIRCLE[0], 60.0, 'circle'],
+    [FIRST_CIRCLE[0], FIRST_CIRCLE[1], FIRST_CIRCLE[2], 33.0, 'circle'],
 ]
 
 class MotorExecutorClient(Node):
