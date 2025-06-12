@@ -20,7 +20,7 @@ CHAIN = Chain(name='5DOF_pen_arm', links=[
     DHLink(d=0.0,   a=125.25, alpha=0.0,     theta=np.pi/2),
     DHLink(d=0.0,   a=130.25, alpha=0.0,     theta=0),
     DHLink(d=0.0,   a=98.5,   alpha=0.0,     theta=0),
-    DHLink(d=0.0,   a=45.0,   alpha=np.pi/2, theta=0)
+    DHLink(d=0.0,   a=34.25,   alpha=np.pi/2, theta=0)
 ], active_links_mask=[False, True, True, True, True, True])
 
 # 3) 오차 함수 (Z_H 방향 제약 포함)
