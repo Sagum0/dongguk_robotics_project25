@@ -7,13 +7,16 @@ import numpy as np
 
 # ================
 
-FIRST_CIRCLE = [290.0, -40.0, 50.0]
+FIRST_CIRCLE = [190.0, 40.0, 50.0]
+SECOND_CIRCLE = [240.0, -20.0, 50.0]
 
 # ================
 
 coordinate_list = [
     # 서랍 열기
-    [FIRST_CIRCLE[0] + 5 +1, FIRST_CIRCLE[1]-1, FIRST_CIRCLE[2], 20.0, 'circle'],
+    # x, y, z, radius, 'task'
+    [FIRST_CIRCLE[0] + 5, FIRST_CIRCLE[1], FIRST_CIRCLE[2], 22.0, 'circle'],
+    [SECOND_CIRCLE[0] + 5, SECOND_CIRCLE[1] -3, SECOND_CIRCLE[2], 42.0, 'circle'],
 ]
 
 class MotorExecutorClient(Node):
