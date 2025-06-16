@@ -9,16 +9,16 @@ import numpy as np
 # 입력 받을 변수 mm 단위
 
 L1 = 175
-BOX_TH = 60
+BOX_TH = 30
 
-L2_INPUT = 125
+L2_INPUT = 150
 TOP_TH = -45
 
 # ================
 
 L2 = L2_INPUT - 9.5
 
-height_offset = -10.0
+height_offset = -2.0
 HANDLE = L1 - 20.0
 PICK_OFFSET = 40.0
 BOX_OPEN_DISTANCE = 60.0  # 서랍 열기 거리
@@ -57,16 +57,16 @@ TOP_6 = [TOP_6_DIS * TOP_COS, TOP_6_DIS * TOP_SIN, 107.5 + height_offset]
 
 ###
 
-TOP_7_DIS = L2 + 22.5 -3
+TOP_7_DIS = L2 + 22.5 + 2
 TOP_7 = [TOP_7_DIS * TOP_COS, TOP_7_DIS * TOP_SIN, 82.5 + height_offset]
 
-TOP_8_DIS = L2 + 52.5 -3
+TOP_8_DIS = L2 + 52.5 + 2
 TOP_8 = [TOP_8_DIS * TOP_COS, TOP_8_DIS * TOP_SIN, 82.5 + height_offset]
 
-TOP_9_DIS = L2 + 82.5 -3
+TOP_9_DIS = L2 + 82.5 + 2
 TOP_9 = [TOP_9_DIS * TOP_COS, TOP_9_DIS * TOP_SIN, 82.5 + height_offset]
 
-TOP_10_DIS = L2 + 112.5 -3
+TOP_10_DIS = L2 + 112.5 + 2
 TOP_10 = [TOP_10_DIS * TOP_COS, TOP_10_DIS * TOP_SIN, 82.5 + height_offset]
 
 STEADY_DIS = L2 - 30.0
@@ -76,49 +76,51 @@ STEADY = [STEADY_DIS * TOP_COS, STEADY_DIS * TOP_SIN, 180.0 + height_offset]
 
 # DROP POSITION
 DROP_DIS = L1 - 25.0
-N1_DROP = [DROP_DIS * BOX_COS - 40.0 * BOX_COS, DROP_DIS * BOX_SIN + 40.0 * BOX_SIN, 70.0]
+N1_DROP = [DROP_DIS * BOX_COS - 40.0 * BOX_SIN, DROP_DIS * BOX_SIN + 40.0 * BOX_COS, 70.0]
 N2_DROP = [DROP_DIS * BOX_COS, DROP_DIS * BOX_SIN, 70.0]
-N3_DROP = [DROP_DIS * BOX_COS + 40.0 * BOX_COS, DROP_DIS * BOX_SIN - 40.0 * BOX_SIN, 70.0]
+N3_DROP = [DROP_DIS * BOX_COS + 40.0 * BOX_SIN, DROP_DIS * BOX_SIN - 40.0 * BOX_COS, 70.0]
 
 
 # GIFT POSITION
 
-FIRST_GIFT_Z = 62.0
-SECOND_GIFT_Z = 87.0
-THIRD_GIFT_Z = 112.0
+FIRST_GIFT_Z = 67.0
+SECOND_GIFT_Z = 95.0
+THIRD_GIFT_Z = 122.5
 
 # 1층
-GIFT_4_DIS = L1 + 75.5
+GIFT_4_DIS = L1 + 66.0
 GIFT_4 = [GIFT_4_DIS * BOX_COS, GIFT_4_DIS * BOX_SIN, FIRST_GIFT_Z]
 
-GIFT_5_DIS = L1 + 45.5
+GIFT_5_DIS = L1 + 39.0
 GIFT_5 = [GIFT_5_DIS * BOX_COS, GIFT_5_DIS * BOX_SIN, FIRST_GIFT_Z]
 
-GIFT_6_DIS = L1 + 15.5
+GIFT_6_DIS = L1 + 12.0
 GIFT_6 = [GIFT_6_DIS * BOX_COS, GIFT_6_DIS * BOX_SIN, FIRST_GIFT_Z]
 
 # 2층
-GIFT_7_DIS = L1 + 60.5
+GIFT_7_DIS = L1 + 53.0
 GIFT_7 = [GIFT_7_DIS * BOX_COS, GIFT_7_DIS * BOX_SIN, SECOND_GIFT_Z]
 
-GIFT_8_DIS = L1 + 30.5
+GIFT_8_DIS = L1 + 25.5
 GIFT_8 = [GIFT_8_DIS * BOX_COS, GIFT_8_DIS * BOX_SIN, SECOND_GIFT_Z]
 
 # 3층
-GIFT_9_DIS = L1 + 45.5
+GIFT_9_DIS = L1 + 39.0
 GIFT_9 = [GIFT_9_DIS * BOX_COS, GIFT_9_DIS * BOX_SIN, THIRD_GIFT_Z]
 
-FAST_MOVE_Z_OFFSET = 30.0
+FAST_MOVE_Z_OFFSET = 40.0
+
+BOX_OFFSET = 4.0
 
 # ================
 
 coordinate_list = [
     # 서랍 열기
-    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 70.0, False, 'fast_move'],
-    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0, False, 'detailed_move'], # 서랍 위치까지 하강
-    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0, True, 'pick'], # 서랍 집기
-    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, True, 'detailed_move'], # 서랍 위치에서 서랍 열기 위치로 이동
-    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, False, 'place'], # 서랍 놓기
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 70.0 + BOX_OFFSET, False, 'fast_move'],
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0 + BOX_OFFSET, False, 'detailed_move'], # 서랍 위치까지 하강
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0 + BOX_OFFSET, True, 'pick'], # 서랍 집기
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0 + BOX_OFFSET, True, 'detailed_move'], # 서랍 위치에서 서랍 열기 위치로 이동
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0 + BOX_OFFSET, False, 'place'], # 서랍 놓기
     [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 190.0, False, 'detailed_move'],
     # 초기 자세로 이동
     [180.0, 0.0, 190.0, False, 'fast_move'],  # 초기 위치로 이동
@@ -166,11 +168,11 @@ coordinate_list = [
     [N3_DROP[0], N3_DROP[1], N3_DROP[2], False, 'place'],  # 1번 큐브 위치로 이동
     
     # 상자를 닫기 위한 위치로 이동
-    [N3_DROP[0], N3_DROP[1], N3_DROP[2] + PICK_OFFSET, False, 'fast_move'],
+    [N3_DROP[0], N3_DROP[1], N3_DROP[2] + PICK_OFFSET, False, 'fast_move'], 
     [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, N3_DROP[2] + PICK_OFFSET, False, 'fast_move'],
-    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0, False, 'detailed_move'], # 서랍 놓기
-    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0, False, 'detailed_move'],
-    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 70.0, False, 'detailed_move'],
+    [L1_OPEN * BOX_COS, L1_OPEN * BOX_SIN, 30.0 + BOX_OFFSET, False, 'detailed_move'], # 서랍 놓기
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 30.0 + BOX_OFFSET, False, 'detailed_move'],
+    [HANDLE * BOX_COS, HANDLE * BOX_SIN, 70.0 + BOX_OFFSET, False, 'detailed_move'],
     
     # 초기 자세로 이동
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
@@ -184,11 +186,11 @@ coordinate_list = [
     [STEADY[0], STEADY[1], STEADY[2], True, 'fast_move'],  # 안정 위치로 이동
     
     # 4번 큐브 PLACE
-    [GIFT_4[0], GIFT_4[1], STEADY[2], True, 'fast_move'],  # 1번 큐브 위치로 이동
-    [GIFT_4[0], GIFT_4[1], GIFT_4[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],  # 1번 큐브 위치로 이동
-    [GIFT_4[0], GIFT_4[1], GIFT_4[2], True, 'detailed_move'],  # 1번 큐브 위치로 이동
-    [GIFT_4[0], GIFT_4[1], GIFT_4[2], False, 'place'],  # 1번 큐브 위치로 이동
-    [GIFT_4[0], GIFT_4[1], GIFT_4[2] + FAST_MOVE_Z_OFFSET, True, 'detailed_move'],  # 1번 큐브 위치로 이동
+    [GIFT_4[0], GIFT_4[1], STEADY[2], True, 'fast_move'],
+    [GIFT_4[0], GIFT_4[1], GIFT_4[2] + FAST_MOVE_Z_OFFSET, True, 'fast_move'],
+    [GIFT_4[0], GIFT_4[1], GIFT_4[2], True, 'detailed_move'],
+    [GIFT_4[0], GIFT_4[1], GIFT_4[2], False, 'place'],
+    [GIFT_4[0], GIFT_4[1], GIFT_4[2] + FAST_MOVE_Z_OFFSET, True, 'detailed_move'],
     
     # 초기 자세로 이동
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
@@ -282,14 +284,6 @@ coordinate_list = [
     
     # 초기 자세로 이동
     [150.0, 0.0, 250.0, False, 'fast_move'],  # 초기 위치로 이동
-    
-    # 초기 자세로 이동
-    [150.0, -100.0, 200.0, False, 'fast_move'],
-    [150.0, 100.0, 150.0, False, 'fast_move'],
-    [150.0, -100.0, 200.0, False, 'fast_move'],
-    [150.0, 100.0, 150.0, False, 'fast_move'],
-    [150.0, -100.0, 200.0, False, 'fast_move'],
-    [150.0, 100.0, 150.0, False, 'fast_move'],
 ]
 
 class MotorExecutorClient(Node):
