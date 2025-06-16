@@ -7,16 +7,27 @@ import numpy as np
 
 # ================
 
-FIRST_CIRCLE = [190.0, 40.0, 50.0]
-SECOND_CIRCLE = [240.0, -20.0, 50.0]
+FIRST_CIRCLE =  [30.0, 40.0, 50.0]
+SECOND_CIRCLE = [30.0, 40.0, 50.0]
 
 # ================
 
+x_offset = 6.0
+
+if FIRST_CIRCLE[1] < 0:
+    y_first_offset = -3.0
+else:
+    y_first_offset =  1.0
+    
+if SECOND_CIRCLE[1] < 0:
+    y_second_offset = -3.0
+else:
+    y_second_offset =  1.0
+
 coordinate_list = [
-    # 서랍 열기
     # x, y, z, radius, 'task'
-    [FIRST_CIRCLE[0] + 5, FIRST_CIRCLE[1], FIRST_CIRCLE[2], 22.0, 'circle'],
-    [SECOND_CIRCLE[0] + 5, SECOND_CIRCLE[1] -3, SECOND_CIRCLE[2], 42.0, 'circle'],
+    [200 + FIRST_CIRCLE[0]  + x_offset, FIRST_CIRCLE[1]  + y_first_offset,  FIRST_CIRCLE[2],  32.0, 'circle'],
+    [200 + SECOND_CIRCLE[0] + x_offset, SECOND_CIRCLE[1] + y_second_offset, SECOND_CIRCLE[2], 42.0, 'circle'],
 ]
 
 class MotorExecutorClient(Node):

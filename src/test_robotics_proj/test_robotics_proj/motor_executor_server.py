@@ -131,7 +131,7 @@ class MotorExecutorServer(Node):
                     np.concatenate(([0], last_q))          # dummy 0 필요 없으면 just last_q
                 )
                 
-                circle_path = generate_circle_path(request.x, request.y, C_DRAW_OFFSET, radius, num_circle = 200) 
+                circle_path = generate_circle_path(request.x, request.y, C_DRAW_OFFSET, radius, num_circle = 300) 
                 
                 c_start_x, c_start_y, _ = circle_path[0]
                 c_start = (c_start_x, c_start_y, C_START_OFFSET)
@@ -220,9 +220,9 @@ class MotorExecutorServer(Node):
                     np.concatenate(([0], last_q))          # dummy 0 필요 없으면 just last_q
                 )
                 
-                c_last = circle_path[-1]
+                # c_last = circle_path[-1]
                 start_point  = [self.present_x, self.present_y, self.present_z]
-                up_point     = [c_last[0], c_last[1], C_START_OFFSET]
+                up_point     = [self.present_x, self.present_y, C_START_OFFSET]
 
                 time.sleep(1.0)
                     
@@ -230,7 +230,7 @@ class MotorExecutorServer(Node):
                 step_5_q_matrix = inverse_kinematics(path_5, 
                                                         initial_q_full)
                 
-                self.motor_speed_pub.publish(Float32MultiArray(data=[10.0, 10.0, 10.0, 10.0, 10.0]))
+                self.motor_speed_pub.publish(Float32MultiArray(data=[5.0, 5.0, 5.0, 5.0, 20.0]))
                 
                 step_5_q_matrix = np.array(step_5_q_matrix)
                 step_5_q_matrix = np.rad2deg(step_5_q_matrix)
@@ -239,10 +239,12 @@ class MotorExecutorServer(Node):
                 for idx, q in enumerate(step_5_q_matrix):
                     
                     # 6-2) 목표 각도 변환 및 퍼블리시
-                    step_5_q_msg.data = [q[0], q[1], q[2], q[3], q[4]]
+                    step_5_q_msg.data = [q[0], q[1], q[2], q[3], 100.0]
                     self.motor_pub.publish(step_5_q_msg)
                 
                 time.sleep(1.0)
+                
+                self.motor_speed_pub.publish(Float32MultiArray(data=[70.0, 70.0, 70.0, 70.0, 90.0]))
                 
                 response.success = True
                 self.get_logger().info('플래닝 및 IK 성공')
